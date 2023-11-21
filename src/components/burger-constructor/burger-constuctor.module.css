@@ -1,0 +1,4 @@
+.burger_constructor {
+    border: 1px solid hsl(0, 0%, 100%);
+    min-width: 600px;
+}
