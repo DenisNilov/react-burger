@@ -1,4 +1,6 @@
-.page_main {
+.page_main__inner {
+  margin: auto;
   display: flex;
   justify-content: space-evenly;
+  width: 1242px;
 }

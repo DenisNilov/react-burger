@@ -1,23 +1,30 @@
 .burger_ingredients {
-    border: 1px solid #fff;
-    min-width: 600px;
+    width: 600px;
 }
 
 .burger_ingredients_list {
     display: flex;
+    flex-direction: column;
     list-style-type: none;
+    border: 1px dashed white;
 }
 
-.burger_ingredients_item {
-    border: 1px solid white;
-    list-style-type: none;
-}
 
-.burger_ingredients_bread {
+.burger_ingredients_component_list {
+    list-style-type: none;
+    overflow-y: scroll;
+    scrollbar-width: thin;
     display: flex;
-    list-style-type: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px dashed white;
 }
 
-.burger_ingredients_bread__item{
-    list-style-type: none;
+
+.burger_ingredients_component__card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid white;
+    align-items: center;
+    border: 1px dashed white;
 }
