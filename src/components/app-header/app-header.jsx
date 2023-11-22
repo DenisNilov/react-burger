@@ -9,13 +9,13 @@ const Header = () => {
                     <button className={style.heder_button}>
                         <div className={style.burgerIcon_inner}>
                             <BurgerIcon type="primary" />
-                            <p className={`${style.header_item_name} text_type_main-default`}>Конструктор</p>
+                            <p className={`${style.header_item_name} text_type_main-default p-2`}>Конструктор</p>
                         </div>
                     </button>
                     <button className={style.heder_button}>
                         <div className={style.listIcon_inner}>
                             <ListIcon type="primary" />
-                            <p className={`${style.header_item_name} text_type_main-default`}>Лента заказов</p>
+                            <p className={`${style.header_item_name} text_type_main-default p-2`}>Лента заказов</p>
                         </div>
                     </button>
                 </nav>
@@ -23,7 +23,7 @@ const Header = () => {
                 <button className={style.heder_button}>
                     <div className={style.profile_inner}>
                         <ProfileIcon type="primary" />
-                        <p className={`${style.header_item_name} text_type_main-default`}>Личный кабинет</p>
+                        <p className={`${style.header_item_name} text_type_main-default p-2`}>Личный кабинет</p>
                     </div>
                 </button>
 
