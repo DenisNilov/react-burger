@@ -1,0 +1,10 @@
+
+.burger_ingredients_component_list {
+    list-style-type: none;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    border: 1px dashed white;
+}

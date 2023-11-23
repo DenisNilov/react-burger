@@ -1,6 +1,6 @@
 import style from './burger-ingredients.module.css';
-import Tabs from './burger-ingredienrs-tabs.jsx';
-import IngredienrsComponent from './burger-ingredients-component.jsx';
+import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
+import IngredienrsComponent from '../burger-ingredients-component/burger-ingredients-component.jsx';
 
 const BurgerIngredients = () => {
     return (

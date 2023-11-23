@@ -1,4 +1,4 @@
-import IngredienrsComponentList from './burger-ingredients-component-list.jsx';
+import IngredienrsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
 
 
 const IngredienrsComponent = ({ name }) => {

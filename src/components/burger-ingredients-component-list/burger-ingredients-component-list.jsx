@@ -1,5 +1,5 @@
-import style from './burger-ingredients.module.css';
-import IngredienrsComponentCard from './burger-ingredients-component-card.jsx';
+import style from './burger-ingredients-component-list.module.css';
+import IngredienrsComponentCard from '../burger-ingredients-component-card/burger-ingredients-component-card.jsx';
 
 const IngredienrsComponentList = () => {
     return (
