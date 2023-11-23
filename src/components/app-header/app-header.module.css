@@ -1,15 +1,21 @@
 .header {
-    max-width: 1920px;
-    height: 88px;
+    max-width: 100%;
     display: flex;
     justify-content: center;
+    box-sizing: border-box;
+    background-color: #1c1c21;
+    ;
 }
 
 .header_inner {
-    width: 1240px;
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    height: 88px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
 }
 
 .burgerIcon_inner {
@@ -27,6 +33,21 @@
 
 .nav {
     display: flex;
+    gap: 8px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: fit-content;
 }
 
 .profile_inner {
@@ -39,8 +60,6 @@
     color: white;
 }
 
-.heder_button {
-    background: none;
-    border: none;
-    padding: 0;
+.heder_link {
+    text-decoration: none;
 }

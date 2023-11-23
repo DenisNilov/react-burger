@@ -3,8 +3,16 @@
 }
 
 .burger_ingredients_list {
+    max-width: 600px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    list-style-type: none;
-    border: 1px dashed white;
+    width: 100%;
+    
+}
+
+.tabs {
+    display: flex;
 }

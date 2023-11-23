@@ -6,30 +6,36 @@ const Header = () => {
         <header className={style.header}>
             <div className={style.header_inner}>
                 <nav className={style.nav}>
-                    <button className={style.heder_button}>
+                    <a href="https://practicum.yandex.ru"
+                        className={style.heder_link}>
                         <div className={style.burgerIcon_inner}>
                             <BurgerIcon type="primary" />
                             <p className={`${style.header_item_name} text_type_main-default p-2`}>Конструктор</p>
                         </div>
-                    </button>
-                    <button className={style.heder_button}>
+                    </a>
+                    <a href="https://practicum.yandex.ru"
+                        className={style.heder_link}>
                         <div className={style.listIcon_inner}>
                             <ListIcon type="primary" />
                             <p className={`${style.header_item_name} text_type_main-default p-2`}>Лента заказов</p>
                         </div>
-                    </button>
+                    </a>
                 </nav>
-                <Logo />
-                <button className={style.heder_button}>
-                    <div className={style.profile_inner}>
+                <a href="https://practicum.yandex.ru"
+                    className={style.logo}>
+                    <Logo />
+                </a>
+
+                <a
+                    href="https://practicum.yandex.ru"
+                    className={style.heder_link}>
+                    <div className={style.listIcon_inner}>
                         <ProfileIcon type="primary" />
                         <p className={`${style.header_item_name} text_type_main-default p-2`}>Личный кабинет</p>
                     </div>
-                </button>
-
-
-            </div>
-        </header>
+                </a>
+            </div >
+        </header >
     )
 
 

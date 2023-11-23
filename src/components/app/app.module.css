@@ -1,6 +1,10 @@
-.page_main__inner {
-  margin: auto;
+.main {
   display: flex;
-  justify-content: space-evenly;
-  width: 1242px;
+  gap: 40px;
+  width: 100%;
+  max-width: 1240px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 0 0 40px 0;
 }
+

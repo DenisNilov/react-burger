@@ -6,12 +6,10 @@ import style from './app.module.css';
 
 function App() {
   return (<>
-    <Header />
-    <main>
-      <div className={style.page_main__inner}>
+    {/* <Header /> */}
+    <main className={style.main}>
         <BurgerIngredients />
         <BurgerConstructor />
-      </div>
     </main>
   </>
 
