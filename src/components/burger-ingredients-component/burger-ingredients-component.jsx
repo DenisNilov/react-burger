@@ -5,10 +5,11 @@ const IngredienrsComponent = ({ name }) => {
     return (
         <div>
             <h2 className="text_type_main-medium mt-10">{name}</h2>
-            <ul className={style.box}>
+            <ul className={style.ingredienrs_component_list}>
+                <IngredienrsComponentList />
+                <IngredienrsComponentList />
                 <IngredienrsComponentList />
             </ul>
-
         </div>)
 }
 

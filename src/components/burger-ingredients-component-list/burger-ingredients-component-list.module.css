@@ -1,10 +1,37 @@
-
-.burger_ingredients_component_list {
-    list-style-type: none;
-    overflow-y: scroll;
-    scrollbar-width: thin;
+.element {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    border: 1px dashed white;
+    flex-direction: column;
+    align-items: center;
+    width: 272px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.image {
+    width: 240px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.element:hover {
+    animation: bounce .6s;
+}
+
+.title {
+    text-align: center;
+}
+
+.price {
+    gap: 8px;
+    box-sizing: border-box;
+    margin: 4px 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+
 }

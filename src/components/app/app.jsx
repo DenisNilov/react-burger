@@ -6,7 +6,7 @@ import style from './app.module.css';
 
 function App() {
   return (<>
-    {/* <Header /> */}
+    <Header />
     <main className={style.main}>
         <BurgerIngredients />
         <BurgerConstructor />
