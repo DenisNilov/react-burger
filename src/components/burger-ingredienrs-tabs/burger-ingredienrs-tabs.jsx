@@ -12,10 +12,10 @@ const Tabs = () => {
 
     const [current, setCurrent] = React.useState('one')
     return (
-        <nav  className={style.tabs} >
-            {tabs.map((tab, index) => (
+        <nav className={style.tabs} >
+            {tabs.map(tab => (
                 <Tab
-                    key={tab.index}
+                    key={tab.id}
                     value={tab.id}
                     active={current === tab.id}
                     onClick={setCurrent}

@@ -4,12 +4,35 @@ import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
 
+
+
 function App() {
+
+  const URL = "https://norma.nomoreparties.space/api/ingredients";
+
+  const [ingredients, setIngredients] = React.useState([]);
+
+  React.useEffect(() => {
+    const api = async () => {
+      return await fetch(URL)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
+        .then((data) => setIngredients(data.data))
+        .catch((error) => console.log(error));
+    }
+    api();
+  }, []);
+
+
   return (<>
     <Header />
     <main className={style.main}>
-        <BurgerIngredients />
-        <BurgerConstructor />
+      <BurgerIngredients ingredients={ingredients} />
+      <BurgerConstructor ingredients={ingredients} />
     </main>
   </>
 
