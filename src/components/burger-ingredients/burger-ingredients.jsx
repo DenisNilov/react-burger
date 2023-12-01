@@ -1,6 +1,6 @@
 import style from './burger-ingredients.module.css';
 import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
-import IngredienrsComponent from '../burger-ingredients-component/burger-ingredients-component.jsx';
+import IngredienrsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
 
 const BurgerIngredients = ({ ingredients }) => {
 
@@ -14,17 +14,17 @@ const BurgerIngredients = ({ ingredients }) => {
             <h1 className="text text_type_main-large pt-10 pb-5">Соберите бургер</h1>
             <Tabs />
             <ul className={style.burger_ingredients_list}>
-                <IngredienrsComponent
+                <IngredienrsComponentList
                     name={'Булки'}
                     data={buns}
                     key={1}
                 />
-                <IngredienrsComponent
+                <IngredienrsComponentList
                     name={'Соусы'}
                     data={sauce}
                     key={2}
                 />
-                <IngredienrsComponent
+                <IngredienrsComponentList
                     name={'Начинки'}
                     data={fillings}
                     key={3}

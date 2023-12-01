@@ -1,17 +1,24 @@
-import IngredienrsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
 import style from './burger-ingredients-component.module.css';
+import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-const IngredienrsComponent = ({ name, data }) => {
+const IngredienrsComponent = ({ data }) => {
+    const { image, price, name, } = data;
+
     return (
-        <li>
-            <h2 className="text_type_main-medium mt-10">{name}</h2>
-            <ul className={style.ingredienrs_component_list}>
-                {data.map(ingredient => <IngredienrsComponentList
-                    data={ingredient}
-                    key={ingredient.id}
-                />)}
-            </ul>
-        </li>)
+        <li className={style.element}>
+            <Counter count={1} size="default" extraClass="m-1" />
+            <img className={style.image} src={image} alt={name}>
+            </img>
+            <div className={style.price}>
+                <p className="text text_type_digits-default mt-1 mb-1">{price}</p>
+                <CurrencyIcon type="primary" />
+            </div>
+            <p className={`text text_type_main-default pb-8 ${style.title}`}>
+                {name}
+            </p>
+        </li>
+    )
+
 }
 
 export default IngredienrsComponent;
