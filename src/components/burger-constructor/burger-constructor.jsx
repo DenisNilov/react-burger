@@ -6,44 +6,53 @@ import {
     Button
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const BurgerConstructor = () => {
+const BurgerConstructor = ({ ingredients }) => {
+
+    const bunTop = ingredients.map((ingredient) =>
+        <ConstructorElement
+            type="top"
+            isLocked={true}
+            text={ingredient.name}
+            price={ingredient.price}
+            thumbnail={ingredient.image}
+            key={ingredient.id}
+        />
+    );
+
+    const bunBottom = ingredients.map((ingredient) =>
+        <ConstructorElement
+            type="bottom"
+            isLocked={true}
+            text={ingredient.name}
+            price={ingredient.price}
+            thumbnail={ingredient.image}
+            key={ingredient.id}
+        />
+    );
+
+
+    const ingredientsList = ingredients
+        .map(ingredient => ingredient.type !== 'bun'
+            ? <ConstructorIngredient
+                data={ingredient}
+                key={ingredient.id}
+            />
+            : '');
+
+
+
+
     return (
         <section className={style.box}>
             <div className={style.elements}>
                 <div className={style.bun}>
-                    <ConstructorElement
-                        type="top"
-                        isLocked={true}
-                        text="Краторная булка N-200i (верх)"
-                        price={200}
-                        thumbnail={'img'}
-                    />
+                    {bunTop[0]}
                 </div>
                 <ul className={style.content}>
-                    <li className={style.element}>
-                        <ConstructorIngredient />
-                    </li>
-                    <li className={style.element}>
-                        <ConstructorIngredient />
-                    </li>
-                    <li className={style.element}>
-                        <ConstructorIngredient />
-                    </li>
-                    <li className={style.element}>
-                        <ConstructorIngredient />
-                    </li>
-                    <li className={style.element}>
-                        <ConstructorIngredient />
-                    </li>
+                    {ingredientsList}
                 </ul>
                 <div className={style.bun}>
-                    <ConstructorElement
-                        type="bottom"
-                        isLocked={true}
-                        text="Краторная булка N-200i (низ)"
-                        price={200}
-                        thumbnail={'img'}
-                    />
+                    {bunBottom[0]}
                 </div>
             </div>
             <div className={style.bottom}>

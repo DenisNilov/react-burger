@@ -4,16 +4,17 @@ import {
     DragIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const ConstructorIngredient = () => {
+const ConstructorIngredient = ({ data }) => {
+    const { name, price, image } = data;
     return (
-        <div className={style.ingredient}>
+        <li className={style.ingredient}>
             <DragIcon type="primary" />
             <ConstructorElement
-                text="Краторная булка N-200i (верх)"
-                price={50}
-                thumbnail={'img'}
+                text={name}
+                price={price}
+                thumbnail={image}
             />
-        </div>
+        </li>
     )
 }
 
