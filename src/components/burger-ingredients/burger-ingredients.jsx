@@ -1,6 +1,9 @@
 import style from './burger-ingredients.module.css';
 import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
 import IngredienrsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
+import PropTypes from 'prop-types';
+import { ingredientsPropTypes } from '../../utils/constants.js'
+
 
 const BurgerIngredients = ({ ingredients }) => {
 
@@ -30,6 +33,10 @@ const BurgerIngredients = ({ ingredients }) => {
         </section >
     )
 
+}
+
+BurgerIngredients.propTypes = {
+    ingredients: PropTypes.arrayOf(ingredientsPropTypes).isRequired,
 }
 
 export default BurgerIngredients;

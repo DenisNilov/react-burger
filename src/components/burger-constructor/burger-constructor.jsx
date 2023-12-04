@@ -1,5 +1,7 @@
 import style from './burger-constuctor.module.css';
 import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
+import PropTypes from 'prop-types';
+import { ingredientsPropTypes } from '../../utils/constants.js'
 import {
     ConstructorElement,
     CurrencyIcon,
@@ -70,9 +72,10 @@ const BurgerConstructor = ({ ingredients }) => {
             </div>
         </section>
     )
+}
 
-
-
+BurgerConstructor.propTypes = {
+    ingredients: PropTypes.arrayOf(ingredientsPropTypes).isRequired,
 }
 
 export default BurgerConstructor;
