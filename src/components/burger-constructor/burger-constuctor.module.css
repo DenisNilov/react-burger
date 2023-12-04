@@ -67,5 +67,12 @@
     margin: 0;
     padding: 0 8px 0 0;
     list-style: none;
-  }
-  
+}
+
+.content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}

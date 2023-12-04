@@ -17,17 +17,14 @@ const BurgerIngredients = ({ ingredients }) => {
                 <IngredienrsComponentList
                     name={'Булки'}
                     data={buns}
-                    key={1}
                 />
                 <IngredienrsComponentList
                     name={'Соусы'}
                     data={sauce}
-                    key={2}
                 />
                 <IngredienrsComponentList
                     name={'Начинки'}
                     data={fillings}
-                    key={3}
                 />
             </ul>
         </section >

@@ -17,5 +17,12 @@
     display: flex;
     flex-direction: column;
 
+}
 
+.burger_ingredients_list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.burger_ingredients_list::-webkit-scrollbar-thumb {
+    background: #8585AD;
 }

@@ -8,7 +8,7 @@ const IngredienrsComponentList = ({ name, data }) => {
             <ul className={style.ingredienrs_component_list}>
                 {data.map(ingredient => <IngredienrsComponent
                     data={ingredient}
-                    key={ingredient.id}
+                    key={ingredient._id}
                 />)}
             </ul>
         </li>)

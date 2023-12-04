@@ -8,25 +8,25 @@ import {
 
 const BurgerConstructor = ({ ingredients }) => {
 
-    const bunTop = ingredients.map((ingredient) =>
+    const bunTop = ingredients.map(ingredient =>
         <ConstructorElement
             type="top"
             isLocked={true}
             text={ingredient.name}
             price={ingredient.price}
             thumbnail={ingredient.image}
-            key={ingredient.id}
+            key={ingredient._id}
         />
     );
 
-    const bunBottom = ingredients.map((ingredient) =>
+    const bunBottom = ingredients.map(ingredient =>
         <ConstructorElement
             type="bottom"
             isLocked={true}
             text={ingredient.name}
             price={ingredient.price}
             thumbnail={ingredient.image}
-            key={ingredient.id}
+            key={ingredient._id}
         />
     );
 
@@ -35,7 +35,7 @@ const BurgerConstructor = ({ ingredients }) => {
         .map(ingredient => ingredient.type !== 'bun'
             ? <ConstructorIngredient
                 data={ingredient}
-                key={ingredient.id}
+                key={ingredient._id}
             />
             : '');
 
