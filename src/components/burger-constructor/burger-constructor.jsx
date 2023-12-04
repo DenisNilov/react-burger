@@ -1,12 +1,10 @@
 import style from './burger-constuctor.module.css';
 import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
 import PropTypes from 'prop-types';
+import Modal from "../modal/modal.jsx";
 import { ingredientsPropTypes } from '../../utils/constants.js'
-import {
-    ConstructorElement,
-    CurrencyIcon,
-    Button
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, CurrencyIcon, Button }
+    from "@ya.praktikum/react-developer-burger-ui-components";
 
 const BurgerConstructor = ({ ingredients }) => {
 
@@ -70,6 +68,10 @@ const BurgerConstructor = ({ ingredients }) => {
                     Оформить заказ
                 </Button>
             </div>
+
+            <Modal>
+
+            </Modal>
         </section>
     )
 }
