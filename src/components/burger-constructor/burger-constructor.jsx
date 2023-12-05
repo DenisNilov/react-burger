@@ -1,12 +1,23 @@
+import React from "react";
 import style from './burger-constuctor.module.css';
 import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
 import PropTypes from 'prop-types';
 import Modal from "../modal/modal.jsx";
-import { ingredientsPropTypes } from '../../utils/constants.js'
+import { ingredientsPropTypes } from '../../utils/constants.js';
+import OrderDetails from "../order-details/order-details.jsx";
 import { ConstructorElement, CurrencyIcon, Button }
     from "@ya.praktikum/react-developer-burger-ui-components";
 
 const BurgerConstructor = ({ ingredients }) => {
+    const [openModal, setOpenModal] = React.useState(false);
+
+    const showModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleClose = () => {
+        setOpenModal(false);
+    };
 
     const bunTop = ingredients.map(ingredient =>
         <ConstructorElement
@@ -64,14 +75,18 @@ const BurgerConstructor = ({ ingredients }) => {
                     htmlType="button"
                     type="primary"
                     size="large"
-                    disabled={false}>
+                    onClick={showModal}
+                >
                     Оформить заказ
                 </Button>
             </div>
+            {openModal &&
+                <Modal onClose={handleClose}>
+                    <OrderDetails />
+                </Modal>
+            }
 
-            <Modal>
 
-            </Modal>
         </section>
     )
 }
