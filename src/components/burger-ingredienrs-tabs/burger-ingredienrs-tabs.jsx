@@ -5,12 +5,12 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 const Tabs = () => {
 
     const tabs = [
-        { id: "bun", title: "Булки" },
-        { id: "sauce", title: "Соусы" },
-        { id: "main", title: "Начинки" },
+        { id: "bun", title: 'Булки' },
+        { id: "sauce", title: 'Соусы' },
+        { id: "main", title: 'Начинки' },
     ];
 
-    const [current, setCurrent] = React.useState('one')
+    const [current, setCurrent] = React.useState('bun')
     return (
         <nav className={style.tabs} >
             {tabs.map(tab => (

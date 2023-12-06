@@ -9,7 +9,7 @@ const BurgerIngredients = ({ ingredients }) => {
 
     const buns = ingredients.filter(ingredient => ingredient.type === 'bun')
     const sauce = ingredients.filter(ingredient => ingredient.type === 'sauce')
-    const fillings = ingredients.filter(ingredient => ingredient.type === 'main')
+    const main = ingredients.filter(ingredient => ingredient.type === 'main')
 
 
     return (
@@ -27,7 +27,7 @@ const BurgerIngredients = ({ ingredients }) => {
                 />
                 <IngredienrsComponentList
                     name={'Начинки'}
-                    data={fillings}
+                    data={main}
                 />
             </ul>
         </section >

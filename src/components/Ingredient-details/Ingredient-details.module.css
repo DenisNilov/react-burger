@@ -18,6 +18,10 @@
 }
 
 
+.name {
+    text-align: center;
+}
+
 .nutritions {
     display: grid;
     grid-template-columns: 136px repeat(3, 112px);
@@ -37,4 +41,3 @@
     margin: 0;
     padding: 0;
 }
-

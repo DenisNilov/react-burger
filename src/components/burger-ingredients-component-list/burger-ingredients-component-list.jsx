@@ -1,5 +1,7 @@
 import IngredienrsComponent from '../burger-ingredients-component/burger-ingredients-component.jsx';
 import style from './burger-ingredients-component-list.module.css';
+import { ingredientsPropTypes } from '../../utils/constants.js';
+import PropTypes from 'prop-types';
 
 const IngredienrsComponentList = ({ name, data }) => {
     return (
@@ -12,6 +14,11 @@ const IngredienrsComponentList = ({ name, data }) => {
                 />)}
             </ul>
         </li>)
+}
+
+IngredienrsComponentList.propTypes = {
+    data: PropTypes.arrayOf(ingredientsPropTypes).isRequired,
+    name: PropTypes.string.isRequired
 }
 
 export default IngredienrsComponentList;
