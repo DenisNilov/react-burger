@@ -9,6 +9,7 @@ const IngredientDetails = ({ image, name, calories, carbohydrates, fat, proteins
     return (
         <>
             <div className={style.container}>
+                <h2 className="text text_type_main-large">Детали ингредиента</h2>
                 <div className={style.image}>
                     <img src={image} alt=''></img>
                 </div>
