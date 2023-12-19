@@ -84,7 +84,7 @@ const BurgerConstructor = ({ ingredients }) => {
             <div className={style.bottom}>
                 <div className={style.sum}>
                     <p className="text text_type_digits-medium">
-                        {totalPrice}
+                        {totalPrice || 0}
                     </p>
                     <CurrencyIcon type="primary" />
                 </div>
