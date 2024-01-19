@@ -1,6 +1,6 @@
 import React from "react";
 import style from './constructor-ingredient.module.css';
-import IngredientDetails from '../ingredient-details/Ingredient-details.jsx';
+import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import Modal from "../modal/modal.jsx";
 import { ingredientsPropTypes } from '../../utils/constants.js'
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
