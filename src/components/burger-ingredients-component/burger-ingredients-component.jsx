@@ -1,6 +1,6 @@
 import style from './burger-ingredients-component.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
+import IngredientDetails from '../Ingredient-details/Ingredient-details.jsx';
 import Modal from "../modal/modal.jsx";
 import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js'
