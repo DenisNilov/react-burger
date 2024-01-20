@@ -48,7 +48,6 @@ const IngredienrsComponent = ({ data }) => {
             }
         </li>
     )
-
 }
 
 IngredienrsComponent.propTypes = {
