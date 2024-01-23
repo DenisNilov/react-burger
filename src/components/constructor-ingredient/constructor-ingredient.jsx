@@ -30,7 +30,7 @@ const ConstructorIngredient = ({ data }) => {
                 thumbnail={image}
             />
             {openModal &&
-                <Modal onClose={handleClose}>
+                <Modal onClose={handleClose} isOpen={openModal}>
                     <IngredientDetails
                         image={image_large}
                         name={name}

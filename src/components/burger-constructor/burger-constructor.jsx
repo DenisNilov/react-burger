@@ -98,7 +98,7 @@ const BurgerConstructor = ({ ingredients }) => {
                 </Button>
             </div>
             {openModal &&
-                <Modal onClose={handleClose}>
+                <Modal onClose={handleClose} isOpen={openModal}>
                     <OrderDetails />
                 </Modal>
             }
