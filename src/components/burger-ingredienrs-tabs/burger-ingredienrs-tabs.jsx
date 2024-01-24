@@ -1,19 +1,14 @@
 import React from 'react';
 import style from './burger-ingredienrs-tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { TABS } from '../../utils/constants.js';
 
 const Tabs = () => {
-
-    const tabs = [
-        { id: "bun", title: 'Булки' },
-        { id: "sauce", title: 'Соусы' },
-        { id: "main", title: 'Начинки' },
-    ];
 
     const [current, setCurrent] = React.useState('bun')
     return (
         <nav className={style.tabs} >
-            {tabs.map(tab => (
+            {TABS.map(tab => (
                 <Tab
                     key={tab.id}
                     value={tab.id}

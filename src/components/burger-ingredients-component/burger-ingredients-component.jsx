@@ -5,9 +5,9 @@ import Modal from "../modal/modal.jsx";
 import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js'
 
-const IngredienrsComponent = ({ data }) => {
+const IngredienrsComponent = ({ ingredient }) => {
 
-    const { image, price, name, image_large, calories, carbohydrates, fat, proteins } = data;
+    const { image, price, name, image_large, calories, carbohydrates, fat, proteins } = ingredient;
 
     const [openModal, setOpenModal] = React.useState(false);
 
@@ -51,7 +51,7 @@ const IngredienrsComponent = ({ data }) => {
 }
 
 IngredienrsComponent.propTypes = {
-    data: ingredientsPropTypes.isRequired,
+    ingredient: ingredientsPropTypes.isRequired,
 }
 
 export default IngredienrsComponent;

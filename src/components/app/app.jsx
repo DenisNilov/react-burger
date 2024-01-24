@@ -3,12 +3,11 @@ import Header from '../app-header/app-header.jsx';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
+import { URL } from '../../utils/constants.js';
 
 
 
 function App() {
-
-  const URL = "https://norma.nomoreparties.space/api/ingredients";
 
   const [ingredients, setIngredients] = React.useState([]);
 

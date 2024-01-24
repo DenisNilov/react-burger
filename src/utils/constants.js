@@ -12,4 +12,12 @@ const ingredientsPropTypes = PropTypes.shape({
     _id: PropTypes.string.isRequired,
 });
 
-export { ingredientsPropTypes };
+const TABS = [
+    { id: "bun", title: 'Булки' },
+    { id: "sauce", title: 'Соусы' },
+    { id: "main", title: 'Начинки' },
+];
+
+const URL = "https://norma.nomoreparties.space/api/ingredients";
+
+export { ingredientsPropTypes, TABS, URL };
