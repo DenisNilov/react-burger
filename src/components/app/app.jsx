@@ -4,7 +4,7 @@ import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
 import { URL } from '../../utils/constants.js';
-
+import { makeResponseCheck } from '../../utils/utils.js';
 
 
 function App() {
@@ -14,12 +14,7 @@ function App() {
   React.useEffect(() => {
     const api = async () => {
       return await fetch(URL)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
+        .then((res) => makeResponseCheck(res))
         .then((data) => setIngredients(data.data))
         .catch((error) => console.log(error));
     }
