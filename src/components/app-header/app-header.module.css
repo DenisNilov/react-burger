@@ -1,0 +1,64 @@
+.header {
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: #1c1c21;
+}
+
+.header_inner {
+    position: relative;
+    width: 100%;
+    max-width: 1280px;
+    height: 88px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.burgerIcon_inner {
+    margin: 0 auto;
+    display: flex;
+    padding: 16px 20px;
+    align-items: center;
+}
+
+.listIcon_inner {
+    display: flex;
+    padding: 16px 20px;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.logo {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    left: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    width: fit-content;
+}
+
+.profile_inner {
+    display: flex;
+    padding: 16px 20px;
+    align-items: center;
+}
+
+.header_item_name {
+    color: white;
+}
+
+.heder_link {
+    text-decoration: none;
+}
