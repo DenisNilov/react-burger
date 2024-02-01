@@ -5,6 +5,7 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
 import { URL } from '../../utils/constants.js';
 import { makeResponseCheck } from '../../utils/utils.js';
+import { BurgerIngredientsContext } from '../../services/appContext.js';
 
 
 function App() {
@@ -22,14 +23,14 @@ function App() {
   }, []);
 
 
-  return (<>
-    <Header />
-    <main className={style.main}>
-      <BurgerIngredients ingredients={ingredients} />
-      <BurgerConstructor ingredients={ingredients} />
-    </main>
-  </>
-
+  return (
+    <BurgerIngredientsContext.Provider value={ingredients}>
+      <Header />
+      <main className={style.main}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </main>
+    </BurgerIngredientsContext.Provider>
   );
 }
 

@@ -1,13 +1,14 @@
 import React from "react";
 import style from './burger-constuctor.module.css';
 import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
-import PropTypes from 'prop-types';
 import Modal from "../modal/modal.jsx";
-import { ingredientsPropTypes } from '../../utils/constants.js';
 import OrderDetails from "../order-details/order-details.jsx";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { BurgerIngredientsContext } from '../../services/appContext.js';
 
-const BurgerConstructor = ({ ingredients }) => {
+const BurgerConstructor = () => {
+
+    const ingredients = React.useContext(BurgerIngredientsContext);
     const [openModal, setOpenModal] = React.useState(false);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
@@ -106,10 +107,6 @@ const BurgerConstructor = ({ ingredients }) => {
 
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropTypes.isRequired).isRequired,
 }
 
 export default BurgerConstructor;
