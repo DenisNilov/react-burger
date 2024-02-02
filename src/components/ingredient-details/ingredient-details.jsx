@@ -11,7 +11,7 @@ const IngredientDetails = ({ image, name, calories, carbohydrates, fat, proteins
             <div className={style.container}>
                 <h2 className="text text_type_main-large">Детали ингредиента</h2>
                 <div className={style.image}>
-                    <img src={image} alt=''></img>
+                    <img src={image} alt={name}></img>
                 </div>
                 <p className={`text text_type_main-medium mt-4 ${style.name}`}>
                     {name}

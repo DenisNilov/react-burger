@@ -2,19 +2,23 @@ import React from "react";
 import style from './order-details.module.css';
 import Done from '../../images/done.svg';
 import { BurgerIngredientsContext } from '../../services/appContext.js';
-import { makeResponseCheck } from '../../utils/utils.js';
+import { request } from '../../utils/utils.js';
 
 const OrderDetails = () => {
 
     const ingredients = React.useContext(BurgerIngredientsContext);
 
-    const [numberOrder, setnumberOrder] = React.useState(0);
+    const [numberOrder, setnumberOrder] = React.useState({
+        isLoading: false,
+        number: ''
+    });
 
     const idIngredients = ingredients.map(ingredient => ingredient._id);
 
     React.useEffect(() => {
         const api = async () => {
-            return await fetch('https://norma.nomoreparties.space/api/orders', {
+            setnumberOrder({ ...numberOrder, isLoading: true });
+            return await request(`orders`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
@@ -22,9 +26,8 @@ const OrderDetails = () => {
                 body: JSON.stringify({
                     "ingredients": idIngredients
                 })
-            }).then((res) => makeResponseCheck(res))
-                .then(data => setnumberOrder(data.order.number))
-                .catch((error) => console.log(error));
+            }).then(data => setnumberOrder({ ...numberOrder, number: data.order.number }))
+                .catch(console.error);
         }
         api();
     }, []);
@@ -32,11 +35,12 @@ const OrderDetails = () => {
     return (
         <div className={style.box}>
             <p className={`text text_type_digits-large ${style.number}`}>
-                {numberOrder}
+                {numberOrder.isLoading && 'Загрузка...'}
+                {numberOrder.number}
             </p>
             <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
             <div className={style.done}>
-                <img src={Done} alt='' ></img>
+                <img src={Done} alt='done' ></img>
             </div>
             <p className="text text_type_main-default mt-15">
                 Ваш заказ начали готовить
