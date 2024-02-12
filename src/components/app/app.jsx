@@ -3,8 +3,8 @@ import Header from '../app-header/app-header.jsx';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
-import { URL } from '../../utils/constants.js';
-import { makeResponseCheck } from '../../utils/utils.js';
+import { request } from '../../utils/utils.js';
+import { BurgerIngredientsContext } from '../../services/appContext.js';
 
 
 function App() {
@@ -13,23 +13,22 @@ function App() {
 
   React.useEffect(() => {
     const api = async () => {
-      return await fetch(URL)
-        .then((res) => makeResponseCheck(res))
+      return await request(`ingredients`)
         .then((data) => setIngredients(data.data))
-        .catch((error) => console.log(error));
+        .catch(console.error);
     }
     api();
   }, []);
 
 
-  return (<>
-    <Header />
-    <main className={style.main}>
-      <BurgerIngredients ingredients={ingredients} />
-      <BurgerConstructor ingredients={ingredients} />
-    </main>
-  </>
-
+  return (
+    <BurgerIngredientsContext.Provider value={ingredients}>
+      <Header />
+      <main className={style.main}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </main>
+    </BurgerIngredientsContext.Provider>
   );
 }
 

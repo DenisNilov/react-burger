@@ -2,11 +2,12 @@ import React from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
 import IngredientsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
-import PropTypes from 'prop-types';
-import { ingredientsPropTypes } from '../../utils/constants.js'
+import { BurgerIngredientsContext } from '../../services/appContext.js';
 
 
-const BurgerIngredients = ({ ingredients }) => {
+const BurgerIngredients = () => {
+
+    const ingredients = React.useContext(BurgerIngredientsContext);
 
     const getIngredients = React.useMemo(() => {
         const buns = ingredients.filter(ingredient => ingredient.type === 'bun')
@@ -46,11 +47,7 @@ const BurgerIngredients = ({ ingredients }) => {
             </ul>
         </section >
     )
-
 }
 
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropTypes.isRequired).isRequired,
-}
 
 export default BurgerIngredients;

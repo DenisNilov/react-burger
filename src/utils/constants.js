@@ -18,6 +18,6 @@ const TABS = [
     { id: "main", title: 'Начинки' },
 ];
 
-const URL = "https://norma.nomoreparties.space/api/ingredients";
+const BASE_URL = "https://norma.nomoreparties.space/api";
 
-export { ingredientsPropTypes, TABS, URL };
+export { ingredientsPropTypes, TABS, BASE_URL };
