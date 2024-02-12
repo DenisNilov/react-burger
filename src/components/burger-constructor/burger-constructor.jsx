@@ -4,11 +4,15 @@ import ConstructorIngredient from '../constructor-ingredient/constructor-ingredi
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { BurgerIngredientsContext } from '../../services/appContext.js';
+import { useSelector, useDispatch } from "react-redux";
 
 const BurgerConstructor = () => {
 
-    const ingredients = React.useContext(BurgerIngredientsContext);
+    //const dispatch = useDispatch();
+
+    const { ingredients } = useSelector(state => state.ingredients);
+
+
     const [openModal, setOpenModal] = React.useState(false);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
