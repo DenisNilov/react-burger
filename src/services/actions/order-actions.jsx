@@ -32,7 +32,6 @@ export const postOrderAction = idIngredients =>
                     "ingredients": idIngredients
                 })
             })
-                .then(data => console.log(data))
                 .then(data => dispatch(postOrderSuccessAction(data)))
         } catch (error) {
             dispatch(postOrderFailedAction(error));
