@@ -1,27 +1,13 @@
 import React from "react";
 import style from './order-details.module.css';
 import Done from '../../images/done.svg';
-import { useSelector, useDispatch } from "react-redux";
-import { postOrderAction } from '../../services/actions/order-actions.jsx';
 
-const OrderDetails = () => {
-
-    const dispatch = useDispatch();
-
-    const { ingredients } = useSelector(state => state.ingredients);
-    const { number } = useSelector(state => state.order.data.order);
-
-
-    const idIngredients = ingredients.map(ingredient => ingredient._id);
-
-    React.useEffect(() => {
-        dispatch(postOrderAction(idIngredients))
-    }, [dispatch]);
+const OrderDetails = ({ orderNumber }) => {
 
     return (
         <div className={style.box}>
             <p className={`text text_type_digits-large ${style.number}`}>
-                {number}
+                {orderNumber.data.order.number}
             </p>
             <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
             <div className={style.done}>

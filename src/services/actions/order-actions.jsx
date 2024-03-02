@@ -1,41 +1,24 @@
 import { request } from '../../utils/utils.js';
 
-export const GET_ORDER_REQUEST = 'GET_ORDER_REQUEST';
-export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
-export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
-
-export const postOrderRequestAction = () => ({
-    type: GET_ORDER_REQUEST,
-});
-
-export const postOrderSuccessAction = data => ({
-    type: GET_ORDER_SUCCESS,
-    payload: data,
-});
-
-export const postOrderFailedAction = error => ({
-    type: GET_ORDER_FAILED,
-    payload: error,
-});
+export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
+export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
+export const POST_ORDER_FAILED = 'POST_ORDER_FAILED';
 
 
-export const postOrderAction = idIngredients =>
-    async (dispatch) => {
-        dispatch(postOrderRequestAction());
-        try {
-            return await request(`orders`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json;charset=utf-8'
-                },
-                body: JSON.stringify({
-                    "ingredients": idIngredients
-                })
-            })
-                .then(data => dispatch(postOrderSuccessAction(data)))
-        } catch (error) {
-            dispatch(postOrderFailedAction(error));
-        }
-    };
-
-//
+export const postOrderAction = ingredients => dispatch => {
+    dispatch({ type: POST_ORDER_REQUEST })
+    request('orders', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            ingredients: ingredients,
+        }),
+    }).then(data =>
+        dispatch({
+            type: POST_ORDER_SUCCESS,
+            payload: data,
+        })
+    ).catch(error => dispatch({ type: POST_ORDER_FAILED }))
+}

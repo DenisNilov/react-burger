@@ -16,16 +16,19 @@ export const ingredientsReducer = (state = initialState, action) => {
       return {
         ...state,
         ingredientsRequest: true,
+        ingredientsFailed: false,
       };
     case GET_INGREDIENTS_SUCCESS:
       return {
         ...state,
         ingredients: action.payload,
+        ingredientsRequest: false,
       };
     case GET_INGREDIENTS_FAILED:
       return {
         ...state,
         ingredientsFailed: true,
+        ingredientsRequest: false,
       };
     default:
       return state;

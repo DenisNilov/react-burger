@@ -2,12 +2,10 @@ import React from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
 import IngredientsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 
 const BurgerIngredients = () => {
-
-    //const dispatch = useDispatch();
 
     const { ingredients } = useSelector(state => state.ingredients);
 

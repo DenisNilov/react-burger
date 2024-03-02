@@ -5,14 +5,15 @@ import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
+import { postOrderAction } from '../../services/actions/order-actions';
+
 
 const BurgerConstructor = () => {
 
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const { ingredients } = useSelector(state => state.ingredients);
-
-
+    const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState(false);
     const [totalPrice, setTotalPrice] = React.useState(0);
 
@@ -25,6 +26,8 @@ const BurgerConstructor = () => {
         return bun.price
     })
 
+    const idIngredients = ingredients.map(ingredient => ingredient._id);
+
     React.useEffect(() => {
         const sum = mainIngredients.reduce(
             (accumulator, total) => accumulator + total.price, bunPrice[0] * 2)
@@ -33,6 +36,7 @@ const BurgerConstructor = () => {
 
     const showModal = () => {
         setOpenModal(true);
+        dispatch(postOrderAction(idIngredients));
     };
 
     const handleClose = () => {
@@ -104,9 +108,9 @@ const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {openModal &&
+            {openModal && orderNumber.data &&
                 <Modal onClose={handleClose} isOpen={openModal}>
-                    <OrderDetails />
+                    <OrderDetails orderNumber={orderNumber} />
                 </Modal>
             }
 
