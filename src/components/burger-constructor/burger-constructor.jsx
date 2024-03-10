@@ -6,96 +6,134 @@ import OrderDetails from "../order-details/order-details.jsx";
 import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
+import { useDrop } from "react-dnd";
+import {
+    addIngConstructor,
+    setBunConstructor,
+    resetIngConstructor,
+} from '../../services/actions/constructor-actions.jsx';
 
 
 const BurgerConstructor = () => {
 
     const dispatch = useDispatch();
-
-    const { ingredients } = useSelector(state => state.ingredients);
+    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
     const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState(false);
-    const [totalPrice, setTotalPrice] = React.useState(0);
-
-    const mainIngredients = ingredients.filter(element =>
-        element.type !== 'bun'
-    );
 
 
-    const bunPrice = ingredients.filter(ingredient => ingredient.type === 'bun').map(bun => {
-        return bun.price
-    })
+    const postOrderNumer = () => {
+        if (bun && ingredients) {
+            dispatch(postOrderAction([bun._id, ...ingredients].map(ingredient => ingredient._id)));
+        }
+    };
 
-    const idIngredients = ingredients.map(ingredient => ingredient._id);
 
-    React.useEffect(() => {
-        const sum = mainIngredients.reduce(
-            (accumulator, total) => accumulator + total.price, bunPrice[0] * 2)
-        setTotalPrice(sum);
-    }, [mainIngredients, bunPrice]);
+    const calculationPrice = React.useMemo(() => {
+        if (bun && ingredients) {
+            const sum = bun.price * 2;
+            const total = sum + ingredients.reduce((prev, el) => prev + el.price, 0);
+            return total;
+        } else return "0";
+    }, [ingredients, bun]);
 
     const showModal = () => {
         setOpenModal(true);
-        dispatch(postOrderAction(idIngredients));
+        postOrderNumer();
     };
 
     const handleClose = () => {
         setOpenModal(false);
     };
 
-    const bunTop = ingredients.map(ingredient =>
-        <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={`${ingredient.name}
-            (вверх)`}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            key={ingredient._id}
-        />
-    );
+    const BunTop = ({ ingredient }) => {
+        return (
+            <ConstructorElement
+                type="top"
+                isLocked={true}
+                text={`${ingredient.name} (верх)`}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+            />
+        );
+    };
 
-    const bunBottom = ingredients.map(ingredient =>
-        <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={`${ingredient.name}
-            (низ)`}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            key={ingredient._id}
-        />
-    );
+
+    const BunBottom = ({ ingredient }) => {
+        return (
+            <ConstructorElement
+                type="bottom"
+                isLocked={true}
+                text={`${ingredient.name} (низ)`}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+            />
+        );
+    };
 
 
     const ingredientsList = ingredients
-        .map(ingredient => ingredient.type !== 'bun'
+        .map((ingredient, index) => ingredient.type !== 'bun'
             ? <ConstructorIngredient
                 data={ingredient}
-                key={ingredient._id}
+                key={index}
             />
             : '');
 
 
 
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop(itemId) {
+            onDropHandler(itemId);
+        },
+    });
+
+    const onDropHandler = (ingredient) => {
+        if (ingredient.type === "bun") {
+            dispatch(setBunConstructor(ingredient));
+        } else {
+            dispatch(addIngConstructor(ingredient));
+        }
+    };
+
+
 
     return (
         <section className={style.box}>
-            <div className={style.elements}>
+            <div
+                className={style.elements}
+                ref={dropTarget}
+            >
                 <div className={style.bun}>
-                    {bunTop[0]}
+                    {bun ? <BunTop ingredient={bun} />
+                        : <p className="text text_type_main-medium">Перетащи сюда булку</p>}
                 </div>
                 <ul className={style.content}>
-                    {ingredientsList}
+                    {(bun || ingredients) && ingredients ? ingredientsList
+                        : <>
+                            <p
+                                className="text text_type_main-medium"
+                                style={{ width: "500px" }}
+                            >
+                                А теперь перетащи сюда{" "}
+                            </p>
+                            <p
+                                className="text text_type_main-medium"
+                                style={{ width: "500px" }}
+                            >
+                                начинку и соусы{" "}
+                            </p>
+                        </>}
                 </ul>
                 <div className={style.bun}>
-                    {bunBottom[0]}
+                    {bun && <BunBottom ingredient={bun} />}
                 </div>
             </div>
             <div className={style.bottom}>
                 <div className={style.sum}>
                     <p className="text text_type_digits-medium">
-                        {totalPrice || 0}
+                        {calculationPrice}
                     </p>
                     <CurrencyIcon type="primary" />
                 </div>
@@ -113,8 +151,6 @@ const BurgerConstructor = () => {
                     <OrderDetails orderNumber={orderNumber} />
                 </Modal>
             }
-
-
         </section>
     )
 }

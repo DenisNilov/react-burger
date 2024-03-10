@@ -3,11 +3,12 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import Modal from "../modal/modal.jsx";
 import React from "react";
-import { ingredientsPropTypes } from '../../utils/constants.js'
+import { ingredientsPropTypes } from '../../utils/constants.js';
+import { useDrag } from 'react-dnd';
 
 const IngredientsComponent = ({ ingredient }) => {
 
-    const { image, price, name, image_large, calories, carbohydrates, fat, proteins } = ingredient;
+    const { image, price, name, image_large, calories, carbohydrates, fat, proteins, _id } = ingredient;
 
     const [openModal, setOpenModal] = React.useState(false);
 
@@ -19,10 +20,21 @@ const IngredientsComponent = ({ ingredient }) => {
         setOpenModal(false);
     };
 
+    const [{ opacity }, ref] = useDrag({
+        type: "ingredient",
+        item: ingredient,
+        collect: (monitor) => ({
+            opacity: monitor.isDragging() ? 0.5 : 1
+        }),
+    });
+
+
     return (
         <li
             className={style.element}
             onClick={showModal}
+            ref={ref}
+            style={{ opacity }}
         >
             <Counter count={1} size="default" extraClass="m-1" />
             <img className={style.image} src={image} alt={name}>
