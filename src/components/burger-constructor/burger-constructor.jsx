@@ -10,7 +10,6 @@ import { useDrop } from "react-dnd";
 import {
     addIngConstructor,
     setBunConstructor,
-    resetIngConstructor,
 } from '../../services/actions/constructor-actions.jsx';
 
 

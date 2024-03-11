@@ -5,15 +5,18 @@ import Modal from "../modal/modal.jsx";
 import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js';
 import { useDrag } from 'react-dnd';
+import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
+import { useDispatch } from "react-redux";
 
 const IngredientsComponent = ({ ingredient }) => {
 
-    const { image, price, name, image_large, calories, carbohydrates, fat, proteins, _id } = ingredient;
-
+    const { image, price, name } = ingredient;
+    const dispatch = useDispatch();
     const [openModal, setOpenModal] = React.useState(false);
 
     const showModal = () => {
         setOpenModal(true);
+        dispatch(addIngredientDetails(ingredient))
     };
 
     const handleClose = () => {
@@ -48,14 +51,7 @@ const IngredientsComponent = ({ ingredient }) => {
             </p>
             {openModal &&
                 <Modal onClose={handleClose} isOpen={openModal}>
-                    <IngredientDetails
-                        image={image_large}
-                        name={name}
-                        calories={calories}
-                        carbohydrates={carbohydrates}
-                        fat={fat}
-                        proteins={proteins}
-                    />
+                    <IngredientDetails />
                 </Modal>
             }
         </li>
