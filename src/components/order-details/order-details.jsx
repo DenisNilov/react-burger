@@ -2,12 +2,13 @@ import React from "react";
 import style from './order-details.module.css';
 import Done from '../../images/done.svg';
 
-const OrderDetails = ({ orderNumber }) => {
+const OrderDetails = ({ orderNumber, isLoading }) => {
 
     return (
         <div className={style.box}>
+            {isLoading && <div className={style.loader} id="loader"></div>}
             <p className={`text text_type_digits-large ${style.number}`}>
-                {orderNumber.data.order.number}
+                {!isLoading && orderNumber.data && orderNumber.data.order.number}
             </p>
             <p className="text text_type_main-medium mt-8">идентификатор заказа</p>
             <div className={style.done}>

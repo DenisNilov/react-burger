@@ -29,10 +29,10 @@ const BurgerConstructor = () => {
     };
 
 
-    const calculationPrice = React.useMemo(() => {
+    const totalPrice = React.useMemo(() => {
         if (bun && ingredients) {
-            const sum = bun.price * 2;
-            const total = sum + ingredients.reduce((prev, el) => prev + el.price, 0);
+            const bunSum = bun.price * 2;
+            const total = ingredients.reduce((accumulator, ingredient) => accumulator + ingredient.price, bunSum);
             return total;
         } else return "0";
     }, [ingredients, bun]);
@@ -72,15 +72,12 @@ const BurgerConstructor = () => {
     };
 
 
-    const ingredientsList = ingredients
-        .map((ingredient, index) => ingredient.type !== 'bun'
-            ? <ConstructorIngredient
+    const IngredientsList = ({ ingredients }) =>
+        ingredients.map((ingredient, index) =>
+            <ConstructorIngredient
                 data={ingredient}
                 key={index}
-            />
-            : '');
-
-
+            />)
 
     const [, dropTarget] = useDrop({
         accept: "ingredient",
@@ -110,19 +107,13 @@ const BurgerConstructor = () => {
                         : <p className="text text_type_main-medium">Перетащи сюда булку</p>}
                 </div>
                 <ul className={style.content}>
-                    {(bun || ingredients) && ingredients ? ingredientsList
-                        : <>
+                    {ingredients ? <IngredientsList ingredients={ingredients} />
+                        : bun && <>
                             <p
                                 className="text text_type_main-medium"
                                 style={{ width: "500px" }}
                             >
-                                А теперь перетащи сюда{" "}
-                            </p>
-                            <p
-                                className="text text_type_main-medium"
-                                style={{ width: "500px" }}
-                            >
-                                начинку и соусы{" "}
+                                А теперь перетащи сюда начинку и соусы
                             </p>
                         </>}
                 </ul>
@@ -133,7 +124,7 @@ const BurgerConstructor = () => {
             <div className={style.bottom}>
                 <div className={style.sum}>
                     <p className="text text_type_digits-medium">
-                        {calculationPrice}
+                        {totalPrice}
                     </p>
                     <CurrencyIcon type="primary" />
                 </div>
@@ -146,9 +137,13 @@ const BurgerConstructor = () => {
                     Оформить заказ
                 </Button>
             </div>
-            {openModal && orderNumber.data &&
+            {openModal &&
                 <Modal onClose={handleClose} isOpen={openModal}>
-                    <OrderDetails orderNumber={orderNumber} />
+                    <OrderDetails
+                        orderNumber={orderNumber}
+                        isLoading={orderNumber.orderRequest}
+                    />
+
                 </Modal>
             }
         </section>
