@@ -5,7 +5,7 @@ import Modal from "../modal/modal.jsx";
 import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js';
 import { useDrag } from 'react-dnd';
-import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
+import { addIngredientDetails, resetIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
 
 const IngredientsComponent = ({ ingredient }) => {
@@ -21,6 +21,7 @@ const IngredientsComponent = ({ ingredient }) => {
 
     const handleClose = () => {
         setOpenModal(false);
+        dispatch(resetIngredientDetails())
     };
 
     const [{ opacity }, ref] = useDrag({

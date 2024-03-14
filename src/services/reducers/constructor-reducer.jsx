@@ -20,6 +20,7 @@ export const constructorReducer = (state = initialState, action) => {
                     ingredients: [
                         {
                             ...action.payload,
+                            id: Date.now().toString()
                         },
                     ],
                 };
@@ -30,6 +31,7 @@ export const constructorReducer = (state = initialState, action) => {
                         ...state.ingredients,
                         {
                             ...action.payload,
+                            id: Date.now().toString()
                         },
                     ],
                 };
@@ -42,9 +44,7 @@ export const constructorReducer = (state = initialState, action) => {
         case DELETE_ING_CONSTRUCTOR:
             return {
                 ...state,
-                ingredients: state.ingredients.filter(
-                    (ingredient) => ingredient._idInBasket !== action.payload
-                ),
+                ingredients: state.ingredients.filter((ingredient) => ingredient.id !== action.payload)
             };
         case SORT_ING_CONSTRUCTOR:
             const ingredients = [...state.ingredients];
