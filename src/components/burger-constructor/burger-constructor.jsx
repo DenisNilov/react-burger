@@ -28,13 +28,10 @@ const BurgerConstructor = () => {
     };
 
 
-    const totalPrice = React.useMemo(() => {
-        if (bun && ingredients) {
-            const bunSum = bun.price * 2;
-            const total = ingredients.reduce((accumulator, ingredient) => accumulator + ingredient.price, bunSum);
-            return total;
-        } else return "0";
-    }, [ingredients, bun]);
+    const totalPrice = React.useMemo(() =>
+    (ingredients ?
+        ingredients.reduce((accumulator, ingredient) => accumulator + ingredient.price, bun ? bun.price * 2 : 0) : 0),
+        [ingredients, bun]);
 
     const showModal = () => {
         setOpenModal(true);
@@ -72,10 +69,10 @@ const BurgerConstructor = () => {
 
 
     const IngredientsList = ({ ingredients }) =>
-        ingredients.map((ingredient, index) =>
+        ingredients.map(ingredient =>
             <ConstructorIngredient
                 data={ingredient}
-                key={index}
+                key={ingredient.id}
             />)
 
     const [, dropTarget] = useDrop({
