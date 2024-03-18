@@ -2,6 +2,7 @@ import React from 'react';
 import style from './burger-ingredienrs-tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TABS } from '../../utils/constants.js';
+import PropTypes from 'prop-types';
 
 const Tabs = ({ refs }) => {
 
@@ -42,6 +43,13 @@ const Tabs = ({ refs }) => {
         </nav>
     )
 
+}
+
+Tabs.propTypes = {
+    ref: PropTypes.oneOfType([
+        PropTypes.func,
+        PropTypes.shape({ current: PropTypes.object })
+    ])
 }
 
 export default Tabs;

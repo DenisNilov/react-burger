@@ -1,4 +1,5 @@
 import style from './burger-ingredients-component.module.css';
+import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import Modal from "../modal/modal.jsx";
@@ -61,6 +62,7 @@ const IngredientsComponent = ({ ingredient, count }) => {
 
 IngredientsComponent.propTypes = {
     ingredient: ingredientsPropTypes.isRequired,
+    count: PropTypes.number
 }
 
 export default IngredientsComponent;

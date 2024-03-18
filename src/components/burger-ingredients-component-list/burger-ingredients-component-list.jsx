@@ -1,8 +1,6 @@
 import React from 'react';
 import IngredientsComponent from '../burger-ingredients-component/burger-ingredients-component.jsx';
 import style from './burger-ingredients-component-list.module.css';
-import { ingredientsPropTypes } from '../../utils/constants.js';
-import PropTypes from 'prop-types';
 
 const IngredientsComponentList = React.forwardRef(({ name, ingredients, count }, ref) => {
     return (
@@ -17,10 +15,5 @@ const IngredientsComponentList = React.forwardRef(({ name, ingredients, count },
             </ul>
         </li>)
 });
-
-IngredientsComponentList.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropTypes.isRequired).isRequired,
-    name: PropTypes.string.isRequired
-}
 
 export default IngredientsComponentList;

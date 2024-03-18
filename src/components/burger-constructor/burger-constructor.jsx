@@ -1,16 +1,13 @@
 import React from "react";
 import style from './burger-constuctor.module.css';
-import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
 import Modal from "../modal/modal.jsx";
 import OrderDetails from "../order-details/order-details.jsx";
-import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
-import {
-    addIngConstructor,
-    setBunConstructor,
-} from '../../services/actions/constructor-actions.jsx';
+import { addIngConstructor, setBunConstructor } from '../../services/actions/constructor-actions.jsx';
+import { BunTop, BunBottom, IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
 
 
 const BurgerConstructor = () => {
@@ -42,38 +39,6 @@ const BurgerConstructor = () => {
         setOpenModal(false);
     };
 
-    const BunTop = ({ ingredient }) => {
-        return (
-            <ConstructorElement
-                type="top"
-                isLocked={true}
-                text={`${ingredient.name} (верх)`}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-            />
-        );
-    };
-
-
-    const BunBottom = ({ ingredient }) => {
-        return (
-            <ConstructorElement
-                type="bottom"
-                isLocked={true}
-                text={`${ingredient.name} (низ)`}
-                price={ingredient.price}
-                thumbnail={ingredient.image}
-            />
-        );
-    };
-
-
-    const IngredientsList = ({ ingredients }) =>
-        ingredients.map(ingredient =>
-            <ConstructorIngredient
-                data={ingredient}
-                key={ingredient.id}
-            />)
 
     const [, dropTarget] = useDrop({
         accept: "ingredient",
