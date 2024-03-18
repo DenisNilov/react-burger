@@ -8,7 +8,7 @@ import { useDrag } from 'react-dnd';
 import { addIngredientDetails, resetIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
 
-const IngredientsComponent = ({ ingredient }) => {
+const IngredientsComponent = ({ ingredient, count }) => {
 
     const { image, price, name } = ingredient;
     const dispatch = useDispatch();
@@ -40,7 +40,7 @@ const IngredientsComponent = ({ ingredient }) => {
             ref={ref}
             style={{ opacity }}
         >
-            <Counter count={1} size="default" extraClass="m-1" />
+            <Counter count={count} size="default" extraClass="m-1" />
             <img className={style.image} src={image} alt={name}>
             </img>
             <div className={style.price}>

@@ -8,6 +8,25 @@ import { useSelector } from "react-redux";
 const BurgerIngredients = () => {
 
     const { ingredients } = useSelector(state => state.ingredients);
+    const burgerConstructor = useSelector(state => state.burgerConstructor);
+
+    const ingredientsCounters = React.useMemo(() => {
+        const { bun, ingredients } = burgerConstructor;
+        const counters = {};
+        if (ingredients) {
+            ingredients.forEach(ingredient => {
+                if (!counters[ingredient._id]) {
+                    counters[ingredient._id] = 0;
+                }
+                counters[ingredient._id]++;
+            });
+        }
+        if (bun) {
+            counters[bun._id] = 2;
+        }
+        return counters;
+    }, [burgerConstructor])
+
 
 
     const getIngredients = React.useMemo(() => {
@@ -33,16 +52,19 @@ const BurgerIngredients = () => {
                 <IngredientsComponentList
                     name={'Булки'}
                     ingredients={buns}
+                    count={ingredientsCounters}
                     ref={bunsRef}
                 />
                 <IngredientsComponentList
                     name={'Соусы'}
                     ingredients={sauce}
+                    count={ingredientsCounters}
                     ref={sauseRef}
                 />
                 <IngredientsComponentList
                     name={'Начинки'}
                     ingredients={main}
+                    count={ingredientsCounters}
                     ref={mainRef}
                 />
             </ul>
