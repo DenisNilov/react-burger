@@ -29,8 +29,8 @@ const BurgerConstructor = () => {
 
 
     const totalPrice = React.useMemo(() =>
-    (ingredients ?
-        ingredients.reduce((accumulator, ingredient) => accumulator + ingredient.price, bun ? bun.price * 2 : 0) : 0),
+        (bun ? bun.price * 2 : 0) + (ingredients ? ingredients
+            .reduce((accumulator, ingredient) => accumulator + ingredient.price, 0) : 0),
         [ingredients, bun]);
 
     const showModal = () => {
