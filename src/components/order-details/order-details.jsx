@@ -4,7 +4,7 @@ import Done from '../../images/done.svg';
 import PropTypes from 'prop-types';
 
 const OrderDetails = ({ orderNumber, isLoading }) => {
-
+    
     return (
         <div className={style.box}>
             {isLoading && <div className={style.loader} id="loader"></div>}
@@ -26,7 +26,18 @@ const OrderDetails = ({ orderNumber, isLoading }) => {
 }
 
 OrderDetails.propTypes = {
-    orderNumber: PropTypes.number.isRequired,
+    orderNumber: PropTypes.shape({
+        data: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+            success: PropTypes.bool.isRequired,
+            order: PropTypes.shape({
+                number: PropTypes.number.isRequired,
+            }).isRequired
+        }).isRequired,
+        orderFailed: PropTypes.bool.isRequired,
+        orderRequest: PropTypes.bool.isRequired,
+        orderSuccess: PropTypes.bool.isRequired,
+    }).isRequired,
     isLoading: PropTypes.bool.isRequired,
 }
 
