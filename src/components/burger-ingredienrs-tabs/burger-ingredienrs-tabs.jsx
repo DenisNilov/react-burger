@@ -4,28 +4,23 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TABS } from '../../utils/constants.js';
 import PropTypes from 'prop-types';
 
-const Tabs = ({ refs }) => {
+const Tabs = ({ inView }) => {
 
     const [current, setCurrent] = React.useState('bun')
 
-    const { bunsRef, sauseRef, mainRef } = refs;
+    const { inViewBun, inViewSause, inViewMain } = inView;
 
-    const handleClickTab = (e) => {
-        setCurrent(e);
-        switch (e) {
-            case 'bun': bunsRef.current.scrollIntoView({ behavior: "smooth" });
-                break
-            case 'sause': sauseRef.current.scrollIntoView({ behavior: "smooth" });
-                break
-            case 'main': mainRef.current.scrollIntoView({ behavior: "smooth" });
-                break
-            default: bunsRef.current.scrollIntoView({ behavior: "smooth" });
-                break
+    React.useEffect(() => {
+        if (inViewBun) {
+            setCurrent("bun");
+        } else if (inViewSause) {
+            setCurrent("sauce");
+        } else if (inViewMain) {
+            setCurrent("main");
         }
+    }, [inViewBun, inViewMain, inViewSause]);
 
 
-
-    }
 
     return (
         <nav className={style.tabs} >
@@ -34,7 +29,6 @@ const Tabs = ({ refs }) => {
                     key={tab.id}
                     value={tab.id}
                     active={current === tab.id}
-                    onClick={e => handleClickTab(e)}
                 >
                     {tab.title}
                 </Tab>
