@@ -10,6 +10,14 @@ const Tabs = ({ inView }) => {
 
     const { inViewBun, inViewSause, inViewMain } = inView;
 
+    const handleClickTab = (e) => {
+        setCurrent(e);
+        const item = document.getElementById(e);
+        if (item) {
+            item.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     React.useEffect(() => {
         if (inViewBun) {
             setCurrent("bun");
@@ -29,6 +37,7 @@ const Tabs = ({ inView }) => {
                     key={tab.id}
                     value={tab.id}
                     active={current === tab.id}
+                    onClick={handleClickTab}
                 >
                     {tab.title}
                 </Tab>

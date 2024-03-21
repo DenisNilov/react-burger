@@ -61,18 +61,21 @@ const BurgerIngredients = () => {
                     ingredients={buns}
                     count={ingredientsCounters}
                     ref={bunsRef}
+                    id={'bun'}
                 />
                 <IngredientsComponentList
                     name={'Соусы'}
                     ingredients={sauce}
                     count={ingredientsCounters}
                     ref={sauseRef}
+                    id={'sauce'}
                 />
                 <IngredientsComponentList
                     name={'Начинки'}
                     ingredients={main}
                     count={ingredientsCounters}
                     ref={mainRef}
+                    id={'main'}
                 />
             </ul>
         </section >
