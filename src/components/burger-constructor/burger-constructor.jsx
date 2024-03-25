@@ -6,7 +6,7 @@ import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-co
 import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
-import { addIngConstructor, setBunConstructor } from '../../services/actions/constructor-actions.jsx';
+import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions.jsx';
 import { BunTop, BunBottom, IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
 
 
@@ -37,6 +37,7 @@ const BurgerConstructor = () => {
 
     const handleClose = () => {
         setOpenModal(false);
+        dispatch(resetIngConstructor());
     };
 
 

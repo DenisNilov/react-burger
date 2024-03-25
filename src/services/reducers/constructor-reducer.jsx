@@ -58,7 +58,7 @@ export const constructorReducer = (state = initialState, action) => {
                 ingredients,
             };
         case RESET_ING_CONSTRUCTOR: {
-            return state;
+            return initialState;
         }
         default: {
             return state;

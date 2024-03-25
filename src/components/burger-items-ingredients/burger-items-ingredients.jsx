@@ -30,10 +30,11 @@ export const BunBottom = ({ ingredient }) => {
 
 export const IngredientsList = ({ ingredients }) => {
     return (
-        ingredients.map(ingredient =>
+        ingredients.map((ingredient, index) =>
             <ConstructorIngredient
                 data={ingredient}
                 key={ingredient.id}
+                index={index}
             />))
 }
 

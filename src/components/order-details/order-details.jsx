@@ -33,7 +33,7 @@ OrderDetails.propTypes = {
             order: PropTypes.shape({
                 number: PropTypes.number.isRequired,
             }).isRequired
-        }).isRequired,
+        }),
         orderFailed: PropTypes.bool.isRequired,
         orderRequest: PropTypes.bool.isRequired,
         orderSuccess: PropTypes.bool.isRequired,
