@@ -7,7 +7,10 @@ export const RESET_ING_CONSTRUCTOR = 'RESET_ING_CONSTRUCTOR';
 export const addIngConstructor = ingredient =>
 ({
     type: ADD_ING_CONSTRUCTOR,
-    payload: ingredient
+    payload: {
+        ...ingredient,
+        id: Date.now().toString()
+    }
 })
 
 export const deleteIngConstructor = ingId =>

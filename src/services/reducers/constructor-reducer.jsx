@@ -18,10 +18,7 @@ export const constructorReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     ingredients: [
-                        {
-                            ...action.payload,
-                            id: Date.now().toString()
-                        },
+                        action.payload,
                     ],
                 };
             } else {
@@ -29,10 +26,7 @@ export const constructorReducer = (state = initialState, action) => {
                     ...state,
                     ingredients: [
                         ...state.ingredients,
-                        {
-                            ...action.payload,
-                            id: Date.now().toString()
-                        },
+                        action.payload
                     ],
                 };
             }
