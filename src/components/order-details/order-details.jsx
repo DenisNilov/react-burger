@@ -4,10 +4,12 @@ import Done from '../../images/done.svg';
 import PropTypes from 'prop-types';
 
 const OrderDetails = ({ orderNumber, isLoading }) => {
-    
+
     return (
         <div className={style.box}>
-            {isLoading && <div className={style.loader} id="loader"></div>}
+            {isLoading &&
+                <p className='text text_type_digits-large'>{orderNumber.data.order.number}</p>
+            }
             <p className={`text text_type_digits-large ${style.number}`}>
                 {!isLoading && orderNumber.data && orderNumber.data.order.number}
             </p>
