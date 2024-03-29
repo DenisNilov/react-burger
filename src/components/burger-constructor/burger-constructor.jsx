@@ -95,6 +95,7 @@ const BurgerConstructor = () => {
                     type="primary"
                     size="large"
                     onClick={showModal}
+                    disabled={!bun}
                 >
                     Оформить заказ
                 </Button>
