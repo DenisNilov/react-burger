@@ -7,9 +7,7 @@ const OrderDetails = ({ orderNumber, isLoading }) => {
 
     return (
         <div className={style.box}>
-            {isLoading &&
-                <p className='text text_type_digits-large'>{orderNumber.data.order.number}</p>
-            }
+            {isLoading && <div className={style.loader} id="loader"></div>}
             <p className={`text text_type_digits-large ${style.number}`}>
                 {!isLoading && orderNumber.data && orderNumber.data.order.number}
             </p>
