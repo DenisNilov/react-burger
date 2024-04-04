@@ -1,30 +1,47 @@
 import style from './burger-ingredients-component.module.css';
+import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
 import Modal from "../modal/modal.jsx";
 import React from "react";
-import { ingredientsPropTypes } from '../../utils/constants.js'
+import { ingredientsPropTypes } from '../../utils/constants.js';
+import { useDrag } from 'react-dnd';
+import { addIngredientDetails, resetIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
+import { useDispatch } from "react-redux";
 
-const IngredientsComponent = ({ ingredient }) => {
+const IngredientsComponent = ({ ingredient, count }) => {
 
-    const { image, price, name, image_large, calories, carbohydrates, fat, proteins } = ingredient;
-
+    const { image, price, name } = ingredient;
+    const dispatch = useDispatch();
     const [openModal, setOpenModal] = React.useState(false);
 
     const showModal = () => {
         setOpenModal(true);
+        dispatch(addIngredientDetails(ingredient))
     };
 
     const handleClose = () => {
         setOpenModal(false);
+        dispatch(resetIngredientDetails())
     };
+
+    const [{ opacity }, ref] = useDrag({
+        type: "ingredient",
+        item: ingredient,
+        collect: (monitor) => ({
+            opacity: monitor.isDragging() ? 0.5 : 1
+        }),
+    });
+
 
     return (
         <li
             className={style.element}
             onClick={showModal}
+            ref={ref}
+            style={{ opacity }}
         >
-            <Counter count={1} size="default" extraClass="m-1" />
+            <Counter count={count} size="default" extraClass="m-1" />
             <img className={style.image} src={image} alt={name}>
             </img>
             <div className={style.price}>
@@ -36,14 +53,7 @@ const IngredientsComponent = ({ ingredient }) => {
             </p>
             {openModal &&
                 <Modal onClose={handleClose} isOpen={openModal}>
-                    <IngredientDetails
-                        image={image_large}
-                        name={name}
-                        calories={calories}
-                        carbohydrates={carbohydrates}
-                        fat={fat}
-                        proteins={proteins}
-                    />
+                    <IngredientDetails />
                 </Modal>
             }
         </li>
@@ -52,6 +62,7 @@ const IngredientsComponent = ({ ingredient }) => {
 
 IngredientsComponent.propTypes = {
     ingredient: ingredientsPropTypes.isRequired,
+    count: PropTypes.number
 }
 
 export default IngredientsComponent;

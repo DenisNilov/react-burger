@@ -3,32 +3,34 @@ import Header from '../app-header/app-header.jsx';
 import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
 import style from './app.module.css';
-import { URL } from '../../utils/constants.js';
-import { makeResponseCheck } from '../../utils/utils.js';
+import { useDispatch } from "react-redux";
+import { getIngredientsAction } from '../../services/actions/ingredients-actions.jsx';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 function App() {
 
-  const [ingredients, setIngredients] = React.useState([]);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const api = async () => {
-      return await fetch(URL)
-        .then((res) => makeResponseCheck(res))
-        .then((data) => setIngredients(data.data))
-        .catch((error) => console.log(error));
-    }
-    api();
-  }, []);
+    dispatch(getIngredientsAction());
+  }, [dispatch]);
 
 
-  return (<>
-    <Header />
-    <main className={style.main}>
-      <BurgerIngredients ingredients={ingredients} />
-      <BurgerConstructor ingredients={ingredients} />
-    </main>
-  </>
+  return (
+    <>
+      <Header />
+      <DndProvider backend={HTML5Backend}>
+        <main className={style.main}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </main>
+      </DndProvider>
+
+
+    </>
+
 
   );
 }

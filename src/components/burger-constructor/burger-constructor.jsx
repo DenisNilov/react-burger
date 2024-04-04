@@ -1,90 +1,92 @@
 import React from "react";
 import style from './burger-constuctor.module.css';
-import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
-import PropTypes from 'prop-types';
 import Modal from "../modal/modal.jsx";
-import { ingredientsPropTypes } from '../../utils/constants.js';
 import OrderDetails from "../order-details/order-details.jsx";
-import { ConstructorElement, CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector, useDispatch } from "react-redux";
+import { postOrderAction } from '../../services/actions/order-actions';
+import { useDrop } from "react-dnd";
+import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions.jsx';
+import { BunTop, BunBottom, IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
 
-const BurgerConstructor = ({ ingredients }) => {
+
+const BurgerConstructor = () => {
+
+    const dispatch = useDispatch();
+    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
+    const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState(false);
-    const [totalPrice, setTotalPrice] = React.useState(0);
-
-    const mainIngredients = ingredients.filter(element =>
-        element.type !== 'bun'
-    );
 
 
-    const bunPrice = ingredients.filter(ingredient => ingredient.type === 'bun').map(bun => {
-        return bun.price
-    })
+    const postOrderNumer = () => {
+        if (bun && ingredients) {
+            dispatch(postOrderAction([bun._id, ...ingredients].map(ingredient => ingredient._id)));
+        }
+    };
 
-    React.useEffect(() => {
-        const sum = mainIngredients.reduce(
-            (accumulator, total) => accumulator + total.price, bunPrice[0] * 2)
-        setTotalPrice(sum);
-    }, [mainIngredients, bunPrice]);
+
+    const totalPrice = React.useMemo(() =>
+        (bun ? bun.price * 2 : 0) + (ingredients ? ingredients
+            .reduce((accumulator, ingredient) => accumulator + ingredient.price, 0) : 0),
+        [ingredients, bun]);
 
     const showModal = () => {
         setOpenModal(true);
+        postOrderNumer();
     };
 
     const handleClose = () => {
         setOpenModal(false);
+        dispatch(resetIngConstructor());
     };
 
-    const bunTop = ingredients.map(ingredient =>
-        <ConstructorElement
-            type="top"
-            isLocked={true}
-            text={ingredient.name}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            key={ingredient._id}
-        />
-    );
 
-    const bunBottom = ingredients.map(ingredient =>
-        <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text={ingredient.name}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            key={ingredient._id}
-        />
-    );
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop(itemId) {
+            onDropHandler(itemId);
+        },
+    });
 
-
-    const ingredientsList = ingredients
-        .map(ingredient => ingredient.type !== 'bun'
-            ? <ConstructorIngredient
-                data={ingredient}
-                key={ingredient._id}
-            />
-            : '');
-
+    const onDropHandler = (ingredient) => {
+        if (ingredient.type === "bun") {
+            dispatch(setBunConstructor(ingredient));
+        } else {
+            dispatch(addIngConstructor(ingredient));
+        }
+    };
 
 
 
     return (
         <section className={style.box}>
-            <div className={style.elements}>
+            <div
+                className={style.elements}
+                ref={dropTarget}
+            >
                 <div className={style.bun}>
-                    {bunTop[0]}
+                    {bun ? <BunTop ingredient={bun} />
+                        : <p className="text text_type_main-medium">Перетащи сюда булку</p>}
                 </div>
                 <ul className={style.content}>
-                    {ingredientsList}
+                    {ingredients ? <IngredientsList ingredients={ingredients} />
+                        : bun && <>
+                            <p
+                                className="text text_type_main-medium"
+                                style={{ width: "500px" }}
+                            >
+                                А теперь перетащи сюда начинку и соусы
+                            </p>
+                        </>}
                 </ul>
                 <div className={style.bun}>
-                    {bunBottom[0]}
+                    {bun && <BunBottom ingredient={bun} />}
                 </div>
             </div>
             <div className={style.bottom}>
                 <div className={style.sum}>
                     <p className="text text_type_digits-medium">
-                        {totalPrice || 0}
+                        {totalPrice}
                     </p>
                     <CurrencyIcon type="primary" />
                 </div>
@@ -93,23 +95,22 @@ const BurgerConstructor = ({ ingredients }) => {
                     type="primary"
                     size="large"
                     onClick={showModal}
+                    disabled={!bun}
                 >
                     Оформить заказ
                 </Button>
             </div>
             {openModal &&
                 <Modal onClose={handleClose} isOpen={openModal}>
-                    <OrderDetails />
+                    <OrderDetails
+                        orderNumber={orderNumber}
+                        isLoading={orderNumber.orderRequest}
+                    />
+
                 </Modal>
             }
-
-
         </section>
     )
-}
-
-BurgerConstructor.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientsPropTypes.isRequired).isRequired,
 }
 
 export default BurgerConstructor;

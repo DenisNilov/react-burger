@@ -1,17 +1,19 @@
 import style from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+import { useSelector } from "react-redux";
 
-const IngredientDetails = ({ image, name, calories, carbohydrates, fat, proteins }) => {
+const IngredientDetails = () => {
 
+    const ingredient = useSelector(state => state.details.ingredientDetails);
+    const { image, name, calories, carbohydrates, fat, proteins } = ingredient;
     const nutritionDimension = 'text text_type_main-default text_color_inactive';
-    const nutritionquantity = 'text text_type_digits-default text_color_inactive'
+    const nutritionquantity = 'text text_type_digits-default text_color_inactive';
 
     return (
         <>
             <div className={style.container}>
                 <h2 className="text text_type_main-large">Детали ингредиента</h2>
                 <div className={style.image}>
-                    <img src={image} alt=''></img>
+                    <img src={image} alt={name}></img>
                 </div>
                 <p className={`text text_type_main-medium mt-4 ${style.name}`}>
                     {name}
@@ -55,14 +57,6 @@ const IngredientDetails = ({ image, name, calories, carbohydrates, fat, proteins
     );
 }
 
-IngredientDetails.propTypes = {
-    calories: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    proteins: PropTypes.number.isRequired
-}
 
 
 export default IngredientDetails;

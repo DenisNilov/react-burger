@@ -16,3 +16,13 @@
     height: 120px;
     margin-top: 60px;
 }
+
+.loader {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #801AB3;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
