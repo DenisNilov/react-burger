@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { getIngredientsAction } from '../../services/actions/ingredients-actions.jsx';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
