@@ -1,17 +1,28 @@
-.wrapper {
-    
-}
-
 .container {
-    
-}
-
-
-.form {
-  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 180px auto 0;
+    max-width: 480px;
 }
 
 .heading {
     font-size: 40px;
     color: white;
+}
+
+.text {
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #4C4CFF;
 }
