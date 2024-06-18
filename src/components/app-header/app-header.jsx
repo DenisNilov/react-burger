@@ -23,10 +23,16 @@ const Header = () => {
                         </div>
                     </a>
                 </nav>
-                <a href="https://practicum.yandex.ru"
-                    className={style.logo}>
-                    <Logo />
-                </a>
+                <Link
+                    to='/'
+                    className={style.heder_link}>
+                    <div
+                        className={style.logo}>
+                        <Logo />
+                    </div>
+                </Link>
+
+
 
                 <Link
                     to='/login'
