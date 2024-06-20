@@ -17,7 +17,7 @@ const ForgotPasswordForm = () => {
                 "Content-Type": "application/json;charset=utf-8",
             },
             body: JSON.stringify({
-                "email": ""
+                "email": value.email
             })
         }).then(data => {
             if (data.success) {

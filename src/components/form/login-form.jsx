@@ -5,7 +5,7 @@ import style from './form.module.css';
 
 const LoginForm = () => {
 
-    const [value, setValue] = React.useState({ name: '', pass: '' })
+    const [value, setValue] = React.useState({ name: '', pass: '' });
 
     return (
         <form className={style.container}>

@@ -6,7 +6,7 @@ import { request } from '../../utils/utils.js';
 
 const ResetPasswordForm = () => {
 
-    const [value, setValue] = React.useState({ pass: '', code: '' })
+    const [value, setValue] = React.useState({ pass: '', token: '' })
 
     const onSubmitNewPassword = (e) => {
         e.preventDefault();
@@ -16,8 +16,8 @@ const ResetPasswordForm = () => {
                 "Content-Type": "application/json;charset=utf-8",
             },
             body: JSON.stringify({
-                "password": "",
-                "token": ""
+                "password": value.pass,
+                "token": value.token
             })
         }).then(data => {
             console.log(data)
@@ -40,8 +40,8 @@ const ResetPasswordForm = () => {
                 extraClass="mt-6 mb-6"
             />
             <Input
-                onChange={e => setValue({ ...value, code: e.target.value })}
-                value={value.code}
+                onChange={e => setValue({ ...value, token: e.target.value })}
+                value={value.token}
                 placeholder={"Ввведите код из письма"}
                 name={"number"}
                 extraClass="mb-6"

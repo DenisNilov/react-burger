@@ -1,19 +1,36 @@
 import React from "react";
 import style from './form.module.css';
 import { Link } from "react-router-dom";
-import {
-    Input,
-    EmailInput,
-    Button,
-    PasswordInput
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { request } from '../../utils/utils.js';
 
 const RegisterForm = () => {
 
     const [value, setValue] = React.useState({ name: '', email: '', pass: '' })
 
+    const onSubmitEmail = (e) => {
+        e.preventDefault();
+        request('auth/register', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json;charset=utf-8",
+            },
+            body: JSON.stringify({
+                "email": value.email,
+                "password": value.pass,
+                "name": value.name
+            })
+        }).then(data => {
+            if (data.success) {
+                console.log(data)
+            }
+        }
+        )
+    }
+
+
     return (
-        <form className={`${style.container}`}>
+        <form className={`${style.container}`} onSubmit={onSubmitEmail}>
             <h1 className={`${style.text} text text_type_main-medium`}>
                 Регистрация
             </h1>
