@@ -26,3 +26,10 @@
     cursor: pointer;
     color: #4C4CFF;
 }
+
+.profile__container{
+    display: flex;
+    gap: 60px;
+    width: 1240px;
+    margin: 120px auto 0;
+}
