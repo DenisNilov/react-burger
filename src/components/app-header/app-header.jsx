@@ -35,7 +35,7 @@ const Header = () => {
 
 
                 <Link
-                    to='/login'
+                    to='/profile'
                     className={style.heder_link}>
                     <div className={style.listIcon_inner}>
                         <ProfileIcon type="primary" />

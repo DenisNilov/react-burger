@@ -7,7 +7,7 @@ const ProfileForm = () => {
     const [value, setValue] = React.useState({ name: '', email: '', pass: '' })
 
     return (
-        <form className={`${style.container}`}>
+        <form className={`${style.profile__container}`}>
             <Input
                 onChange={e => setValue({ ...value, name: e.target.value })}
                 value={value.name}

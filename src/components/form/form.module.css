@@ -26,3 +26,7 @@
     cursor: pointer;
     color: #4C4CFF;
 }
+
+.profile__container {
+    margin: 0;
+}
