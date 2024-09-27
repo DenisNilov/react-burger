@@ -2,35 +2,22 @@ import React from "react";
 import style from './form.module.css';
 import { Link } from "react-router-dom";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { request } from '../../utils/utils.js';
+import { registerUserThunk } from '../../services/actions/user-actions.jsx';
+import { useDispatch } from "react-redux";
 
 const RegisterForm = () => {
 
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState({ name: '', email: '', pass: '' })
 
-    const onSubmitEmail = (e) => {
+    const registerSubmit = (e) => {
         e.preventDefault();
-        request('auth/register', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({
-                "email": value.email,
-                "password": value.pass,
-                "name": value.name
-            })
-        }).then(data => {
-            if (data.success) {
-                console.log(data)
-            }
-        }
-        )
+        dispatch(registerUserThunk(value))
     }
 
 
     return (
-        <form className={`${style.container}`} onSubmit={onSubmitEmail}>
+        <form className={`${style.container}`} onSubmit={registerSubmit}>
             <h1 className={`${style.text} text text_type_main-medium`}>
                 Регистрация
             </h1>
