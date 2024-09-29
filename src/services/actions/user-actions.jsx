@@ -33,3 +33,30 @@ export const registerUserThunk = user => dispatch => {
             }
         }).catch(err => dispatch({ type: REGISTER_USER_ERROR }));
 };
+
+export const loginUserThunk = user => dispatch => {
+    dispatch({
+        type: LOGIN_USER_REQUEST,
+    });
+    request('auth/login', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json;charset=utf-8",
+        },
+        body: JSON.stringify({
+            email: user.email,
+            password: user.pass
+        }),
+    }).then(res => {
+        dispatch({
+            type: LOGIN_USER_SUCCESS,
+            payload: res.user,
+        });
+
+    })
+        .catch((err) => {
+            dispatch({
+                type: LOGIN_USER_ERROR,
+            });
+        });
+};

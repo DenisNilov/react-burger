@@ -2,13 +2,21 @@ import React from "react";
 import { EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
 import style from './form.module.css';
+import { loginUserThunk } from '../../services/actions/user-actions.jsx';
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
 
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState({ name: '', pass: '' });
 
+    const loginSubmit = (e) => {
+        e.preventDefault();
+        dispatch(loginUserThunk(value))
+    }
+
     return (
-        <form className={style.container}>
+        <form className={style.container} onSubmit={loginSubmit}>
             <h1 className={`${style.text} text text_type_main-medium`}>
                 Вход
             </h1>

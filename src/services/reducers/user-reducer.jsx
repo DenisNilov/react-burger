@@ -2,9 +2,9 @@ import {
     REGISTER_USER_REQUEST,
     REGISTER_USER_SUCCESS,
     REGISTER_USER_ERROR,
-    /* LOGIN_USER_REQUEST,
+    LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_ERROR */
+    LOGIN_USER_ERROR
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -47,7 +47,7 @@ export const userReducer = (state = initialState, action) => {
             };
         }
 
-        /* case LOGIN_USER_REQUEST: {
+        case LOGIN_USER_REQUEST: {
             return {
                 ...state,
                 loginUserRequest: true,
@@ -70,7 +70,7 @@ export const userReducer = (state = initialState, action) => {
                 loginUserRequest: false,
                 loginUserError: true,
             };
-        } */
+        }
 
         default:
             return state;
