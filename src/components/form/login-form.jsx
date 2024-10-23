@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 const LoginForm = () => {
 
     const dispatch = useDispatch();
-    const [value, setValue] = React.useState({ name: '', pass: '' });
+    const [value, setValue] = React.useState({ email: '', pass: '' });
 
     const loginSubmit = (e) => {
         e.preventDefault();
@@ -21,8 +21,8 @@ const LoginForm = () => {
                 Вход
             </h1>
             <EmailInput
-                onChange={e => setValue({ ...value, name: e.target.value })}
-                value={value.name}
+                onChange={e => setValue({ ...value, email: e.target.value })}
+                value={value.email}
                 name={"email"}
                 placeholder="E-mail"
                 isIcon={false}
