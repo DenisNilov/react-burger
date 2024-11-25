@@ -2,7 +2,7 @@ import React from "react";
 import { EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './form.module.css';
 import { loginUserThunk } from '../../services/actions/user-actions.jsx';
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -16,7 +16,6 @@ const LoginForm = () => {
         e.preventDefault();
         dispatch(loginUserThunk(value));
         if (user) navigate('/');
-        
     }
 
     return (

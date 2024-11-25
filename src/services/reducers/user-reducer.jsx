@@ -4,7 +4,10 @@ import {
     REGISTER_USER_ERROR,
     LOGIN_USER_REQUEST,
     LOGIN_USER_SUCCESS,
-    LOGIN_USER_ERROR
+    LOGIN_USER_ERROR,
+    REFRESH_TOKEN_REQUEST,
+    REFRESH_TOKEN_SUCCESS,
+    REFRESH_TOKEN_ERROR,
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -17,6 +20,9 @@ const initialState = {
 
     loginUserRequest: false,
     loginUserError: false,
+
+    refreshTokenRequest: false,
+    refreshTokenError: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -69,6 +75,29 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 loginUserRequest: false,
                 loginUserError: true,
+            };
+        }
+
+        case REFRESH_TOKEN_REQUEST: {
+            return {
+                ...state,
+                refreshTokenRequest: true,
+                refreshTokenError: false,
+            };
+        }
+        case REFRESH_TOKEN_SUCCESS: {
+            return {
+                ...state,
+                userData: action.payload,
+                refreshTokenRequest: false,
+                refreshTokenError: false,
+            };
+        }
+        case REFRESH_TOKEN_ERROR: {
+            return {
+                ...state,
+                refreshTokenRequest: false,
+                refreshTokenError: true,
             };
         }
 
