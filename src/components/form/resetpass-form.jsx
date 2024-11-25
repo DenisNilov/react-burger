@@ -10,20 +10,12 @@ const ResetPasswordForm = () => {
 
     const onSubmitNewPassword = (e) => {
         e.preventDefault();
-        request('password-reset/reset', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({
-                "password": value.pass,
-                "token": value.token
-            })
+        request('password-reset/reset', 'POST', {
+            password: value.pass,
+            token: value.token
         }).then(data => {
             console.log(data)
-
-        }
-        ).catch(err => console.log('не отправилось'))
+        }).catch(err => console.log('не отправилось'))
 
     }
 

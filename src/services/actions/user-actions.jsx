@@ -1,4 +1,12 @@
-import { request } from '../../utils/utils.js';
+import {
+    request,
+    setToken,
+    getToken,
+    setRefreshToken,
+    getRefreshToken,
+    resetRefreshToken,
+    resetToken,
+} from '../../utils/utils.js';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
@@ -12,51 +20,37 @@ export const registerUserThunk = user => dispatch => {
     dispatch({
         type: REGISTER_USER_REQUEST,
     });
-    request('auth/register', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify({
-            email: user.email,
-            password: user.pass,
-            name: user.name
-        }),
-    })
-        .then(res => {
-            if (res.success) {
-                console.log(res)
-                dispatch({
-                    type: REGISTER_USER_SUCCESS,
-                    payload: res.user,
-                });
-            }
-        }).catch(err => dispatch({ type: REGISTER_USER_ERROR }));
+    request('auth/register', 'POST', {
+        email: user.email,
+        password: user.pass,
+        name: user.name
+    }).then(res => {
+        setRefreshToken(res.refreshToken);
+        setToken(res.accessToken);
+        dispatch({
+            type: REGISTER_USER_SUCCESS,
+            payload: res.user,
+        });
+    }).catch(err => dispatch({ type: REGISTER_USER_ERROR }));
 };
 
 export const loginUserThunk = user => dispatch => {
     dispatch({
         type: LOGIN_USER_REQUEST,
     });
-    request('auth/login', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json;charset=utf-8",
-        },
-        body: JSON.stringify({
-            email: user.email,
-            password: user.pass
-        }),
+    request('auth/login', 'POST', {
+        email: user.email,
+        password: user.pass
     }).then(res => {
+        setRefreshToken(res.refreshToken);
+        setToken(res.accessToken);
         dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: res.user,
         });
-
-    })
-        .catch((err) => {
-            dispatch({
-                type: LOGIN_USER_ERROR,
-            });
+    }).catch((err) => {
+        dispatch({
+            type: LOGIN_USER_ERROR,
         });
+    });
 };

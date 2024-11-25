@@ -1,18 +1,22 @@
 import React from "react";
 import { EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
 import style from './form.module.css';
 import { loginUserThunk } from '../../services/actions/user-actions.jsx';
-import { useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(store => store.user.userData);
     const [value, setValue] = React.useState({ email: '', pass: '' });
 
     const loginSubmit = (e) => {
         e.preventDefault();
-        dispatch(loginUserThunk(value))
+        dispatch(loginUserThunk(value));
+        if (user) navigate('/');
+        
     }
 
     return (
@@ -20,6 +24,7 @@ const LoginForm = () => {
             <h1 className={`${style.text} text text_type_main-medium`}>
                 Вход
             </h1>
+
             <EmailInput
                 onChange={e => setValue({ ...value, email: e.target.value })}
                 value={value.email}

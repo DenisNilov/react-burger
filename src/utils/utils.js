@@ -1,5 +1,12 @@
 import { BASE_URL } from './constants.js';
 
+const api = {
+    url: BASE_URL,
+    headers: {
+        "Content-Type": "application/json",
+    },
+};
+
 const makeResponseCheck = response => {
     if (response.ok) {
         return response.json();
@@ -7,6 +14,27 @@ const makeResponseCheck = response => {
     return Promise.reject(`Ошибка ${response.status}`);
 }
 
-const request = (endpoint, options) => fetch(`${BASE_URL}/${endpoint}`, options).then(makeResponseCheck);
+const request = (endpoint, method = 'GET', data = null, token = null) => {
+    const options = {
+        method: method,
+        headers: api.headers,
+    }
+    if (data) options.body = JSON.stringify(data);
+    if (token) options.headers = { ...options.headers, 'Authorization': token };
+    return fetch(`${BASE_URL}/${endpoint}`, options).then(makeResponseCheck);
+}
 
-export { request };
+const setToken = (accessToken) => localStorage.setItem("accessToken", accessToken);
+
+const getToken = () => localStorage.getItem("accessToken");
+
+const resetToken = () => localStorage.setItem("accessToken", null);
+
+
+const setRefreshToken = (refreshToken) => localStorage.setItem("refreshToken", refreshToken);
+
+const getRefreshToken = () => localStorage.getItem("refreshToken");
+
+const resetRefreshToken = () => localStorage.setItem("refreshToken", null);
+
+export { request, setToken, getToken, resetToken, setRefreshToken, getRefreshToken, resetRefreshToken };

@@ -1,18 +1,22 @@
 import React from "react";
 import style from './form.module.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { registerUserThunk } from '../../services/actions/user-actions.jsx';
-import { useDispatch } from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 
 const RegisterForm = () => {
 
     const dispatch = useDispatch();
     const [value, setValue] = React.useState({ name: '', email: '', pass: '' })
+    const user = useSelector(store => store.user.userData);
+    const navigate = useNavigate();
 
     const registerSubmit = (e) => {
         e.preventDefault();
+        if (user) return;
         dispatch(registerUserThunk(value))
+        navigate('/');
     }
 
 

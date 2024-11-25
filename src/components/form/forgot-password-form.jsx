@@ -11,15 +11,7 @@ const ForgotPasswordForm = () => {
 
     const onSubmitEmail = (e) => {
         e.preventDefault();
-        request('password-reset', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify({
-                "email": value.email
-            })
-        }).then(data => {
+        request('password-reset', "POST", { email: value.email }).then(data => {
             if (data.success) {
                 console.log(data)
             }
