@@ -3,7 +3,7 @@ import style from './form.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { registerUserThunk } from '../../services/actions/user-actions.jsx';
-import {useSelector, useDispatch} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 const RegisterForm = () => {
 
@@ -12,12 +12,12 @@ const RegisterForm = () => {
     const user = useSelector(store => store.user.userData);
     const navigate = useNavigate();
 
-    const registerSubmit = (e) => {
+    const registerSubmit = React.useCallback(e => {
         e.preventDefault();
         if (user) return;
-        dispatch(registerUserThunk(value))
+        dispatch(registerUserThunk(value));
         navigate('/');
-    }
+    }, [dispatch, user, value, navigate]);
 
 
     return (
