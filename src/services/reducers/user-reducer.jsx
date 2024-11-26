@@ -8,6 +8,7 @@ import {
     REFRESH_TOKEN_REQUEST,
     REFRESH_TOKEN_SUCCESS,
     REFRESH_TOKEN_ERROR,
+    LOGOUT_USER,
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -101,6 +102,10 @@ export const userReducer = (state = initialState, action) => {
             };
         }
 
+        case LOGOUT_USER: {
+            return { ...state, isAuth: false };
+        }
+        
         default:
             return state;
     }

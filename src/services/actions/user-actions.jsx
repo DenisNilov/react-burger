@@ -19,7 +19,9 @@ export const LOGIN_USER_ERROR = "LOGIN_USER_ERROR";
 
 export const REFRESH_TOKEN_REQUEST = "REFRESH_TOKEN_REQUEST";
 export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
-export const REFRESH_TOKEN_ERROR = "const REFRESH_TOKEN_ERROR";
+export const REFRESH_TOKEN_ERROR = "REFRESH_TOKEN_ERROR";
+
+export const LOGOUT_USER = "LOGOUT_USER";
 
 export const registerUserThunk = user => dispatch => {
     dispatch({
@@ -74,4 +76,15 @@ export const updateToken = refreshToken => dispatch => {
                 payload: res,
             });
         }).catch(err => dispatch({ type: REFRESH_TOKEN_ERROR }));
+};
+
+export const logoutThunk = refreshToken => dispatch => {
+    request('auth/logout', 'POST', {
+        token: refreshToken
+    }).then(res => {
+        localStorage.clear();
+        resetRefreshToken(res.refreshToken);
+        resetToken(res.accessToken);
+        dispatch({ type: LOGOUT_USER });
+    }).catch((err) => console.log(err));
 };
