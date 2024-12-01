@@ -9,6 +9,9 @@ import {
     REFRESH_TOKEN_SUCCESS,
     REFRESH_TOKEN_ERROR,
     LOGOUT_USER,
+    UPDATE_USER_REQUEST,
+    UPDATE_USER_SUCCESS,
+    UPDATE_USER_ERROR,
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -22,8 +25,17 @@ const initialState = {
     loginUserRequest: false,
     loginUserError: false,
 
+    forgotPasswordRequest: false,
+    forgotPasswordError: false,
+
+    resetPasswordRequest: false,
+    reserPasswordError: false,
+
     refreshTokenRequest: false,
     refreshTokenError: false,
+
+    checkUserRequest: null,
+    checkUserError: false,
 };
 
 export const userReducer = (state = initialState, action) => {
@@ -105,7 +117,34 @@ export const userReducer = (state = initialState, action) => {
         case LOGOUT_USER: {
             return { ...state, isAuth: false };
         }
-        
+
+        case UPDATE_USER_REQUEST: {
+            return {
+                ...state,
+                updateDataRequest: true,
+                updateDataError: false,
+            };
+        }
+        case UPDATE_USER_SUCCESS: {
+            return {
+                ...state,
+                updateDataRequest: false,
+                updateDataError: false,
+                userData: {
+                    ...state.userData,
+                    email: action.payload.email,
+                    name: action.payload.name,
+                },
+            };
+        }
+        case UPDATE_USER_ERROR: {
+            return {
+                ...state,
+                updateDataRequest: false,
+                updateDataError: true,
+            };
+        }
+
         default:
             return state;
     }

@@ -37,7 +37,19 @@ const getRefreshToken = () => localStorage.getItem("refreshToken");
 
 const resetRefreshToken = () => localStorage.setItem("refreshToken", null);
 
-const updateAccessToken = (refreshToken) => request(('auth/token'), "POST", { token: refreshToken })
+const updateAccessToken = (refreshToken) => request(('auth/token'), "POST", { token: refreshToken });
+
+const getUserInfo = (token) => {
+    return request('auth/user', "GET", null, token)
+};
+
+const updateUserInfo = (upData, token) => {
+    return request('auth/user', "PATCH", upData, token)
+};
 
 
-export { request, setToken, getToken, resetToken, setRefreshToken, getRefreshToken, resetRefreshToken, updateAccessToken };
+export {
+    request, setToken, getToken, resetToken, setRefreshToken,
+    getRefreshToken, resetRefreshToken, updateAccessToken,
+    getUserInfo, updateUserInfo
+};

@@ -7,6 +7,8 @@ import {
     resetRefreshToken,
     resetToken,
     updateAccessToken,
+    getUserInfo,
+    updateUserInfo,
 } from '../../utils/utils.js';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
@@ -22,6 +24,10 @@ export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
 export const REFRESH_TOKEN_ERROR = "REFRESH_TOKEN_ERROR";
 
 export const LOGOUT_USER = "LOGOUT_USER";
+
+export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
+export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
+export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 
 export const registerUserThunk = user => dispatch => {
     dispatch({
@@ -87,4 +93,18 @@ export const logoutThunk = refreshToken => dispatch => {
         resetToken(res.accessToken);
         dispatch({ type: LOGOUT_USER });
     }).catch((err) => console.log(err));
+};
+
+export const updateUserData = (data, refreshToken) => dispatch => {
+    dispatch({
+        type: UPDATE_USER_REQUEST,
+    });
+    updateUserInfo(data, refreshToken)
+        .then(res => {
+            console.log(res)
+            dispatch({
+                type: UPDATE_USER_SUCCESS,
+                payload: res.user,
+            });
+        }).catch(err => dispatch({ type: UPDATE_USER_ERROR }));
 };
