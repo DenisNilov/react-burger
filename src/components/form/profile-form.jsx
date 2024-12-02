@@ -8,26 +8,42 @@ import { getToken } from '../../utils/utils.js';
 
 const ProfileForm = () => {
 
+    const [isEdit, setEdit] = React.useState(null);
     const user = useSelector((state) => state.user.userData);
     const dispatch = useDispatch();
     const token = getToken();
 
-    const [value, setValue] = React.useState({
+    const [values, setValues] = React.useState({
         email: `${user ? user.email : ""}`,
-        pass: "",
+        password: "",
         name: `${user ? user.name : ""}`,
     });
 
+    const isEditValue = isEdit === null ? false : isEdit?.name !== values.name || isEdit?.email !== values.email || values.password !== '';
+
+    React.useEffect(() => {
+        setEdit(user)
+        console.log(isEditValue)
+    }, [user, isEditValue])
+
+    const onChange = e => {
+        const { name, value } = e.target;
+        setValues(prevValues => {
+            return { ...prevValues, [name]: value };
+        });
+
+    }
+
     const updateSubmit = React.useCallback(e => {
         e.preventDefault();
-        dispatch(updateUserData(value, token));
+        dispatch(updateUserData(values, token));
     },
-        [dispatch, value, token]
+        [dispatch, values, token]
     );
 
-    const onReset = () => setValue({
+    const onReset = () => setValues({
         name: user.name,
-        pass: "",
+        password: "",
         email: user.email
     });
 
@@ -35,8 +51,8 @@ const ProfileForm = () => {
     return (
         <form className={`${style.profile__container}`} onSubmit={updateSubmit}>
             <Input
-                onChange={e => setValue({ ...value, name: e.target.value })}
-                value={value.name}
+                onChange={onChange}
+                value={values.name}
                 placeholder={"Имя"}
                 type={"text"}
                 name={"name"}
@@ -44,25 +60,29 @@ const ProfileForm = () => {
                 extraClass="mb-6"
             />
             <EmailInput
-                onChange={e => setValue({ ...value, email: e.target.value })}
-                value={value.email}
+                onChange={onChange}
+                value={values.email}
                 name={"email"}
                 placeholder="Логин"
                 isIcon={false}
                 extraClass="mb-6"
             />
             <PasswordInput
-                onChange={e => setValue({ ...value, pass: e.target.value })}
-                value={value.pass}
+                onChange={onChange}
+                value={values.password}
                 name={"password"}
                 placeholder="Пароль"
                 extraClass="mb-6"
                 icon="EditIcon"
             />
-            <Button extraClass="mr-2" type="primary" htmlType={"submit"}>Сохранить</Button>
-            <Button type="secondary" htmlType={"button"} onClick={onReset}>Отмена</Button>
 
-
+            {
+                isEditValue && (
+                    <>
+                        <Button extraClass="mr-2" type="primary" htmlType={"submit"}>Сохранить</Button>
+                        <Button type="secondary" htmlType={"button"} onClick={onReset}>Отмена</Button>
+                    </>
+                )}
         </form>
     )
 

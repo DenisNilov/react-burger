@@ -10,11 +10,11 @@ const LoginForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(store => store.user.userData);
-    const [value, setValue] = React.useState({ email: '', pass: '' });
+    const [values, setValue] = React.useState({ email: '', password: '' });
 
     const loginSubmit = (e) => {
         e.preventDefault();
-        dispatch(loginUserThunk(value));
+        dispatch(loginUserThunk(values));
         if (user) navigate('/');
     }
 
@@ -25,16 +25,16 @@ const LoginForm = () => {
             </h1>
 
             <EmailInput
-                onChange={e => setValue({ ...value, email: e.target.value })}
-                value={value.email}
+                onChange={e => setValue({ ...values, email: e.target.value })}
+                value={values.email}
                 name={"email"}
                 placeholder="E-mail"
                 isIcon={false}
                 extraClass="mt-6 mb-6"
             />
             <PasswordInput
-                onChange={e => setValue({ ...value, pass: e.target.value })}
-                value={value.pass}
+                onChange={e => setValue({ ...values, password: e.target.value })}
+                value={values.password}
                 name={"password"}
                 extraClass="mb-6"
             />

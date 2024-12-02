@@ -35,7 +35,7 @@ export const registerUserThunk = user => dispatch => {
     });
     request('auth/register', 'POST', {
         email: user.email,
-        password: user.pass,
+        password: user.password,
         name: user.name
     }).then(res => {
         setRefreshToken(res.refreshToken);
@@ -53,7 +53,7 @@ export const loginUserThunk = user => dispatch => {
     });
     request('auth/login', 'POST', {
         email: user.email,
-        password: user.pass
+        password: user.password
     }).then(res => {
         setRefreshToken(res.refreshToken);
         setToken(res.accessToken);

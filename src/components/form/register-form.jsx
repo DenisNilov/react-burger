@@ -8,16 +8,16 @@ import { useSelector, useDispatch } from "react-redux";
 const RegisterForm = () => {
 
     const dispatch = useDispatch();
-    const [value, setValue] = React.useState({ name: '', email: '', pass: '' })
+    const [values, setValues] = React.useState({ name: '', email: '', password: '' })
     const user = useSelector(store => store.user.userData);
     const navigate = useNavigate();
 
     const registerSubmit = React.useCallback(e => {
         e.preventDefault();
         if (user) return;
-        dispatch(registerUserThunk(value));
+        dispatch(registerUserThunk(values));
         navigate('/');
-    }, [dispatch, user, value, navigate]);
+    }, [dispatch, user, values, navigate]);
 
 
     return (
@@ -26,23 +26,23 @@ const RegisterForm = () => {
                 Регистрация
             </h1>
             <Input
-                onChange={e => setValue({ ...value, name: e.target.value })}
-                value={value.name}
+                onChange={e => setValues({ ...values, name: e.target.value })}
+                value={values.name}
                 placeholder={"Name"}
                 name={"name"}
                 extraClass="mt-6 mb-6"
             />
             <EmailInput
-                onChange={e => setValue({ ...value, email: e.target.value })}
-                value={value.email}
+                onChange={e => setValues({ ...values, email: e.target.value })}
+                value={values.email}
                 name={"email"}
                 placeholder="E-mail"
                 isIcon={false}
                 extraClass="mb-6"
             />
             <PasswordInput
-                onChange={e => setValue({ ...value, pass: e.target.value })}
-                value={value.pass}
+                onChange={e => setValues({ ...values, password: e.target.value })}
+                value={values.password}
                 name={'password'}
                 extraClass="mb-6"
             />

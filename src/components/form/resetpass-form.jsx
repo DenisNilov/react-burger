@@ -6,13 +6,13 @@ import { request } from '../../utils/utils.js';
 
 const ResetPasswordForm = () => {
 
-    const [value, setValue] = React.useState({ pass: '', token: '' })
+    const [values, setValues] = React.useState({ password: '', token: '' })
 
     const onSubmitNewPassword = (e) => {
         e.preventDefault();
         request('password-reset/reset', 'POST', {
-            password: value.pass,
-            token: value.token
+            password: values.password,
+            token: values.token
         }).then(data => {
             console.log(data)
         }).catch(err => console.log('не отправилось'))
@@ -25,15 +25,15 @@ const ResetPasswordForm = () => {
                 Восстановление пароля
             </h1>
             <PasswordInput
-                onChange={e => setValue({ ...value, pass: e.target.value })}
-                value={value.pass}
+                onChange={e => setValues({ ...values, password: e.target.value })}
+                value={values.password}
                 name={"password"}
                 placeholder={"Введите новый пароль"}
                 extraClass="mt-6 mb-6"
             />
             <Input
-                onChange={e => setValue({ ...value, token: e.target.value })}
-                value={value.token}
+                onChange={e => setValues({ ...values, token: e.target.value })}
+                value={values.token}
                 placeholder={"Ввведите код из письма"}
                 name={"number"}
                 extraClass="mb-6"
