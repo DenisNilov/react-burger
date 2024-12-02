@@ -5,20 +5,20 @@ import { RegisterPage } from '../../pages/register.jsx';
 import { ForgotPasswordPage } from '../../pages/forgot-password.jsx';
 import { ResetPasswordPage } from '../../pages/reset-password.jsx';
 import { Profile } from '../../pages/profile.jsx';
+import { ProtectedRouteElement } from '../protected-route/protected-route.jsx';
 
 function App() {
-
 
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ProtectedRouteElement element={<HomePage />} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<ProtectedRouteElement element={<Profile />} />} />
         </Routes>
       </BrowserRouter>
     </>
