@@ -12,6 +12,9 @@ import {
     UPDATE_USER_REQUEST,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    GET_USER_ERROR,
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -142,6 +145,34 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 updateDataRequest: false,
                 updateDataError: true,
+            };
+        }
+
+        case GET_USER_REQUEST: {
+            return {
+                ...state,
+                checkUserRequest: true,
+                checkUserError: false,
+            };
+        }
+        case GET_USER_SUCCESS: {
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    email: action.payload.email,
+                    name: action.payload.name,
+                },
+                isAuth: true,
+                checkUserRequest: false,
+                checkUserError: false,
+            };
+        }
+        case GET_USER_ERROR: {
+            return {
+                ...state,
+                checkUserRequest: false,
+                checkUserError: true,
             };
         }
 

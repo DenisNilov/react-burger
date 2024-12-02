@@ -29,6 +29,10 @@ export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
 export const UPDATE_USER_SUCCESS = "UPDATE_USER_SUCCESS";
 export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 
+export const GET_USER_REQUEST = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_ERROR = "GET_USER_ERROR";
+
 export const registerUserThunk = user => dispatch => {
     dispatch({
         type: REGISTER_USER_REQUEST,
@@ -107,4 +111,16 @@ export const updateUserData = (data, refreshToken) => dispatch => {
                 payload: res.user,
             });
         }).catch(err => dispatch({ type: UPDATE_USER_ERROR }));
+};
+
+export const getUserData = () => dispatch => {
+    dispatch({ type: GET_USER_REQUEST });
+    getUserInfo(getToken())
+        .then(res => {
+            dispatch({
+                type: GET_USER_SUCCESS,
+                payload: res.user
+            })
+        })
+        .catch(err => dispatch({ type: GET_USER_ERROR }))
 };
