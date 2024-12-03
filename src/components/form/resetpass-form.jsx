@@ -1,21 +1,23 @@
 import React from "react";
 import style from './form.module.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { request } from '../../utils/utils.js';
+import { resetPassThunk } from '../../services/actions/user-actions.jsx';
+import { useDispatch } from "react-redux";
 
 const ResetPasswordForm = () => {
 
-    const [values, setValues] = React.useState({ password: '', token: '' })
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [values, setValues] = React.useState({ password: '' });
+    const [valueNumber, setValueNumber] = React.useState("");
 
     const onSubmitNewPassword = (e) => {
         e.preventDefault();
-        request('password-reset/reset', 'POST', {
-            password: values.password,
-            token: values.token
-        }).then(data => {
-            console.log(data)
-        }).catch(err => console.log('не отправилось'))
+        if (values.password && valueNumber) {
+            dispatch(resetPassThunk(values.password, valueNumber, () => navigate("/")));
+        };
 
     }
 
@@ -32,8 +34,8 @@ const ResetPasswordForm = () => {
                 extraClass="mt-6 mb-6"
             />
             <Input
-                onChange={e => setValues({ ...values, token: e.target.value })}
-                value={values.token}
+                onChange={e => setValueNumber(e.target.value)}
+                value={valueNumber}
                 placeholder={"Ввведите код из письма"}
                 name={"number"}
                 extraClass="mb-6"

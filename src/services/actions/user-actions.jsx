@@ -9,6 +9,7 @@ import {
     updateAccessToken,
     getUserInfo,
     updateUserInfo,
+    postNewPassword,
 } from '../../utils/utils.js';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
@@ -32,6 +33,10 @@ export const UPDATE_USER_ERROR = "UPDATE_USER_ERROR";
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_ERROR = "GET_USER_ERROR";
+
+export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
+export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
+export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
 
 export const registerUserThunk = user => dispatch => {
     dispatch({
@@ -123,4 +128,24 @@ export const getUserData = () => dispatch => {
             })
         })
         .catch(err => dispatch({ type: GET_USER_ERROR }))
+};
+
+export const resetPassThunk = (password, code, callback) => dispatch => {
+    dispatch({
+        type: RESET_PASSWORD_REQUEST,
+    });
+    postNewPassword(password, code)
+        .then((res) => {
+            console.log(res);
+            dispatch({
+                type: RESET_PASSWORD_SUCCESS,
+                payload: res.user,
+            });
+            callback();
+        })
+        .catch((err) => {
+            dispatch({
+                type: RESET_PASSWORD_ERROR,
+            });
+        });
 };

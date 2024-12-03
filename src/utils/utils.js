@@ -47,9 +47,11 @@ const updateUserInfo = (upData, token) => {
     return request('auth/user', "PATCH", upData, token)
 };
 
+const postNewPassword = (password, code) => request('password-reset/reset', "POST", { password, token: code })
+
 
 export {
     request, setToken, getToken, resetToken, setRefreshToken,
     getRefreshToken, resetRefreshToken, updateAccessToken,
-    getUserInfo, updateUserInfo
+    getUserInfo, updateUserInfo, postNewPassword
 };
