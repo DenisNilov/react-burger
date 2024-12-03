@@ -1,9 +1,20 @@
 import style from './nav-profile.module.css';
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { logoutThunk } from '../../services/actions/user-actions.jsx';
+import { useDispatch } from "react-redux";
+import { getRefreshToken } from '../../utils/utils.js';
+
 
 const NavProfile = () => {
 
     const location = useLocation();
+    const dispatch = useDispatch();
+    const token = getRefreshToken();
+
+    const onOut = (e) => {
+        e.preventDefault();
+        dispatch(logoutThunk(token));
+    };
 
     return (
         <nav className={style.nav}>
@@ -29,6 +40,7 @@ const NavProfile = () => {
             </NavLink>
             <Link
                 className={`text text_color_inactive text_type_main-medium ${style.link}`}
+                onClick={onOut}
             >
                 Выход
             </Link>
