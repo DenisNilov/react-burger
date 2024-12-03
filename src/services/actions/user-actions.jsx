@@ -10,6 +10,7 @@ import {
     getUserInfo,
     updateUserInfo,
     postNewPassword,
+    postEmailForReset
 } from '../../utils/utils.js';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
@@ -37,6 +38,10 @@ export const GET_USER_ERROR = "GET_USER_ERROR";
 export const RESET_PASSWORD_REQUEST = "RESET_PASSWORD_REQUEST";
 export const RESET_PASSWORD_SUCCESS = "RESET_PASSWORD_SUCCESS";
 export const RESET_PASSWORD_ERROR = "RESET_PASSWORD_ERROR";
+
+export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
+export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
+export const FORGOT_PASSWORD_ERROR = "FORGOT_PASSWORD_ERROR";
 
 export const registerUserThunk = user => dispatch => {
     dispatch({
@@ -135,17 +140,28 @@ export const resetPassThunk = (password, code, callback) => dispatch => {
         type: RESET_PASSWORD_REQUEST,
     });
     postNewPassword(password, code)
-        .then((res) => {
+        .then(res => {
             console.log(res);
             dispatch({
                 type: RESET_PASSWORD_SUCCESS,
                 payload: res.user,
             });
             callback();
-        })
-        .catch((err) => {
-            dispatch({
-                type: RESET_PASSWORD_ERROR,
-            });
-        });
+        }).catch(err => dispatch({ type: RESET_PASSWORD_ERROR }));
 };
+
+export const forgotPassThunk = (email, callback) => dispatch => {
+    dispatch({
+        type: FORGOT_PASSWORD_REQUEST,
+    });
+    postEmailForReset(email)
+        .then((res) => {
+            getRefreshToken(res.refreshToken);
+            console.log(res);
+            dispatch({
+                type: FORGOT_PASSWORD_SUCCESS,
+                payload: res.user,
+            });
+            callback();
+        }).catch(err => dispatch({ type: FORGOT_PASSWORD_ERROR }));
+}

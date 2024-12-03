@@ -39,19 +39,18 @@ const resetRefreshToken = () => localStorage.setItem("refreshToken", null);
 
 const updateAccessToken = (refreshToken) => request(('auth/token'), "POST", { token: refreshToken });
 
-const getUserInfo = (token) => {
-    return request('auth/user', "GET", null, token)
-};
+const getUserInfo = (token) => request('auth/user', "GET", null, token);
 
-const updateUserInfo = (upData, token) => {
-    return request('auth/user', "PATCH", upData, token)
-};
+const updateUserInfo = (upData, token) => request('auth/user', "PATCH", upData, token);
 
-const postNewPassword = (password, code) => request('password-reset/reset', "POST", { password, token: code })
+const postNewPassword = (password, code) => request('reset-password', "POST", { password, token: code });
+
+const postEmailForReset = (email) => request('forgot-password', "POST", { email });
+
 
 
 export {
     request, setToken, getToken, resetToken, setRefreshToken,
     getRefreshToken, resetRefreshToken, updateAccessToken,
-    getUserInfo, updateUserInfo, postNewPassword
+    getUserInfo, updateUserInfo, postNewPassword, postEmailForReset
 };

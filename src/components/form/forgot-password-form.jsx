@@ -1,22 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./form.module.css";
-import { request } from '../../utils/utils.js';
+import { forgotPassThunk } from '../../services/actions/user-actions.jsx';
+import { useDispatch } from "react-redux";
 
 
 const ForgotPasswordForm = () => {
 
-    const [value, setValue] = React.useState({ email: '' })
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const [values, setValue] = React.useState({ email: '' })
 
     const onSubmitEmail = (e) => {
         e.preventDefault();
-        request('password-reset', "POST", { email: value.email }).then(data => {
-            if (data.success) {
-                console.log(data)
-            }
-        }
-        )
+        if (values.email) {
+            dispatch(forgotPassThunk(values.email, () => navigate('/reset-password')));
+        };
     }
 
     return (
@@ -25,8 +26,8 @@ const ForgotPasswordForm = () => {
                 Восстановление пароля
             </h1>
             <EmailInput
-                onChange={e => setValue({ ...value, email: e.target.value })}
-                value={value.email}
+                onChange={e => setValue({ ...values, email: e.target.value })}
+                value={values.email}
                 name={"email"}
                 placeholder="Укажите e-mail"
                 isIcon={false}

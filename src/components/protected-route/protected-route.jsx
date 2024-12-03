@@ -10,9 +10,10 @@ export const ProtectedRouteElement = ({ children, needAuth }) => {
 
     if (needAuth) {
         console.log('нужна авторизация и она :' + isAuth)
-        return isAuth ? children : <Navigate to='/login' replace />
+        return isAuth ? children : <Navigate to='/login' /* state={{ from: '/reset-password' }} */ />
     }
     else {
+        console.log('не нужна авторизация и она :' + isAuth)
         return isAuth ? <Navigate to={location.state?.from ?? '/'} /> : children
     }
 }
