@@ -15,6 +15,12 @@ import {
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
     GET_USER_ERROR,
+    FORGOT_PASSWORD_REQUEST,
+    FORGOT_PASSWORD_SUCCESS,
+    FORGOT_PASSWORD_ERROR,
+    RESET_PASSWORD_REQUEST,
+    RESET_PASSWORD_SUCCESS,
+    RESET_PASSWORD_ERROR,
 } from "../actions/user-actions.jsx";
 
 const initialState = {
@@ -173,6 +179,53 @@ export const userReducer = (state = initialState, action) => {
                 ...state,
                 checkUserRequest: false,
                 checkUserError: true,
+            };
+        }
+
+        case FORGOT_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                forgotPasswordRequest: true,
+                forgotPasswordError: false,
+            };
+        }
+        case FORGOT_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                userData: action.payload,
+                forgotPasswordRequest: false,
+                forgotPasswordError: false,
+            };
+        }
+        case FORGOT_PASSWORD_ERROR: {
+            return {
+                ...state,
+                forgotPasswordRequest: false,
+                forgotPasswordError: true,
+            };
+        }
+
+        case RESET_PASSWORD_REQUEST: {
+            return {
+                ...state,
+                resetUserRequest: true,
+                resetUserError: false,
+            };
+        }
+
+        case RESET_PASSWORD_SUCCESS: {
+            return {
+                ...state,
+                userData: action.payload,
+                resetUserRequest: false,
+                resetUserError: false,
+            };
+        }
+        case RESET_PASSWORD_ERROR: {
+            return {
+                ...state,
+                resetUserRequest: false,
+                resetUserError: true,
             };
         }
 
