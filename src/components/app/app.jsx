@@ -13,12 +13,12 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<ProtectedRouteElement element={<HomePage />} />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<ProtectedRouteElement element={<Profile />} />} />
+          <Route path="/" element={<ProtectedRouteElement needAuth={true}><HomePage /></ProtectedRouteElement>} />
+          <Route path="/login" element={<ProtectedRouteElement needAuth={false}><LoginPage /></ProtectedRouteElement>} />
+          <Route path="/register" element={<ProtectedRouteElement needAuth={false}><RegisterPage /></ProtectedRouteElement>} />
+          <Route path="/forgot-password" element={<ProtectedRouteElement needAuth={false}><ForgotPasswordPage /></ProtectedRouteElement>} />
+          <Route path="/reset-password" element={<ProtectedRouteElement needAuth={false}><ResetPasswordPage /></ProtectedRouteElement>} />
+          <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
         </Routes>
       </BrowserRouter>
     </>

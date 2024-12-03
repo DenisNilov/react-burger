@@ -1,12 +1,24 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import propTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
-export const ProtectedRouteElement = ({ element }) => {
-    let isAuth = useSelector(store => store.user.isAuth);
-    return isAuth ? element : <Navigate to='/login' replace />
+export const ProtectedRouteElement = ({ children, needAuth }) => {
+
+    const isAuth = useSelector((store) => store.user.isAuth);
+    const location = useLocation();
+
+    if (needAuth) {
+        console.log('нужна авторизация и она :' + isAuth)
+        return isAuth ? children : <Navigate to='/login' replace />
+    }
+    else {
+        return isAuth ? <Navigate to={location.state?.from ?? '/'} /> : children
+    }
 }
 
+
 ProtectedRouteElement.propTypes = {
-    element: propTypes.element.isRequired
+    children: propTypes.element.isRequired,
+    needAuth: propTypes.bool.isRequired,
 }
