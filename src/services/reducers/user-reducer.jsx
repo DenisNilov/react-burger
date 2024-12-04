@@ -28,6 +28,8 @@ const initialState = {
 
     isAuth: false,
 
+    haveVisitedPage: false,
+
     registerUserRequest: false,
     registerUserError: false,
 
@@ -195,6 +197,7 @@ export const userReducer = (state = initialState, action) => {
                 userData: action.payload,
                 forgotPasswordRequest: false,
                 forgotPasswordError: false,
+                haveVisitedPage: true,
             };
         }
         case FORGOT_PASSWORD_ERROR: {

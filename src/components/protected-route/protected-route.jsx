@@ -6,16 +6,13 @@ import { useLocation } from "react-router-dom";
 export const ProtectedRouteElement = ({ children, needAuth }) => {
 
     const isAuth = useSelector((store) => store.user.isAuth);
+    const haveVisitedPage = useSelector((store) => store.user.haveVisitedPage);
     const location = useLocation();
 
     if (needAuth) {
-        console.log('нужна авторизация и она :' + isAuth)
         return isAuth ? children : <Navigate to='/login' />
-    }
-    else {
-        console.log('не нужна авторизация и она :' + isAuth)
-        console.log(location.state)
-        return isAuth ? <Navigate to={location.state?.from ?? '/'} /> : children
+    } else {
+        return (location.pathname === '/reset-password' && !haveVisitedPage) ? <Navigate to='/forgot-password' /> : children
     }
 }
 
