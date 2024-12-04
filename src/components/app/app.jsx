@@ -6,12 +6,14 @@ import { ForgotPasswordPage } from '../../pages/forgot-password.jsx';
 import { ResetPasswordPage } from '../../pages/reset-password.jsx';
 import { Profile } from '../../pages/profile.jsx';
 import { ProtectedRouteElement } from '../protected-route/protected-route.jsx';
+import Header from '../app-header/app-header.jsx';
 
 function App() {
 
   return (
     <>
       <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<ProtectedRouteElement needAuth={true}><HomePage /></ProtectedRouteElement>} />
           <Route path="/login" element={<ProtectedRouteElement needAuth={false}><LoginPage /></ProtectedRouteElement>} />
