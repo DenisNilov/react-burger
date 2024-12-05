@@ -1,29 +1,31 @@
 import style from './burger-ingredients-component.module.css';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx';
-import Modal from "../modal/modal.jsx";
 import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js';
 import { useDrag } from 'react-dnd';
-import { addIngredientDetails, resetIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
+import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { setIngredient } from "../../utils/utils.js";
+import { getIngredient, getToken } from "../../utils/utils.js";
 
 const IngredientsComponent = ({ ingredient, count }) => {
 
-    const { image, price, name } = ingredient;
+    const { image, price, name, _id } = ingredient;
     const dispatch = useDispatch();
-    const [openModal, setOpenModal] = React.useState(false);
+    const navigate = useNavigate();
+
+    React.useEffect(() => {
+        setIngredient(ingredient)
+    }, [ingredient])
 
     const showModal = () => {
-        setOpenModal(true);
-        dispatch(addIngredientDetails(ingredient))
+        navigate(`/ingredients/${_id}`)
+        dispatch(addIngredientDetails(getIngredient()));
+        console.log(getIngredient())
     };
 
-    const handleClose = () => {
-        setOpenModal(false);
-        dispatch(resetIngredientDetails())
-    };
 
     const [{ opacity }, ref] = useDrag({
         type: "ingredient",
@@ -51,11 +53,6 @@ const IngredientsComponent = ({ ingredient, count }) => {
             <p className={`text text_type_main-default pb-8 ${style.title}`}>
                 {name}
             </p>
-            {openModal &&
-                <Modal onClose={handleClose} isOpen={openModal}>
-                    <IngredientDetails />
-                </Modal>
-            }
         </li>
     )
 }

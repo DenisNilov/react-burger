@@ -7,6 +7,7 @@ import { ResetPasswordPage } from '../../pages/reset-password.jsx';
 import { Profile } from '../../pages/profile.jsx';
 import { ProtectedRouteElement } from '../protected-route/protected-route.jsx';
 import Header from '../app-header/app-header.jsx';
+import { IngredientDetailsPage } from '../../pages/ingredients-id.jsx';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/forgot-password" element={<ProtectedRouteElement needAuth={false}><ForgotPasswordPage /></ProtectedRouteElement>} />
           <Route path="/reset-password" element={<ProtectedRouteElement needAuth={false}><ResetPasswordPage /></ProtectedRouteElement>} />
           <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
+          <Route path={`/ingredients/:id`} element={<IngredientDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </>

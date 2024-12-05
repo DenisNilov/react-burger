@@ -16,5 +16,5 @@ export const addIngredientDetails = ingredient => {
 };
 
 export const resetIngredientDetails = () => {
-  return { type: SET_INGREDIENT_DETAILS }
+  return { type: RESET_INGREDIENT_DETAILS }
 };
