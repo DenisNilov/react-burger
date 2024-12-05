@@ -15,7 +15,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<ProtectedRouteElement needAuth={true}><HomePage /></ProtectedRouteElement>} />
+          <Route path="/" element={<ProtectedRouteElement needAuth={false}><HomePage /></ProtectedRouteElement>} />
           <Route path="/login" element={<ProtectedRouteElement needAuth={false}><LoginPage /></ProtectedRouteElement>} />
           <Route path="/register" element={<ProtectedRouteElement needAuth={false}><RegisterPage /></ProtectedRouteElement>} />
           <Route path="/forgot-password" element={<ProtectedRouteElement needAuth={false}><ForgotPasswordPage /></ProtectedRouteElement>} />

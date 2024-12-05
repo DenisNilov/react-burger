@@ -8,6 +8,7 @@ import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
 import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions.jsx';
 import { BunTop, BunBottom, IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
+import { useNavigate } from "react-router-dom";
 
 
 const BurgerConstructor = () => {
@@ -16,6 +17,8 @@ const BurgerConstructor = () => {
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
     const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState(false);
+    const isAuth = useSelector((store) => store.user.isAuth);
+    const navigate = useNavigate()
 
 
     const postOrderNumer = () => {
@@ -31,8 +34,13 @@ const BurgerConstructor = () => {
         [ingredients, bun]);
 
     const showModal = () => {
-        setOpenModal(true);
-        postOrderNumer();
+        if (isAuth) {
+            setOpenModal(true);
+            postOrderNumer();
+        } else {
+            navigate('/login')
+        }
+
     };
 
     const handleClose = () => {
