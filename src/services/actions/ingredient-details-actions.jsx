@@ -1,8 +1,9 @@
 export const SET_INGREDIENT_DETAILS = "SET_INGREDIENT_DETAILS";
 export const RESET_INGREDIENT_DETAILS = "RESET_INGREDIENT_DETAILS";
 
-export const addIngredientDetails = ingredient => {
-  return {
+
+export const addIngredientDetails = ingredient => dispatch => {
+  dispatch({
     type: SET_INGREDIENT_DETAILS,
     payload: {
       name: ingredient.name,
@@ -12,7 +13,7 @@ export const addIngredientDetails = ingredient => {
       fat: ingredient.fat,
       carbohydrates: ingredient.carbohydrates,
     },
-  };
+  });
 };
 
 export const resetIngredientDetails = () => {

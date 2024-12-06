@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { getIngredientsAction } from '../services/actions/ingredients-actions.jsx';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { Outlet } from 'react-router-dom';
 
 
 export const HomePage = () => {
@@ -25,9 +26,8 @@ export const HomePage = () => {
                     <BurgerConstructor />
                 </main>
             </DndProvider>
+            <Outlet />
         </>
-
-
     );
 }
 

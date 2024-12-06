@@ -16,18 +16,17 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<ProtectedRouteElement needAuth={false}><HomePage /></ProtectedRouteElement>} />
+          <Route path="/" element={<ProtectedRouteElement needAuth={false}><HomePage /></ProtectedRouteElement>}>
+            <Route path={`/ingredients/:id`} element={<IngredientDetailsPage />} />
+          </Route>
           <Route path="/login" element={<ProtectedRouteElement needAuth={false}><LoginPage /></ProtectedRouteElement>} />
           <Route path="/register" element={<ProtectedRouteElement needAuth={false}><RegisterPage /></ProtectedRouteElement>} />
           <Route path="/forgot-password" element={<ProtectedRouteElement needAuth={false}><ForgotPasswordPage /></ProtectedRouteElement>} />
           <Route path="/reset-password" element={<ProtectedRouteElement needAuth={false}><ResetPasswordPage /></ProtectedRouteElement>} />
           <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
-          <Route path={`/ingredients/:id`} element={<IngredientDetailsPage />} />
         </Routes>
       </BrowserRouter>
     </>
-
-
   );
 }
 
