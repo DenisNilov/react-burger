@@ -16,4 +16,6 @@ const IngredientsComponentList = React.forwardRef(({ name, ingredients, count, i
         </li>)
 });
 
+//Проверка на пропсы
+
 export default IngredientsComponentList;

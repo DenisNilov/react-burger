@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import propTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
-export const ProtectedRouteElement = ({ children, needAuth }) => {
+export const ProtectedRouteElement = ({ children, needAuth = false }) => {
 
     const isAuth = useSelector((store) => store.user.isAuth);
     const haveVisitedPage = useSelector((store) => store.user.haveVisitedPage);
@@ -19,5 +19,5 @@ export const ProtectedRouteElement = ({ children, needAuth }) => {
 
 ProtectedRouteElement.propTypes = {
     children: propTypes.element.isRequired,
-    needAuth: propTypes.bool.isRequired,
+    needAuth: propTypes.bool,
 }

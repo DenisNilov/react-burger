@@ -48,7 +48,7 @@ const Tabs = ({ inView }) => {
 
 }
 
-Tabs.propTypes = {
+Tabs.propTypes = { //Рекомендую убрать проверку на пропс
     ref: PropTypes.oneOfType([
         PropTypes.func,
         PropTypes.shape({ current: PropTypes.object })
