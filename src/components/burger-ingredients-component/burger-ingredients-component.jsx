@@ -1,7 +1,6 @@
 import style from './burger-ingredients-component.module.css';
 import PropTypes from 'prop-types';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from "react";
 import { ingredientsPropTypes } from '../../utils/constants.js';
 import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
@@ -21,6 +20,8 @@ const IngredientsComponent = ({ ingredient, count }) => {
         }),
     });
 
+    const openDetails = () => dispatch(addIngredientDetails(ingredient));
+
 
     return (
         <li
@@ -30,7 +31,7 @@ const IngredientsComponent = ({ ingredient, count }) => {
         >
             <Link
                 to={`/ingredients/${_id}`}
-                onClick={() => dispatch(addIngredientDetails(ingredient))}
+                onClick={openDetails}
                 className={style.link}
             >
                 <Counter count={count} size="default" extraClass="m-1" />

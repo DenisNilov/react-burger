@@ -48,11 +48,12 @@ const Tabs = ({ inView }) => {
 
 }
 
-Tabs.propTypes = { //Рекомендую убрать проверку на пропс
-    ref: PropTypes.oneOfType([
-        PropTypes.func,
-        PropTypes.shape({ current: PropTypes.object })
-    ])
+Tabs.propTypes = { 
+    inView: PropTypes.shape({
+        inViewBun: PropTypes.bool.isRequired,
+        inViewSause: PropTypes.bool.isRequired,
+        inViewMain: PropTypes.bool.isRequired,
+    })
 }
 
 export default Tabs;

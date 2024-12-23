@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
 import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions.jsx';
-import { IngredientsList, Bun } from '../burger-items-ingredients/burger-items-ingredients.jsx';
+import { IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
