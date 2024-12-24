@@ -8,6 +8,7 @@ import { Profile } from '../../pages/profile.jsx';
 import { ProtectedRouteElement } from '../protected-route/protected-route.jsx';
 import Header from '../app-header/app-header.jsx';
 import { IngredientDetailsPage } from '../../pages/ingredients-id.jsx';
+import { NotFound404 } from '../../pages/not-found.jsx';
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/forgot-password" element={<ProtectedRouteElement><ForgotPasswordPage /></ProtectedRouteElement>} />
           <Route path="/reset-password" element={<ProtectedRouteElement><ResetPasswordPage /></ProtectedRouteElement>} />
           <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
+          <Route path="*" element={<NotFound404 />} />
         </Routes>
       </BrowserRouter>
     </>
