@@ -25,6 +25,7 @@ function App() {
           <Route path="/forgot-password" element={<ProtectedRouteElement><ForgotPasswordPage /></ProtectedRouteElement>} />
           <Route path="/reset-password" element={<ProtectedRouteElement><ResetPasswordPage /></ProtectedRouteElement>} />
           <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
+          <Route path="/profile/orders" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
           <Route path="*" element={<NotFound404 />} />
         </Routes>
       </BrowserRouter>
