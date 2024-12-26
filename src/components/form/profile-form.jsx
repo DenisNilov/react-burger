@@ -23,7 +23,6 @@ const ProfileForm = () => {
 
     React.useEffect(() => {
         setEdit(user)
-        console.log(isEditValue)
     }, [user, isEditValue])
 
     const onChange = e => {

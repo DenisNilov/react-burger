@@ -126,7 +126,7 @@ export const userReducer = (state = initialState, action) => {
         }
 
         case LOGOUT_USER: {
-            return { ...state, isAuth: false };
+            return { ...state, isAuth: false, userData: null };
         }
 
         case UPDATE_USER_REQUEST: {
