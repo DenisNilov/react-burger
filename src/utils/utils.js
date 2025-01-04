@@ -47,9 +47,9 @@ const postNewPassword = (password, code) => request('reset-password', "POST", { 
 
 const postEmailForReset = (email) => request('forgot-password', "POST", { email });
 
-const setIngredient = (ingredient) => localStorage.setItem("ingredient", ingredient);
+const setIngredient = (ingredient) => localStorage.setItem("ingredient", JSON.stringify(ingredient));
 
-const getIngredient = () => localStorage.getItem("ingredient");
+const getIngredient = () => JSON.parse(localStorage.getItem("ingredient"));
 
 export {
     request, setToken, getToken, resetToken, setRefreshToken,

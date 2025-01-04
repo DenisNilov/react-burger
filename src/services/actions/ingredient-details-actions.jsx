@@ -7,7 +7,7 @@ export const addIngredientDetails = ingredient => dispatch => {
     type: SET_INGREDIENT_DETAILS,
     payload: {
       name: ingredient.name,
-      image: ingredient.image_large,
+      image_large: ingredient.image_large,
       calories: ingredient.calories,
       proteins: ingredient.proteins,
       fat: ingredient.fat,

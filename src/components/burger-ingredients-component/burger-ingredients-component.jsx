@@ -6,9 +6,10 @@ import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
+import { setIngredient } from '../../utils/utils.js';
 
 const IngredientsComponent = ({ ingredient, count }) => {
-
+    
     const { image, price, name, _id } = ingredient;
     const dispatch = useDispatch();
 
@@ -20,7 +21,11 @@ const IngredientsComponent = ({ ingredient, count }) => {
         }),
     });
 
-    const openDetails = () => dispatch(addIngredientDetails(ingredient));
+    const openDetails = () => {
+        setIngredient(ingredient);
+        dispatch(addIngredientDetails(ingredient))
+    }
+
 
 
     return (
