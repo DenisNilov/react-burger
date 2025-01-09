@@ -51,9 +51,11 @@ const setIngredient = (ingredient) => localStorage.setItem("ingredient", JSON.st
 
 const getIngredient = () => JSON.parse(localStorage.getItem("ingredient"));
 
+const resetIngredient = () => localStorage.setItem("ingredient", null);
+
 export {
     request, setToken, getToken, resetToken, setRefreshToken,
     getRefreshToken, resetRefreshToken, updateAccessToken,
     getUserInfo, updateUserInfo, postNewPassword, postEmailForReset,
-    getIngredient, setIngredient
+    getIngredient, setIngredient, resetIngredient
 };

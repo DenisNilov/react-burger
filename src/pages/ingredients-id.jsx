@@ -4,6 +4,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { resetIngredientDetails } from '../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
+import { resetIngredient } from '../utils/utils.js';
 
 
 export const IngredientDetailsPage = () => {
@@ -16,6 +17,7 @@ export const IngredientDetailsPage = () => {
         setOpenModal(false);
         navigate('/');
         dispatch(resetIngredientDetails());
+        resetIngredient()
     };
 
     return (
