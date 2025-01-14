@@ -18,6 +18,13 @@ const LoginForm = () => {
         dispatch(loginUserThunk(values));
     }
 
+    const handleChangeForm = (e) => {
+        setValue({
+            ...values,
+            [e.target.name]: e.target.value
+        })
+    };
+
     return (
         <>
             {user ? <Navigate to='/' />
@@ -34,7 +41,7 @@ const LoginForm = () => {
                             </h1>
 
                             <EmailInput
-                                onChange={e => setValue({ ...values, email: e.target.value })}
+                                onChange={handleChangeForm}
                                 value={values.email}
                                 name={"email"}
                                 placeholder="E-mail"
@@ -42,7 +49,7 @@ const LoginForm = () => {
                                 extraClass="mt-6 mb-6"
                             />
                             <PasswordInput
-                                onChange={e => setValue({ ...values, password: e.target.value })}
+                                onChange={handleChangeForm}
                                 value={values.password}
                                 name={"password"}
                                 extraClass="mb-6"
