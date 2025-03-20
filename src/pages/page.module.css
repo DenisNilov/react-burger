@@ -1,0 +1,46 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 0;
+    max-width: 480px;
+}
+
+.heading {
+    font-size: 40px;
+    color: white;
+}
+
+.text {
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #4C4CFF;
+}
+
+.profile__container{
+    display: flex;
+    gap: 60px;
+    width: 1240px;
+    margin: 120px auto 0;
+}
+
+.background{
+    background-image: url('../images/404-page.png');
+    max-width: 1920px;
+    height: 100%;
+    background-size: 100% auto; 
+    background-repeat: no-repeat;
+    aspect-ratio: 3/1.875;
+    margin: auto;
+}
+

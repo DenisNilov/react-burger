@@ -7,7 +7,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
 import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions.jsx';
-import { BunTop, BunBottom, IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
+import { IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
+import { useNavigate } from "react-router-dom";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
 const BurgerConstructor = () => {
@@ -16,6 +18,8 @@ const BurgerConstructor = () => {
     const { bun, ingredients } = useSelector(state => state.burgerConstructor);
     const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState(false);
+    const isAuth = useSelector((store) => store.user.isAuth);
+    const navigate = useNavigate()
 
 
     const postOrderNumer = () => {
@@ -31,8 +35,13 @@ const BurgerConstructor = () => {
         [ingredients, bun]);
 
     const showModal = () => {
-        setOpenModal(true);
-        postOrderNumer();
+        if (isAuth) {
+            setOpenModal(true);
+            postOrderNumer();
+        } else {
+            navigate('/login')
+        }
+
     };
 
     const handleClose = () => {
@@ -65,7 +74,13 @@ const BurgerConstructor = () => {
                 ref={dropTarget}
             >
                 <div className={style.bun}>
-                    {bun ? <BunTop ingredient={bun} />
+                    {bun ? <ConstructorElement
+                        type='top'
+                        isLocked={true}
+                        text={`${bun.name} (верх)`}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />
                         : <p className="text text_type_main-medium">Перетащи сюда булку</p>}
                 </div>
                 <ul className={style.content}>
@@ -80,7 +95,13 @@ const BurgerConstructor = () => {
                         </>}
                 </ul>
                 <div className={style.bun}>
-                    {bun && <BunBottom ingredient={bun} />}
+                    {bun && <ConstructorElement
+                        type='bottom'
+                        isLocked={true}
+                        text={`${bun.name} (низ)`}
+                        price={bun.price}
+                        thumbnail={bun.image}
+                    />}
                 </div>
             </div>
             <div className={style.bottom}>

@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 180px auto 0;
+    max-width: 480px;
+}
+
+.heading {
+    font-size: 40px;
+    color: white;
+}
+
+.text {
+    margin: 0;
+}
+
+.wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.link {
+    text-decoration: none;
+    cursor: pointer;
+    color: #4C4CFF;
+}
+
+.profile__container {
+    margin: 0;
+}
+
+.loader {
+    margin: auto;
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #801AB3;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}

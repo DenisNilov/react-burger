@@ -1,37 +1,44 @@
-import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HomePage } from '../../pages/home.jsx';
+import { LoginPage } from '../../pages/login.jsx';
+import { RegisterPage } from '../../pages/register.jsx';
+import { ForgotPasswordPage } from '../../pages/forgot-password.jsx';
+import { ResetPasswordPage } from '../../pages/reset-password.jsx';
+import { Profile } from '../../pages/profile.jsx';
+import { ProtectedRouteElement } from '../protected-route/protected-route.jsx';
 import Header from '../app-header/app-header.jsx';
-import BurgerConstructor from '../burger-constructor/burger-constructor.jsx';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx';
-import style from './app.module.css';
-import { useDispatch } from "react-redux";
-import { getIngredientsAction } from '../../services/actions/ingredients-actions.jsx';
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-
+import { IngredientDetailsPage } from '../../pages/ingredients-id.jsx';
+import { NotFound404 } from '../../pages/not-found.jsx';
+import { useDispatch } from 'react-redux';
+import { getUserData } from '../../services/actions/user-actions.jsx';
+import React from "react";
 
 function App() {
 
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(getIngredientsAction());
+    dispatch(getUserData())
   }, [dispatch]);
-
 
   return (
     <>
-      <Header />
-      <DndProvider backend={HTML5Backend}>
-        <main className={style.main}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </main>
-      </DndProvider>
-
-
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<ProtectedRouteElement ><HomePage /></ProtectedRouteElement>}>
+            <Route path={`/ingredients/:id`} element={<IngredientDetailsPage />} />
+          </Route>
+          <Route path="/login" element={<ProtectedRouteElement><LoginPage /></ProtectedRouteElement>} />
+          <Route path="/register" element={<ProtectedRouteElement><RegisterPage /></ProtectedRouteElement>} />
+          <Route path="/forgot-password" element={<ProtectedRouteElement><ForgotPasswordPage /></ProtectedRouteElement>} />
+          <Route path="/reset-password" element={<ProtectedRouteElement><ResetPasswordPage /></ProtectedRouteElement>} />
+          <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
+          <Route path="/profile/orders" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
+          <Route path="*" element={<NotFound404 />} />
+        </Routes>
+      </BrowserRouter>
     </>
-
-
   );
 }
 
