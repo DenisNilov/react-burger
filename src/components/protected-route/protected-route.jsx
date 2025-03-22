@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import propTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 
 export const ProtectedRouteElement = ({ children, needAuth = false }) => {
@@ -14,10 +13,4 @@ export const ProtectedRouteElement = ({ children, needAuth = false }) => {
     } else {
         return (location.pathname === '/reset-password' && !haveVisitedPage) ? <Navigate to='/forgot-password' /> : children
     }
-}
-
-
-ProtectedRouteElement.propTypes = {
-    children: propTypes.element.isRequired,
-    needAuth: propTypes.bool,
 }

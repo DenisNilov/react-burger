@@ -2,7 +2,6 @@ import React from 'react';
 import style from './burger-ingredienrs-tabs.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { TABS } from '../../utils/constants.js';
-import PropTypes from 'prop-types';
 
 const Tabs = ({ inView }) => {
 
@@ -46,14 +45,6 @@ const Tabs = ({ inView }) => {
         </nav>
     )
 
-}
-
-Tabs.propTypes = { 
-    inView: PropTypes.shape({
-        inViewBun: PropTypes.bool.isRequired,
-        inViewSause: PropTypes.bool.isRequired,
-        inViewMain: PropTypes.bool.isRequired,
-    })
 }
 
 export default Tabs;

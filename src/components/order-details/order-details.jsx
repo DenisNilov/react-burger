@@ -1,7 +1,6 @@
 import React from "react";
 import style from './order-details.module.css';
 import Done from '../../images/done.svg';
-import PropTypes from 'prop-types';
 
 const OrderDetails = ({ orderNumber, isLoading }) => {
 
@@ -26,22 +25,6 @@ const OrderDetails = ({ orderNumber, isLoading }) => {
             }
         </div>
     );
-}
-
-OrderDetails.propTypes = {
-    orderNumber: PropTypes.shape({
-        data: PropTypes.shape({
-            name: PropTypes.string.isRequired,
-            success: PropTypes.bool.isRequired,
-            order: PropTypes.shape({
-                number: PropTypes.number.isRequired,
-            }).isRequired
-        }),
-        orderFailed: PropTypes.bool.isRequired,
-        orderRequest: PropTypes.bool.isRequired,
-        orderSuccess: PropTypes.bool.isRequired,
-    }).isRequired,
-    isLoading: PropTypes.bool.isRequired,
 }
 
 export default OrderDetails;

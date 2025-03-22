@@ -1,5 +1,4 @@
 import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx';
-import { ingredientsPropTypes } from '../../utils/constants.js'
 
 export const IngredientsList = ({ ingredients }) => {
     return (
@@ -9,9 +8,4 @@ export const IngredientsList = ({ ingredients }) => {
                 key={ingredient.id}
                 index={index}
             />))
-}
-
-
-IngredientsList.propTypes = {
-    ingredient: ingredientsPropTypes
 }
