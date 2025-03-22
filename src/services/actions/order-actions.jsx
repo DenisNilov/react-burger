@@ -1,4 +1,4 @@
-import { request, getToken } from '../../utils/utils.js';
+import { request, getToken } from '../../utils/utils';
 
 export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';

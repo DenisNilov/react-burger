@@ -3,7 +3,7 @@ import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-de
 import style from './form.module.css';
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserData } from '../../services/actions/user-actions.jsx';
-import { getToken } from '../../utils/utils.js';
+import { getToken } from '../../utils/utils';
 
 
 const ProfileForm = () => {

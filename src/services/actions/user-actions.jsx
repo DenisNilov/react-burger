@@ -11,7 +11,7 @@ import {
     updateUserInfo,
     postNewPassword,
     postEmailForReset
-} from '../../utils/utils.js';
+} from '../../utils/utils';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";

@@ -2,7 +2,7 @@ import style from './nav-profile.module.css';
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoutThunk } from '../../services/actions/user-actions.jsx';
 import { useDispatch } from "react-redux";
-import { getRefreshToken } from '../../utils/utils.js';
+import { getRefreshToken } from '../../utils/utils';
 
 
 const NavProfile = () => {

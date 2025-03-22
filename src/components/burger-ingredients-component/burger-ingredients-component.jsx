@@ -4,10 +4,10 @@ import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
-import { setIngredient } from '../../utils/utils.js';
+import { setIngredient } from '../../utils/utils';
 
 const IngredientsComponent = ({ ingredient, count }) => {
-    
+
     const { image, price, name, _id } = ingredient;
     const dispatch = useDispatch();
 

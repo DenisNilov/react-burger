@@ -1,4 +1,4 @@
-import { request } from '../../utils/utils.js';
+import { request } from '../../utils/utils';
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";

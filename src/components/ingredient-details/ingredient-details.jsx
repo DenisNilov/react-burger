@@ -1,6 +1,6 @@
 import style from './ingredient-details.module.css';
 import { useSelector } from "react-redux";
-import { getIngredient } from '../../utils/utils.js';
+import { getIngredient } from '../../utils/utils';
 
 const IngredientDetails = () => {
 

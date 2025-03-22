@@ -4,7 +4,7 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import { resetIngredientDetails } from '../services/actions/ingredient-details-actions.jsx';
 import { useDispatch } from "react-redux";
-import { resetIngredient } from '../utils/utils.js';
+import { resetIngredient } from '../utils/utils';
 
 
 export const IngredientDetailsPage = () => {
