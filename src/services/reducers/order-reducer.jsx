@@ -2,7 +2,7 @@ import {
     POST_ORDER_REQUEST,
     POST_ORDER_SUCCESS,
     POST_ORDER_FAILED,
-} from '../actions/order-actions.jsx';
+} from '../actions/order-actions';
 
 
 const initialState = {

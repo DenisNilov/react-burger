@@ -10,7 +10,7 @@ import Header from '../app-header/app-header.jsx';
 import { IngredientDetailsPage } from '../../pages/ingredients-id.jsx';
 import { NotFound404 } from '../../pages/not-found.jsx';
 import { useDispatch } from 'react-redux';
-import { getUserData } from '../../services/actions/user-actions.jsx';
+import { getUserData } from '../../services/actions/user-actions';
 import React from "react";
 
 function App() {

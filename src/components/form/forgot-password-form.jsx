@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./form.module.css";
-import { forgotPassThunk } from '../../services/actions/user-actions.jsx';
+import { forgotPassThunk } from '../../services/actions/user-actions';
 import { useDispatch } from "react-redux";
 
 

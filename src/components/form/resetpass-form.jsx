@@ -2,7 +2,7 @@ import React from "react";
 import style from './form.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { resetPassThunk } from '../../services/actions/user-actions.jsx';
+import { resetPassThunk } from '../../services/actions/user-actions';
 import { useDispatch } from "react-redux";
 
 const ResetPasswordForm = () => {

@@ -12,6 +12,8 @@ import {
     postNewPassword,
     postEmailForReset
 } from '../../utils/utils';
+import { AppDispatch, ICallback } from '../types';
+import { IUser } from '../types/data';
 
 export const REGISTER_USER_REQUEST = "REGISTER_USER_REQUEST";
 export const REGISTER_USER_SUCCESS = "REGISTER_USER_SUCCESS";
@@ -43,7 +45,7 @@ export const FORGOT_PASSWORD_REQUEST = "FORGOT_PASSWORD_REQUEST";
 export const FORGOT_PASSWORD_SUCCESS = "FORGOT_PASSWORD_SUCCESS";
 export const FORGOT_PASSWORD_ERROR = "FORGOT_PASSWORD_ERROR";
 
-export const registerUserThunk = user => dispatch => {
+export const registerUserThunk = (user: IUser) => (dispatch: AppDispatch) => {
     dispatch({
         type: REGISTER_USER_REQUEST,
     });
@@ -61,7 +63,7 @@ export const registerUserThunk = user => dispatch => {
     }).catch(err => dispatch({ type: REGISTER_USER_ERROR }));
 };
 
-export const loginUserThunk = user => dispatch => {
+export const loginUserThunk = (user: IUser) => (dispatch: AppDispatch) => {
     dispatch({
         type: LOGIN_USER_REQUEST,
     });
@@ -83,7 +85,7 @@ export const loginUserThunk = user => dispatch => {
 };
 
 
-export const updateToken = refreshToken => dispatch => {
+export const updateToken = (refreshToken: string) => (dispatch: AppDispatch) => {
     dispatch({
         type: REFRESH_TOKEN_REQUEST,
     });
@@ -98,22 +100,22 @@ export const updateToken = refreshToken => dispatch => {
         }).catch(err => dispatch({ type: REFRESH_TOKEN_ERROR }));
 };
 
-export const logoutThunk = refreshToken => dispatch => {
+export const logoutThunk = (refreshToken: string) => (dispatch: AppDispatch) => {
     request('auth/logout', 'POST', {
         token: refreshToken
-    }).then(res => {
+    }).then((res) => {
         localStorage.clear();
-        resetRefreshToken(res.refreshToken);
-        resetToken(res.accessToken);
+        resetRefreshToken();
+        resetToken();
         dispatch({ type: LOGOUT_USER });
     }).catch((err) => console.log(err));
 };
 
-export const updateUserData = (data, refreshToken) => dispatch => {
+export const updateUserData = (user: IUser, refreshToken: string) => (dispatch: AppDispatch) => {
     dispatch({
         type: UPDATE_USER_REQUEST,
     });
-    updateUserInfo(data, refreshToken)
+    updateUserInfo(user, refreshToken)
         .then(res => {
             console.log(res)
             dispatch({
@@ -123,19 +125,25 @@ export const updateUserData = (data, refreshToken) => dispatch => {
         }).catch(err => dispatch({ type: UPDATE_USER_ERROR }));
 };
 
-export const getUserData = () => dispatch => {
+export const getUserData = () => (dispatch: AppDispatch) => {
+
     dispatch({ type: GET_USER_REQUEST });
-    getUserInfo(getToken())
-        .then(res => {
-            dispatch({
-                type: GET_USER_SUCCESS,
-                payload: res.user
+    const token = getToken();
+    if (token) {
+        getUserInfo(token)
+            .then(res => {
+                dispatch({
+                    type: GET_USER_SUCCESS,
+                    payload: res.user
+                });
             })
-        })
-        .catch(err => dispatch({ type: GET_USER_ERROR }))
+            .catch(err => dispatch({ type: GET_USER_ERROR }));
+    } else {
+        dispatch({ type: GET_USER_ERROR });
+    }
 };
 
-export const resetPassThunk = (password, code, callback) => dispatch => {
+export const resetPassThunk = (password: string, code: string, callback: ICallback) => (dispatch: AppDispatch) => {
     dispatch({
         type: RESET_PASSWORD_REQUEST,
     });
@@ -150,13 +158,13 @@ export const resetPassThunk = (password, code, callback) => dispatch => {
         }).catch(err => dispatch({ type: RESET_PASSWORD_ERROR }));
 };
 
-export const forgotPassThunk = (email, callback) => dispatch => {
+export const forgotPassThunk = (email: string, callback: ICallback) => (dispatch: AppDispatch) => {
     dispatch({
         type: FORGOT_PASSWORD_REQUEST,
     });
     postEmailForReset(email)
         .then((res) => {
-            getRefreshToken(res.refreshToken);
+            getRefreshToken();
             console.log(res);
             dispatch({
                 type: FORGOT_PASSWORD_SUCCESS,

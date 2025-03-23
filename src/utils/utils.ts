@@ -1,5 +1,5 @@
 import { BASE_URL } from './constants';
-import { IIngredient } from '../services/types/data';
+import { IIngredient, Response } from '../services/types/data';
 
 interface IOptions<T = any> {
     method: string;
@@ -8,10 +8,6 @@ interface IOptions<T = any> {
         'Authorization'?: string;
     },
     body?: T;
-}
-
-interface Response {
-    [key: string]: any;
 }
 
 
@@ -51,7 +47,6 @@ const setToken = (accessToken: string) => localStorage.setItem("accessToken", ac
 const getToken = () => localStorage.getItem("accessToken");
 
 const resetToken = () => localStorage.setItem("accessToken", '');
-
 
 const setRefreshToken = (refreshToken: string) => localStorage.setItem("refreshToken", refreshToken);
 

@@ -12,3 +12,13 @@ export interface IIngredient {
     __v: any;
     _id: string;
 }
+
+export interface IUser {
+    name: string;
+    email: string;
+    password?: string;
+}
+
+export interface Response {
+    [key: string]: any;
+}

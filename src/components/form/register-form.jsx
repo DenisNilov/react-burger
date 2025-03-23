@@ -2,7 +2,7 @@ import React from "react";
 import style from './form.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { registerUserThunk } from '../../services/actions/user-actions.jsx';
+import { registerUserThunk } from '../../services/actions/user-actions';
 import { useSelector, useDispatch } from "react-redux";
 
 const RegisterForm = () => {

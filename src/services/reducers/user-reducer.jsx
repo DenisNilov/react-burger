@@ -21,7 +21,7 @@ import {
     RESET_PASSWORD_REQUEST,
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
-} from "../actions/user-actions.jsx";
+} from "../actions/user-actions";
 
 const initialState = {
     userData: null,

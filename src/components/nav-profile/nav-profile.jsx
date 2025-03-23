@@ -1,6 +1,6 @@
 import style from './nav-profile.module.css';
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { logoutThunk } from '../../services/actions/user-actions.jsx';
+import { logoutThunk } from '../../services/actions/user-actions';
 import { useDispatch } from "react-redux";
 import { getRefreshToken } from '../../utils/utils';
 
