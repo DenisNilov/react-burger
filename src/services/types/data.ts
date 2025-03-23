@@ -11,6 +11,7 @@ export interface IIngredient {
     type: string;
     __v: any;
     _id: string;
+    id: string;
 }
 
 export interface IUser {
@@ -21,4 +22,9 @@ export interface IUser {
 
 export interface Response {
     [key: string]: any;
+}
+
+export interface IAction {
+    type: string;
+    payload?: any;
 }
