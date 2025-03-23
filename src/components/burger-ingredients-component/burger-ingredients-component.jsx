@@ -1,7 +1,7 @@
 import style from './burger-ingredients-component.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
-import { addIngredientDetails } from '../../services/actions/ingredient-details-actions.jsx';
+import { addIngredientDetails } from '../../services/actions/ingredient-details-actions';
 import { useDispatch } from "react-redux";
 import { Link } from 'react-router-dom';
 import { setIngredient } from '../../utils/utils';

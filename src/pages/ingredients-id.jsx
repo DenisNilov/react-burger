@@ -2,7 +2,7 @@ import IngredientDetails from '../components/ingredient-details/ingredient-detai
 import Modal from '../components/modal/modal.jsx';
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { resetIngredientDetails } from '../services/actions/ingredient-details-actions.jsx';
+import { resetIngredientDetails } from '../services/actions/ingredient-details-actions';
 import { useDispatch } from "react-redux";
 import { resetIngredient } from '../utils/utils';
 

@@ -1,7 +1,7 @@
 import React from "react";
 import style from './constructor-ingredient.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { deleteIngConstructor, sortIngConstructor } from '../../services/actions/constructor-actions.jsx';
+import { deleteIngConstructor, sortIngConstructor } from '../../services/actions/constructor-actions';
 import { useDispatch } from "react-redux";
 import { useDrag, useDrop } from 'react-dnd';
 

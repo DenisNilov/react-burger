@@ -4,7 +4,7 @@ import {
     DELETE_ING_CONSTRUCTOR,
     SET_BUN_CONSTRUCTOR,
     RESET_ING_CONSTRUCTOR,
-} from '../actions/constructor-actions.jsx';
+} from '../actions/constructor-actions';
 
 export const initialState = {
     bun: null,

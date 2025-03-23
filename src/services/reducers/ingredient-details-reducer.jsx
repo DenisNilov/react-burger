@@ -1,7 +1,7 @@
 import {
     SET_INGREDIENT_DETAILS,
     RESET_INGREDIENT_DETAILS
-} from '../actions/ingredient-details-actions.jsx';
+} from '../actions/ingredient-details-actions';
 
 export const initialState = {
     ingredientDetails: null

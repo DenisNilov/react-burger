@@ -1,4 +1,5 @@
 import { BASE_URL } from './constants';
+import { IIngredient } from '../services/types/data';
 
 interface IOptions<T = any> {
     method: string;
@@ -13,20 +14,6 @@ interface Response {
     [key: string]: any;
 }
 
-interface IIngredient {
-    calories: number;
-    carbohydrates: number;
-    fat: number;
-    image: string;
-    image_large: string;
-    image_mobile: string;
-    name: string;
-    price: number;
-    proteins: number;
-    type: string;
-    __v: any;
-    _id: string;
-}
 
 type TToken = string | null;
 
