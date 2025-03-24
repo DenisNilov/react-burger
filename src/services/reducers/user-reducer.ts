@@ -22,8 +22,35 @@ import {
     RESET_PASSWORD_SUCCESS,
     RESET_PASSWORD_ERROR,
 } from "../actions/user-actions";
+import { IAction, IUser } from "../types/data";
 
-const initialState = {
+interface IUserState {
+    userData: IUser | null;
+
+    isAuth: boolean;
+
+    haveVisitedPage: boolean;
+
+    registerUserRequest: boolean;
+    registerUserError: boolean;
+
+    loginUserRequest: boolean;
+    loginUserError: boolean;
+
+    forgotPasswordRequest: boolean;
+    forgotPasswordError: boolean;
+
+    resetPasswordRequest: boolean;
+    reserPasswordError: boolean;
+
+    refreshTokenRequest: boolean;
+    refreshTokenError: boolean;
+
+    checkUserRequest: null;
+    checkUserError: boolean;
+}
+
+const initialState: IUserState = {
     userData: null,
 
     isAuth: false,
@@ -49,7 +76,7 @@ const initialState = {
     checkUserError: false,
 };
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action: IAction) => {
     switch (action.type) {
         case REGISTER_USER_REQUEST: {
             return {

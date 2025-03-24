@@ -3,6 +3,7 @@ import {
     POST_ORDER_SUCCESS,
     POST_ORDER_FAILED,
 } from '../actions/order-actions';
+import { IAction } from '../types/data';
 
 
 const initialState = {
@@ -12,7 +13,7 @@ const initialState = {
     orderFailed: false,
 };
 
-export const orderReducer = (state = initialState, action) => {
+export const orderReducer = (state = initialState, action: IAction) => {
     switch (action.type) {
         case POST_ORDER_REQUEST:
             return {
