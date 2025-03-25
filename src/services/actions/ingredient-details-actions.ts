@@ -1,10 +1,20 @@
-import { IIngredient } from "../types/data";
+import { IIngredient, IIngDetailsInitial } from "../types/data";
 
 export const SET_INGREDIENT_DETAILS = "SET_INGREDIENT_DETAILS";
 export const RESET_INGREDIENT_DETAILS = "RESET_INGREDIENT_DETAILS";
 
+interface IAddIngredientDetailsAction {
+  readonly type: typeof SET_INGREDIENT_DETAILS;
+  readonly payload: IIngDetailsInitial;
+}
+interface IResetIngredientDetailsAction {
+  readonly type: typeof RESET_INGREDIENT_DETAILS;
+}
 
-export const addIngredientDetails = (ingredient: IIngredient) =>
+export type TIngredientDetailsAction = IAddIngredientDetailsAction | IResetIngredientDetailsAction;
+
+
+export const addIngredientDetails = (ingredient: IIngredient): IAddIngredientDetailsAction =>
 ({
   type: SET_INGREDIENT_DETAILS,
   payload: {
@@ -17,6 +27,6 @@ export const addIngredientDetails = (ingredient: IIngredient) =>
   },
 });
 
-export const resetIngredientDetails = () => {
+export const resetIngredientDetails = (): IResetIngredientDetailsAction => {
   return { type: RESET_INGREDIENT_DETAILS }
 };

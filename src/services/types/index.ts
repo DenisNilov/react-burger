@@ -1,10 +1,17 @@
 import { ThunkDispatch } from "redux-thunk";
-import { AnyAction } from 'redux';
 import { store } from '../../store/store';
+import { TOrderAction } from '../actions/order-actions';
+import { TUserAction } from "../actions/user-actions";
+import { TConstructorAction } from '../actions/constructor-actions';
+import { TGetItemsActions } from '../actions/ingredients-actions';
+import { TIngredientDetailsAction } from '../actions/ingredient-details-actions'
 
 type RootState = ReturnType<typeof store.getState>;
 
-export type AppDispatch = ThunkDispatch<RootState, void, AnyAction>;
+type TApplicationActions = TGetItemsActions | TConstructorAction | TOrderAction | TUserAction |
+    TIngredientDetailsAction;
+
+export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
 
 export interface ICallback {
     (): void;

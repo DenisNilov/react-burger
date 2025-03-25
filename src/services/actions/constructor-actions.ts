@@ -6,7 +6,30 @@ export const DELETE_ING_CONSTRUCTOR = 'DELETE_ING_CONSTRUCTOR';
 export const SET_BUN_CONSTRUCTOR = 'SET_BIN_CONSTRUCTOR';
 export const RESET_ING_CONSTRUCTOR = 'RESET_ING_CONSTRUCTOR';
 
-export const addIngConstructor = (ingredient: IIngredient) =>
+interface IAddIngredientConstructorAction {
+    readonly type: typeof ADD_ING_CONSTRUCTOR;
+    readonly payload: IIngredient;
+}
+interface ISortIngredientConstructorAction {
+    readonly type: typeof SORT_ING_CONSTRUCTOR;
+    readonly payload: { from: number, to: number }
+}
+interface IDeleteIngredientConstructorAction {
+    readonly type: typeof DELETE_ING_CONSTRUCTOR;
+    readonly payload: string | undefined;
+}
+interface IResetIngredientConstructorAction {
+    readonly type: typeof RESET_ING_CONSTRUCTOR;
+}
+interface ISetBunConstructorAction {
+    readonly type: typeof SET_BUN_CONSTRUCTOR;
+    readonly payload: IIngredient;
+}
+
+export type TConstructorAction = IAddIngredientConstructorAction | ISortIngredientConstructorAction | IDeleteIngredientConstructorAction |
+    IResetIngredientConstructorAction | ISetBunConstructorAction;
+
+export const addIngConstructor = (ingredient: IIngredient): IAddIngredientConstructorAction =>
 ({
     type: ADD_ING_CONSTRUCTOR,
     payload: {
@@ -15,24 +38,24 @@ export const addIngConstructor = (ingredient: IIngredient) =>
     }
 })
 
-export const deleteIngConstructor = (ingId: string) =>
+export const deleteIngConstructor = (ingId: string): IDeleteIngredientConstructorAction =>
 ({
     type: DELETE_ING_CONSTRUCTOR,
     payload: ingId
 })
 
-export const setBunConstructor = (bun: IIngredient) =>
+export const setBunConstructor = (bun: IIngredient): ISetBunConstructorAction =>
 ({
     type: SET_BUN_CONSTRUCTOR,
     payload: bun
 })
 
-export const sortIngConstructor = (dragIndex: number, hoverIndex: number) => ({
+export const sortIngConstructor = (dragIndex: number, hoverIndex: number): ISortIngredientConstructorAction => ({
     type: SORT_ING_CONSTRUCTOR,
     payload: {
         from: dragIndex,
         to: hoverIndex,
     }
 })
-export const resetIngConstructor = () =>
+export const resetIngConstructor = (): IResetIngredientConstructorAction =>
     ({ type: RESET_ING_CONSTRUCTOR })

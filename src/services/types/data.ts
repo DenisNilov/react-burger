@@ -11,7 +11,7 @@ export interface IIngredient {
     type: string;
     __v: any;
     _id: string;
-    id: string;
+    id?: string;
 }
 
 export interface IUser {
@@ -28,3 +28,30 @@ export interface IAction {
     type: string;
     payload?: any;
 }
+
+
+export interface IOrderInfo {
+    createdAt: string;
+    updatedAt: string;
+    ingredients: string[];
+    name: string;
+    number: number;
+    status: "done" | "created";
+    _id: string;
+    price: number;
+}
+
+export interface IOrder {
+    order: IOrderInfo,
+    name: string,
+    success: boolean
+}
+
+export interface IIngDetailsInitial {
+    name: string,
+    image_large: string,
+    calories: number,
+    proteins: number,
+    fat: number,
+    carbohydrates: number
+} 
