@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styles from "./page.module.css";
+import { FC } from "react";
 
-export const NotFound404 = () => {
+export const NotFound404: FC = () => {
   return (
     <div className={styles.background}>
       <div className={styles.container}>

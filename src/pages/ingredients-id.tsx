@@ -1,13 +1,13 @@
-import IngredientDetails from '../components/ingredient-details/ingredient-details.jsx';
-import Modal from '../components/modal/modal.jsx';
-import React from "react";
+import IngredientDetails from '../components/ingredient-details/ingredient-details';
+import Modal from '../components/modal/modal';
+import React, { FC } from "react";
 import { useNavigate } from 'react-router-dom';
 import { resetIngredientDetails } from '../services/actions/ingredient-details-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../services/hooks';
 import { resetIngredient } from '../utils/utils';
 
 
-export const IngredientDetailsPage = () => {
+export const IngredientDetailsPage: FC = () => {
 
     const [openModal, setOpenModal] = React.useState(true);
     const navigate = useNavigate();

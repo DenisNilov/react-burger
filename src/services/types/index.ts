@@ -6,7 +6,7 @@ import { TConstructorAction } from '../actions/constructor-actions';
 import { TGetItemsActions } from '../actions/ingredients-actions';
 import { TIngredientDetailsAction } from '../actions/ingredient-details-actions'
 
-type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof store.getState>;
 
 type TApplicationActions = TGetItemsActions | TConstructorAction | TOrderAction | TUserAction |
     TIngredientDetailsAction;

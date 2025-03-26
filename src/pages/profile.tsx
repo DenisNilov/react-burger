@@ -1,9 +1,10 @@
-import ProfileForm from '../components/form/profile-form.jsx';
+import ProfileForm from '../components/form/profile-form';
 import style from './page.module.css';
-import NavProfile from '../components/nav-profile/nav-profile.jsx';
+import NavProfile from '../components/nav-profile/nav-profile';
 import { useLocation } from "react-router-dom";
+import { FC } from 'react';
 
-export const Profile = () => {
+export const Profile: FC = () => {
 
     const location = useLocation();
 
