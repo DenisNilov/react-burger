@@ -1,13 +1,13 @@
 import React from "react";
 import style from './burger-constuctor.module.css';
-import Modal from "../modal/modal.jsx";
-import OrderDetails from "../order-details/order-details.jsx";
+import Modal from "../modal/modal";
+import OrderDetails from "../order-details/order-details";
 import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from "react-redux";
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
 import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions';
-import { IngredientsList } from '../burger-items-ingredients/burger-items-ingredients.jsx';
+import IngredientsList from '../burger-items-ingredients/burger-items-ingredients';
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 

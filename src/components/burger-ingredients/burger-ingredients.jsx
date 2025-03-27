@@ -1,7 +1,7 @@
 import React from 'react';
 import style from './burger-ingredients.module.css';
-import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs.jsx';
-import IngredientsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list.jsx';
+import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs';
+import IngredientsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list';
 import { useSelector } from "react-redux";
 import { useInView } from "react-intersection-observer";
 

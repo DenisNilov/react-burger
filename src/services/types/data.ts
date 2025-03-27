@@ -11,7 +11,7 @@ export interface IIngredient {
     type: string;
     __v: any;
     _id: string;
-    id?: string;
+    id: string;
 }
 
 export interface IUser {
