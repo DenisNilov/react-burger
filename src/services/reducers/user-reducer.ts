@@ -46,7 +46,7 @@ interface IUserState {
     refreshTokenRequest: boolean;
     refreshTokenError: boolean;
 
-    checkUserRequest: null;
+    checkUserRequest: boolean;
     checkUserError: boolean;
 }
 
@@ -72,7 +72,7 @@ const initialState: IUserState = {
     refreshTokenRequest: false,
     refreshTokenError: false,
 
-    checkUserRequest: null,
+    checkUserRequest: false,
     checkUserError: false,
 };
 
