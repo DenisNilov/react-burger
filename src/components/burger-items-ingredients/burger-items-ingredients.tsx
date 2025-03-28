@@ -6,7 +6,7 @@ interface IIngredientsListProps {
     ingredients: Array<IIngredient>;
 }
 const IngredientsList: FC<IIngredientsListProps> = ({ ingredients }) => {
-    return (<div>
+    return (<>
         {
             ingredients.map((ingredient: IIngredient, index: number) =>
                 <ConstructorIngredient
@@ -15,7 +15,7 @@ const IngredientsList: FC<IIngredientsListProps> = ({ ingredients }) => {
                     index={index}
                 />)
         }
-    </div>)
+    </>)
 
 }
 
