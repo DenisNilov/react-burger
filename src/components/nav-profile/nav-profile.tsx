@@ -3,15 +3,16 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoutThunk } from '../../services/actions/user-actions';
 import { useDispatch } from "react-redux";
 import { getRefreshToken } from '../../utils/utils';
+import { AppDispatch } from '../../services/types';
 
 
 const NavProfile = () => {
 
     const location = useLocation();
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const token = getRefreshToken();
 
-    const onOut = (e) => {
+    const onOut = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         dispatch(logoutThunk(token));
     };
@@ -39,6 +40,7 @@ const NavProfile = () => {
                 История заказов
             </NavLink>
             <Link
+                to={{ pathname: '/login' }}
                 className={`text text_color_inactive text_type_main-medium ${style.link}`}
                 onClick={onOut}
             >

@@ -254,7 +254,7 @@ export const updateToken = (refreshToken: string) => (dispatch: AppDispatch) => 
         }).catch(err => dispatch(updateUserError()));
 };
 
-export const logoutThunk = (refreshToken: string) => (dispatch: AppDispatch) => {
+export const logoutThunk = (refreshToken: string | null) => (dispatch: AppDispatch) => {
     request('auth/logout', 'POST', {
         token: refreshToken
     }).then((res) => {
