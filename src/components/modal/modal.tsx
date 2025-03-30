@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { createPortal } from "react-dom";
-import ModalOverlay from '../modal-overlay/modal-overlay.jsx';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 import style from './modal.module.css';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const modalRoot = document.getElementById('react-modals');
+const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 
-const Modal = ({ children, onClose, isOpen }) => {
+interface IModalProps {
+    children: JSX.Element | JSX.Element[];
+    onClose(): void;
+    isOpen: boolean
+}
+
+const Modal: FC<IModalProps> = ({ children, onClose, isOpen }) => {
 
     React.useEffect(() => {
 
-        const handleEsc = (e) => {
+        const handleEsc = (e: KeyboardEvent) => {
             if (e.key === "Escape") {
                 onClose();
             }
@@ -22,6 +28,8 @@ const Modal = ({ children, onClose, isOpen }) => {
             };
         };
     }, [onClose, isOpen]);
+
+    if (!modalRoot) return null;
 
     return createPortal(
         <div className={style.container} onClick={(evt) => evt.stopPropagation()}>

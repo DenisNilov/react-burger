@@ -11,8 +11,6 @@ interface IOrderDetailsProps {
 
 const OrderDetails: FC<IOrderDetailsProps> = ({ orderNumber, isLoading }) => {
 
-    console.log(orderNumber);
-
     return (
         <div className={style.box}>
             {isLoading ? (<div className={style.loader} id="loader"></div>)

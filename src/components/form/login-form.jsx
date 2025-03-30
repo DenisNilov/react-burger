@@ -4,7 +4,7 @@ import style from './form.module.css';
 import { loginUserThunk } from '../../services/actions/user-actions';
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import Modal from "../modal/modal.jsx";
+import Modal from "../modal/modal";
 
 const LoginForm = () => {
 
