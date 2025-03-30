@@ -10,7 +10,6 @@ import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../..
 import IngredientsList from '../burger-items-ingredients/burger-items-ingredients';
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import AuthorizationError from "../authorization-error/authorization-error";
 
 
 const BurgerConstructor = () => {
@@ -70,9 +69,6 @@ const BurgerConstructor = () => {
 
     return (
         <section className={style.box}>
-            {!isAuth &&
-                < AuthorizationError />
-            }
             <div
                 className={style.elements}
                 ref={dropTarget}

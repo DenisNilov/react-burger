@@ -1,8 +1,13 @@
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './app-header.module.css';
 import { Link } from 'react-router-dom';
+import { FC } from "react";
+import { useSelector } from '../../services/hooks';
 
-const Header = () => {
+const Header: FC = () => {
+
+    const isAuth = useSelector((store) => store.user.isAuth);
+
     return (
         <header className={style.header}>
             <div className={style.header_inner}>
@@ -39,7 +44,9 @@ const Header = () => {
                     className={style.heder_link}>
                     <div className={style.listIcon_inner}>
                         <ProfileIcon type="primary" />
-                        <p className={`${style.header_item_name} text_type_main-default p-2`}>Личный кабинет</p>
+                        <p className={`${style.header_item_name} text_type_main-default p-2`}>
+                            {isAuth ? 'Личный кабинет' : 'Войти'}
+                        </p>
                     </div>
                 </Link>
             </div >
