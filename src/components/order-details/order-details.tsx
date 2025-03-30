@@ -1,8 +1,17 @@
-import React from "react";
 import style from './order-details.module.css';
 import Done from '../../images/done.svg';
+import { FC } from 'react';
+import { IOrderState } from '../../services/reducers/order-reducer';
 
-const OrderDetails = ({ orderNumber, isLoading }) => {
+
+interface IOrderDetailsProps {
+    orderNumber: IOrderState;
+    isLoading?: boolean;
+}
+
+const OrderDetails: FC<IOrderDetailsProps> = ({ orderNumber, isLoading }) => {
+
+    console.log(orderNumber);
 
     return (
         <div className={style.box}>
