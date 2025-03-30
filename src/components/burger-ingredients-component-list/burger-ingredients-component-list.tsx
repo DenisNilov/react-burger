@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import IngredientsComponent from '../burger-ingredients-component/burger-ingredients-component.jsx';
+import React, { ForwardedRef } from 'react';
+import IngredientsComponent from '../burger-ingredients-component/burger-ingredients-component';
 import style from './burger-ingredients-component-list.module.css';
 import { IIngredient } from '../../services/types/data';
 
@@ -15,9 +15,8 @@ interface PropsIngredientsComponentList {
     id: string;
 }
 
-const IngredientsComponentList: FC<PropsIngredientsComponentList> =
-    React.forwardRef<HTMLHeadingElement, PropsIngredientsComponentList>(({ name, ingredients, count, id },
-        ref) => {
+const IngredientsComponentList = React.forwardRef<HTMLHeadingElement, PropsIngredientsComponentList>(
+    ({ name, ingredients, count, id }, ref: ForwardedRef<HTMLHeadingElement>) => {
         return (
             <li>
                 <h2 className="text_type_main-medium mt-10" ref={ref} id={id}>{name} </h2>

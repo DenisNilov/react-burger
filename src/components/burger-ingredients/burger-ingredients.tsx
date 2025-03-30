@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 import style from './burger-ingredients.module.css';
 import Tabs from '../burger-ingredienrs-tabs/burger-ingredienrs-tabs';
 import IngredientsComponentList from '../burger-ingredients-component-list/burger-ingredients-component-list';
-import { useSelector } from "react-redux";
+import { useSelector } from '../../services/hooks';
 import { useInView } from "react-intersection-observer";
+import { IIngredient } from '../../services/types/data';
 
+interface ICouteres {
+    [key: string]: number;
+}
 
-const BurgerIngredients = () => {
+const BurgerIngredients: FC = () => {
 
     const { ingredients } = useSelector(state => state.ingredients);
     const burgerConstructor = useSelector(state => state.burgerConstructor);
 
     const ingredientsCounters = React.useMemo(() => {
         const { bun, ingredients } = burgerConstructor;
-        const counters = {};
+        const counters: ICouteres = {};
         if (ingredients) {
             ingredients.forEach(ingredient => {
                 if (!counters[ingredient._id]) {
@@ -31,9 +35,9 @@ const BurgerIngredients = () => {
 
 
     const getIngredients = React.useMemo(() => {
-        const buns = ingredients.filter(ingredient => ingredient.type === 'bun')
-        const sauce = ingredients.filter(ingredient => ingredient.type === 'sauce')
-        const main = ingredients.filter(ingredient => ingredient.type === 'main')
+        const buns = ingredients.filter((ingredient: IIngredient) => ingredient.type === 'bun')
+        const sauce = ingredients.filter((ingredient: IIngredient) => ingredient.type === 'sauce')
+        const main = ingredients.filter((ingredient: IIngredient) => ingredient.type === 'main')
 
         return { buns, sauce, main }
     }, [ingredients])

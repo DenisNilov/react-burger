@@ -2,11 +2,18 @@ import style from './burger-ingredients-component.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 import { Link } from 'react-router-dom';
 import { setIngredient } from '../../utils/utils';
+import { FC } from 'react';
+import { IIngredient } from '../../services/types/data';
 
-const IngredientsComponent = ({ ingredient, count }) => {
+interface IIngredientsComponentProps {
+    ingredient: IIngredient;
+    count: number;
+}
+
+const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, count }) => {
 
     const { image, price, name, _id } = ingredient;
     const dispatch = useDispatch();
