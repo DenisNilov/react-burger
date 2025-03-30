@@ -1,23 +1,25 @@
-import React from "react";
+import React, { FC } from "react";
 import style from './burger-constuctor.module.css';
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { CurrencyIcon, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../services/hooks';
 import { postOrderAction } from '../../services/actions/order-actions';
 import { useDrop } from "react-dnd";
 import { addIngConstructor, setBunConstructor, resetIngConstructor } from '../../services/actions/constructor-actions';
 import IngredientsList from '../burger-items-ingredients/burger-items-ingredients';
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IIngredient } from "../../services/types/data";
 
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
 
     const dispatch = useDispatch();
-    const { bun, ingredients } = useSelector(state => state.burgerConstructor);
+    const { bun } = useSelector(state => state.burgerConstructor);
+    const { ingredients }: { ingredients: Array<IIngredient> | null } = useSelector(state => state.burgerConstructor);
     const orderNumber = useSelector(state => state.order);
-    const [openModal, setOpenModal] = React.useState(false);
+    const [openModal, setOpenModal] = React.useState<boolean>(false);
     const isAuth = useSelector((store) => store.user.isAuth);
     const navigate = useNavigate()
 
@@ -29,10 +31,17 @@ const BurgerConstructor = () => {
     };
 
 
-    const totalPrice = React.useMemo(() =>
-        (bun ? bun.price * 2 : 0) + (ingredients ? ingredients
-            .reduce((accumulator, ingredient) => accumulator + ingredient.price, 0) : 0),
-        [ingredients, bun]);
+    const totalPrice = React.useMemo(() => {
+        const sumBun = bun ? bun.price * 2 : 0;
+
+        const sumIngredients = ingredients ? ingredients.reduce((accumulator: number, ingredient: IIngredient) => {
+            return accumulator + ingredient.price
+        }, 0) : 0;
+
+        return sumBun + sumIngredients;
+    }, [ingredients, bun]);
+
+
 
     const showModal = () => {
         if (isAuth) {
@@ -52,12 +61,12 @@ const BurgerConstructor = () => {
 
     const [, dropTarget] = useDrop({
         accept: "ingredient",
-        drop(itemId) {
+        drop(itemId: IIngredient) {
             onDropHandler(itemId);
         },
     });
 
-    const onDropHandler = (ingredient) => {
+    const onDropHandler = (ingredient: IIngredient) => {
         if (ingredient.type === "bun") {
             dispatch(setBunConstructor(ingredient));
         } else {
