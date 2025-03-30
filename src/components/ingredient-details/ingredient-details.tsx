@@ -1,8 +1,9 @@
 import style from './ingredient-details.module.css';
-import { useSelector } from "react-redux";
+import { useSelector } from '../../services/hooks';
 import { getIngredient } from '../../utils/utils';
+import { FC } from 'react';
 
-const IngredientDetails = () => {
+const IngredientDetails: FC = () => {
 
     const ingredient = useSelector(state => state.details.ingredientDetails) || getIngredient();
     const { image_large, name, calories, carbohydrates, fat, proteins } = ingredient;

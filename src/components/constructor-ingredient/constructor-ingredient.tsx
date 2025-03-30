@@ -2,9 +2,8 @@ import React, { FC } from "react";
 import style from './constructor-ingredient.module.css';
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { deleteIngConstructor, sortIngConstructor } from '../../services/actions/constructor-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 import { useDrag, useDrop } from 'react-dnd';
-import { AppDispatch, } from "../../services/types";
 import { IIngredient } from '../../services/types/data';
 
 interface PropsConstructorIngredient {
@@ -13,7 +12,7 @@ interface PropsConstructorIngredient {
 }
 
 const ConstructorIngredient: FC<PropsConstructorIngredient> = ({ data, index }) => {
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useDispatch();
     const ref = React.useRef<HTMLLIElement>(null);
     const { name, price, image, id } = data;
 
@@ -60,7 +59,7 @@ const ConstructorIngredient: FC<PropsConstructorIngredient> = ({ data, index }) 
 
     const [{ isDragging }, drag] = useDrag<DragObject, unknown, { isDragging: boolean }>({
         type: "sort_ingredient",
-        item: () => ({ data, index }), // This should match the DragObject structure
+        item: () => ({ data, index }),
         collect: (monitor) => ({
             isDragging: monitor.isDragging(),
         }),

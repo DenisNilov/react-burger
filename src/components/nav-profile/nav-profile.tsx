@@ -1,15 +1,14 @@
 import style from './nav-profile.module.css';
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { logoutThunk } from '../../services/actions/user-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 import { getRefreshToken } from '../../utils/utils';
-import { AppDispatch } from '../../services/types';
 
 
 const NavProfile = () => {
 
     const location = useLocation();
-    const dispatch: AppDispatch = useDispatch();
+    const dispatch = useDispatch();
     const token = getRefreshToken();
 
     const onOut = (e: React.MouseEvent<HTMLAnchorElement>) => {
