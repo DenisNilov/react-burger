@@ -1,19 +1,19 @@
-import React from "react";
+import { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./form.module.css";
 import { forgotPassThunk } from '../../services/actions/user-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm: FC = () => {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const [values, setValue] = React.useState({ email: '' })
+    const [values, setValue] = useState({ email: '' })
 
-    const onSubmitEmail = (e) => {
+    const onSubmitEmail = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (values.email) {
             dispatch(forgotPassThunk(values.email, () => navigate('/reset-password')));

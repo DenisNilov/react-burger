@@ -8,8 +8,8 @@ const modalRoot: HTMLElement | null = document.getElementById('react-modals');
 
 interface IModalProps {
     children: JSX.Element | JSX.Element[];
-    onClose(): void;
-    isOpen: boolean
+    onClose?: () => void;
+    isOpen?: boolean
 }
 
 const Modal: FC<IModalProps> = ({ children, onClose, isOpen }) => {
@@ -17,7 +17,7 @@ const Modal: FC<IModalProps> = ({ children, onClose, isOpen }) => {
     React.useEffect(() => {
 
         const handleEsc = (e: KeyboardEvent) => {
-            if (e.key === "Escape") {
+            if (e.key === "Escape" && onClose) {
                 onClose();
             }
         }

@@ -1,24 +1,25 @@
-import React from "react";
+import React, { FC, useState } from "react";
 import { EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './form.module.css';
 import { loginUserThunk } from '../../services/actions/user-actions';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../services/hooks';
 import { Link, Navigate } from "react-router-dom";
 import Modal from "../modal/modal";
 
-const LoginForm = () => {
+
+const LoginForm: FC = () => {
 
     const dispatch = useDispatch();
     const user = useSelector(store => store.user.userData);
-    const [values, setValue] = React.useState({ email: '', password: '' });
+    const [values, setValue] = useState({ email: '', password: '' });
     const isLoading = useSelector(store => store.user.loginUserRequest);
 
-    const loginSubmit = (e) => {
+    const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         dispatch(loginUserThunk(values));
     }
 
-    const handleChangeForm = (e) => {
+    const handleChangeForm = (e: React.ChangeEvent<HTMLInputElement>) => {
         setValue({
             ...values,
             [e.target.name]: e.target.value

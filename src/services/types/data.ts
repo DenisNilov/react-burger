@@ -15,7 +15,7 @@ export interface IIngredient {
 }
 
 export interface IUser {
-    name: string;
+    name?: string;
     email: string;
     password?: string;
 }

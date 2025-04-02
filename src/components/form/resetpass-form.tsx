@@ -3,7 +3,7 @@ import style from './form.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { resetPassThunk } from '../../services/actions/user-actions';
-import { useDispatch } from "react-redux";
+import { useDispatch } from '../../services/hooks';
 
 const ResetPasswordForm = () => {
 
@@ -13,7 +13,7 @@ const ResetPasswordForm = () => {
     const [values, setValues] = React.useState({ password: '' });
     const [valueNumber, setValueNumber] = React.useState("");
 
-    const onSubmitNewPassword = (e) => {
+    const onSubmitNewPassword = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (values.password && valueNumber) {
             dispatch(resetPassThunk(values.password, valueNumber, () => navigate("/")));

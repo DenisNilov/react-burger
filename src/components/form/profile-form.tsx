@@ -1,14 +1,15 @@
-import React from "react";
+import React, { FC } from "react";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './form.module.css';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../services/hooks';
 import { updateUserData } from '../../services/actions/user-actions';
 import { getToken } from '../../utils/utils';
+import { IUser } from "../../services/types/data";
 
 
-const ProfileForm = () => {
+const ProfileForm: FC = () => {
 
-    const [isEdit, setEdit] = React.useState(null);
+    const [isEdit, setEdit] = React.useState<IUser | null>(null);
     const user = useSelector((state) => state.user.userData);
     const dispatch = useDispatch();
     const token = getToken();
@@ -25,7 +26,7 @@ const ProfileForm = () => {
         setEdit(user)
     }, [user, isEditValue])
 
-    const onChange = e => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setValues(prevValues => {
             return { ...prevValues, [name]: value };
@@ -33,9 +34,9 @@ const ProfileForm = () => {
 
     }
 
-    const updateSubmit = React.useCallback(e => {
+    const updateSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        dispatch(updateUserData(values, token));
+        if (token) dispatch(updateUserData(values, token));
     },
         [dispatch, values, token]
     );

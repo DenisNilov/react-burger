@@ -1,18 +1,18 @@
-import React from "react";
+import React, { FC } from "react";
 import style from './form.module.css';
 import { Link, useNavigate } from "react-router-dom";
 import { Input, EmailInput, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { registerUserThunk } from '../../services/actions/user-actions';
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from '../../services/hooks';
 
-const RegisterForm = () => {
+const RegisterForm: FC = () => {
 
     const dispatch = useDispatch();
     const [values, setValues] = React.useState({ name: '', email: '', password: '' })
     const user = useSelector(store => store.user.userData);
     const navigate = useNavigate();
 
-    const registerSubmit = React.useCallback(e => {
+    const registerSubmit = React.useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (user) return;
         dispatch(registerUserThunk(values));
