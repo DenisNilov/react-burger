@@ -9,11 +9,11 @@ import { ProtectedRouteElement } from '../protected-route/protected-route';
 import Header from '../app-header/app-header';
 import { IngredientDetailsPage } from '../../pages/ingredients-id';
 import { NotFound404 } from '../../pages/not-found';
-import { useDispatch } from 'react-redux';
+import { useDispatch } from '../../services/hooks';
 import { getUserData } from '../../services/actions/user-actions';
-import React from "react";
+import React, { FC } from "react";
 
-function App() {
+const App: FC = () => {
 
   const dispatch = useDispatch();
 
