@@ -3,9 +3,9 @@ import { AppDispatch } from '../types';
 import { IIngredient } from '../types/data';
 import { IOrder } from '../types/data';
 
-export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST';
-export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS';
-export const POST_ORDER_FAILED = 'POST_ORDER_FAILED';
+export const POST_ORDER_REQUEST: 'POST_ORDER_REQUEST' = 'POST_ORDER_REQUEST';
+export const POST_ORDER_SUCCESS: 'POST_ORDER_SUCCESS' = 'POST_ORDER_SUCCESS';
+export const POST_ORDER_FAILED: 'POST_ORDER_FAILED' = 'POST_ORDER_FAILED';
 
 export interface IPostOrderDetailsRequestAction {
     readonly type: typeof POST_ORDER_REQUEST;

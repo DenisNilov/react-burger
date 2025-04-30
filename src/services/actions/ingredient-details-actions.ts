@@ -1,7 +1,7 @@
 import { IIngredient, IIngDetailsInitial } from "../types/data";
 
-export const SET_INGREDIENT_DETAILS = "SET_INGREDIENT_DETAILS";
-export const RESET_INGREDIENT_DETAILS = "RESET_INGREDIENT_DETAILS";
+export const SET_INGREDIENT_DETAILS: 'SET_INGREDIENT_DETAILS' = "SET_INGREDIENT_DETAILS";
+export const RESET_INGREDIENT_DETAILS: 'RESET_INGREDIENT_DETAILS' = "RESET_INGREDIENT_DETAILS";
 
 interface IAddIngredientDetailsAction {
   readonly type: typeof SET_INGREDIENT_DETAILS;

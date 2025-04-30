@@ -2,9 +2,9 @@ import { request } from '../../utils/utils';
 import { AppDispatch } from '../types/index';
 import { IIngredient } from "../types/data";
 
-export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
-export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
-export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
+export const GET_INGREDIENTS_REQUEST: 'GET_INGREDIENTS_REQUEST' = "GET_INGREDIENTS_REQUEST";
+export const GET_INGREDIENTS_FAILED: "GET_INGREDIENTS_FAILED" = "GET_INGREDIENTS_FAILED";
+export const GET_INGREDIENTS_SUCCESS: 'GET_INGREDIENTS_SUCCESS' = "GET_INGREDIENTS_SUCCESS";
 
 export interface IGetItemsRequestAction {
     readonly type: typeof GET_INGREDIENTS_REQUEST;
