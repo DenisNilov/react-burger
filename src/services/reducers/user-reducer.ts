@@ -27,8 +27,6 @@ import { IAction, IUser } from "../types/data";
 interface IUserState {
     userData: IUser | null;
 
-    isAuth: boolean;
-
     haveVisitedPage: boolean;
 
     registerUserRequest: boolean;
@@ -52,8 +50,6 @@ interface IUserState {
 
 const initialState: IUserState = {
     userData: null,
-
-    isAuth: false,
 
     haveVisitedPage: false,
 
@@ -88,9 +84,7 @@ export const userReducer = (state = initialState, action: IAction) => {
         case REGISTER_USER_SUCCESS: {
             return {
                 ...state,
-                userData: {
-                    ...state.userData,
-                },
+                userData: action.payload,
                 registerUserRequest: false,
                 registerUserError: false,
             };
@@ -118,7 +112,6 @@ export const userReducer = (state = initialState, action: IAction) => {
                 userData: action.payload,
                 loginUserRequest: false,
                 loginUserError: false,
-                isAuth: true,
             };
         }
         case LOGIN_USER_ERROR: {
@@ -139,7 +132,6 @@ export const userReducer = (state = initialState, action: IAction) => {
         case REFRESH_TOKEN_SUCCESS: {
             return {
                 ...state,
-                userData: action.payload,
                 refreshTokenRequest: false,
                 refreshTokenError: false,
             };
@@ -153,7 +145,10 @@ export const userReducer = (state = initialState, action: IAction) => {
         }
 
         case LOGOUT_USER: {
-            return { ...state, isAuth: false, userData: null };
+            return {
+                ...state,
+                userData: null
+            };
         }
 
         case UPDATE_USER_REQUEST: {
@@ -193,12 +188,7 @@ export const userReducer = (state = initialState, action: IAction) => {
         case GET_USER_SUCCESS: {
             return {
                 ...state,
-                userData: {
-                    ...state.userData,
-                    email: action.payload.email,
-                    name: action.payload.name,
-                },
-                isAuth: true,
+                userData: action.payload,
                 checkUserRequest: false,
                 checkUserError: false,
             };
@@ -221,7 +211,6 @@ export const userReducer = (state = initialState, action: IAction) => {
         case FORGOT_PASSWORD_SUCCESS: {
             return {
                 ...state,
-                userData: action.payload,
                 forgotPasswordRequest: false,
                 forgotPasswordError: false,
                 haveVisitedPage: true,
@@ -246,7 +235,6 @@ export const userReducer = (state = initialState, action: IAction) => {
         case RESET_PASSWORD_SUCCESS: {
             return {
                 ...state,
-                userData: action.payload,
                 resetUserRequest: false,
                 resetUserError: false,
             };

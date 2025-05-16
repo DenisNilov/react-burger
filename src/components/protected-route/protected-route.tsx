@@ -10,7 +10,7 @@ interface IProtectedRouteProps {
 
 export const ProtectedRouteElement: FC<IProtectedRouteProps> = ({ children, needAuth = false }) => {
 
-    const isAuth = useSelector((store) => store.user.isAuth);
+    const isAuth = useSelector((store) => store.user.userData);
     const haveVisitedPage = useSelector((store) => store.user.haveVisitedPage);
     const location = useLocation();
 

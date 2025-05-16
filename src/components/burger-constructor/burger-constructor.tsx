@@ -20,7 +20,7 @@ const BurgerConstructor: FC = () => {
     const { ingredients }: { ingredients: Array<IIngredient> | null } = useSelector(state => state.burgerConstructor);
     const orderNumber = useSelector(state => state.order);
     const [openModal, setOpenModal] = React.useState<boolean>(false);
-    const isAuth = useSelector((store) => store.user.isAuth);
+    const isAuth = useSelector((store) => store.user.userData);
     const navigate = useNavigate()
 
 

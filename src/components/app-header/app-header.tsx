@@ -6,7 +6,7 @@ import { useSelector } from '../../services/hooks';
 
 const Header: FC = () => {
 
-    const isAuth = useSelector((store) => store.user.isAuth);
+    const isAuth = useSelector((store) => store.user.userData);
 
     return (
         <header className={style.header}>

@@ -10,7 +10,7 @@ import {
     getUserInfo,
     updateUserInfo,
     postNewPassword,
-    postEmailForReset
+    postEmailForReset,
 } from '../../utils/utils';
 import { AppDispatch, ICallback } from '../types';
 import { IUser } from "../types/data";
@@ -76,7 +76,6 @@ interface IRefreshUserRequestAction {
 }
 interface IRefreshUserSuccessAction {
     readonly type: typeof REFRESH_TOKEN_SUCCESS;
-    readonly payload: string;
 }
 interface IRefreshUserErrorAction {
     readonly type: typeof REFRESH_TOKEN_ERROR;
@@ -87,7 +86,6 @@ interface IForgotUserRequestAction {
 }
 interface IForgotUserSuccessAction {
     readonly type: typeof FORGOT_PASSWORD_SUCCESS;
-    readonly payload: IUser;
 }
 interface IForgotUserErrorAction {
     readonly type: typeof FORGOT_PASSWORD_ERROR;
@@ -98,7 +96,6 @@ interface IResetPasswordRequestAction {
 }
 interface IResetPasswordSuccessAction {
     readonly type: typeof RESET_PASSWORD_SUCCESS;
-    readonly payload: IUser;
 }
 interface IResetPasswordErrorAction {
     readonly type: typeof RESET_PASSWORD_ERROR;
@@ -174,9 +171,8 @@ const updateUserError = (): IUpdateUserErrorAction => ({
 const forgotUserRequest = (): IForgotUserRequestAction => ({
     type: FORGOT_PASSWORD_REQUEST
 });
-const forgotUserSuccess = (user: IUser): IForgotUserSuccessAction => ({
+const forgotUserSuccess = (): IForgotUserSuccessAction => ({
     type: FORGOT_PASSWORD_SUCCESS,
-    payload: user
 });
 const forgotUserError = (): IForgotUserErrorAction => ({
     type: FORGOT_PASSWORD_ERROR
@@ -185,9 +181,8 @@ const forgotUserError = (): IForgotUserErrorAction => ({
 const resetPassUserRequest = (): IResetPasswordRequestAction => ({
     type: RESET_PASSWORD_REQUEST
 });
-const resetPassUserSuccess = (user: IUser): IResetPasswordSuccessAction => ({
+const resetPassUserSuccess = (): IResetPasswordSuccessAction => ({
     type: RESET_PASSWORD_SUCCESS,
-    payload: user
 });
 const resetPassUserError = (): IResetPasswordErrorAction => ({
     type: RESET_PASSWORD_ERROR
@@ -196,9 +191,8 @@ const resetPassUserError = (): IResetPasswordErrorAction => ({
 const updateTokenRequest = (): IRefreshUserRequestAction => ({
     type: REFRESH_TOKEN_REQUEST
 });
-const updateTokenSuccess = (refreshToken: string): IRefreshUserSuccessAction => ({
-    type: REFRESH_TOKEN_SUCCESS,
-    payload: refreshToken
+const updateTokenSuccess = (): IRefreshUserSuccessAction => ({
+    type: REFRESH_TOKEN_SUCCESS
 });
 const updateTokenError = (): IRefreshUserErrorAction => ({
     type: REFRESH_TOKEN_ERROR
@@ -244,16 +238,6 @@ export const loginUserThunk = (user: IUser) => (dispatch: AppDispatch) => {
 };
 
 
-const updateToken = (refreshToken: string | null) => (dispatch: AppDispatch) => {
-    dispatch(updateUserRequest());
-    return updateAccessToken(refreshToken)
-        .then(res => {
-            setRefreshToken(res.refreshToken);
-            setToken(res.accessToken);
-            dispatch(updateUserSuccess(res));
-        }).catch(err => dispatch(updateUserError()));
-};
-
 export const logoutThunk = (refreshToken: string | null) => (dispatch: AppDispatch) => {
     request('auth/logout', 'POST', {
         token: refreshToken
@@ -265,57 +249,62 @@ export const logoutThunk = (refreshToken: string | null) => (dispatch: AppDispat
     }).catch((err) => console.log(err));
 };
 
-export const updateUserData = (user: IUser, refreshToken: string) => (dispatch: AppDispatch) => {
-    dispatch(updateTokenRequest());
-    updateUserInfo(user, refreshToken)
+export const updateUserData = (user: IUser, token: string) => (dispatch: AppDispatch) => {
+    dispatch(updateUserRequest());
+    updateUserInfo(user, token)
         .then(res => {
-            console.log(res)
-            dispatch(updateTokenSuccess(res.user));
+            dispatch(updateUserSuccess(res.user));
+        }).catch(err => dispatch(updateUserError()));
+};
+
+const updateToken = (refreshToken: string | null) => (dispatch: AppDispatch) => {
+    dispatch(updateTokenRequest());
+    return updateAccessToken(refreshToken)
+        .then(res => {
+            setRefreshToken(res.refreshToken);
+            setToken(res.accessToken);
+            updateTokenSuccess();
         }).catch(err => dispatch(updateTokenError()));
 };
 
 export const getUserData = () => (dispatch: AppDispatch) => {
     dispatch(getUserRequest());
-    const token = getToken();
-    if (!token) return;
-    getUserInfo(token)
+    getUserInfo(getToken())
         .then(res => {
             dispatch(getUserSuccess(res.user));
         })
         .catch(err => {
             dispatch(getUserError());
-            if (err.message === "jwt expired" || "jwt malformed") {
-                dispatch(updateToken(getRefreshToken()))
-                    .then(() => {
-                        getUserInfo(token)
-                            .then(res => {
-                                dispatch(getUserSuccess(res.user));
-                            })
-                            .catch(err => {
-                                dispatch(getUserError());
-                            });
-                    });
-            }
+            dispatch(updateToken(getRefreshToken()))
+                .then(() => {
+                    getUserInfo(getToken())
+                        .then(res => {
+                            dispatch(getUserSuccess(res.user));
+                        })
+                        .catch(err => {
+                            dispatch(getUserError());
+                        });
+                });
+
         });
 };
 
-export const resetPassThunk = (password: string, code: string, callback: ICallback) => (dispatch: AppDispatch) => {
-    dispatch(resetPassUserRequest());
-    postNewPassword(password, code)
-        .then(res => {
-            console.log(res);
-            dispatch(resetPassUserSuccess(res.user));
-            callback();
-        }).catch(err => resetPassUserError());
-};
+export const resetPassThunk = (password: string, code: string, callback: ICallback) =>
+    (dispatch: AppDispatch) => {
+        dispatch(resetPassUserRequest());
+        postNewPassword(password, code)
+            .then(() => {
+                dispatch(resetPassUserSuccess());
+                callback();
+            }).catch(err => resetPassUserError());
+    };
 
-export const forgotPassThunk = (email: string, callback: ICallback) => (dispatch: AppDispatch) => {
-    dispatch(forgotUserRequest());
-    postEmailForReset(email)
-        .then((res) => {
-            getRefreshToken();
-            console.log(res);
-            dispatch(forgotUserSuccess(res.user));
-            callback();
-        }).catch(err => dispatch(forgotUserError()));
-}
+export const forgotPassThunk = (email: string, callback: ICallback) =>
+    (dispatch: AppDispatch) => {
+        dispatch(forgotUserRequest());
+        postEmailForReset(email)
+            .then(() => {
+                dispatch(forgotUserSuccess());
+                callback();
+            }).catch(err => dispatch(forgotUserError()));
+    }

@@ -56,13 +56,13 @@ const resetRefreshToken = () => localStorage.setItem("refreshToken", '');
 
 const updateAccessToken = (refreshToken: TToken) => request(('auth/token'), "POST", { token: refreshToken });
 
-const getUserInfo = (token: string) => request('auth/user', "GET", null, token);
+const getUserInfo = (token: TToken) => request('auth/user', "GET", null, token);
 
 const updateUserInfo = (upData: TData, token: TToken) => request('auth/user', "PATCH", upData, token);
 
-const postNewPassword = (password: string, code: string) => request('reset-password', "POST", { password, token: code });
+const postNewPassword = (password: string, token: string) => request('password-reset/reset', "POST", { password, token });
 
-const postEmailForReset = (email: string) => request('forgot-password', "POST", { email });
+const postEmailForReset = (email: string) => request('password-reset', "POST", { email });
 
 const setIngredient = (ingredient: IIngredient) => {
     localStorage.setItem("ingredient", JSON.stringify(ingredient));

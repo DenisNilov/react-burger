@@ -20,6 +20,8 @@ const ForgotPasswordForm: FC = () => {
         };
     }
 
+    const isValue = values.email.length > 3 && values.email.includes('@');
+
     return (
         <form className={`${style.container}`} onSubmit={onSubmitEmail}>
             <h1 className={`${style.text} text text_type_main-medium`}>
@@ -34,7 +36,7 @@ const ForgotPasswordForm: FC = () => {
                 extraClass="mt-6 mb-6"
             />
             <Button
-                disabled={false}
+                disabled={!isValue}
                 htmlType="submit"
                 type="primary"
                 size="large"
