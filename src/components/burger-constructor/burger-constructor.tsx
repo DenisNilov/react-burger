@@ -125,7 +125,7 @@ const BurgerConstructor: FC = () => {
                     type="primary"
                     size="large"
                     onClick={showModal}
-                    disabled={!bun}
+                    disabled={!bun ? true : (!ingredients || ingredients.length < 1) ? true : false}
                 >
                     Оформить заказ
                 </Button>
