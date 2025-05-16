@@ -225,7 +225,7 @@ export const registerUserThunk = (user: IUser) => (dispatch: AppDispatch) => {
     }).then(res => {
         setRefreshToken(res.refreshToken);
         setToken(res.accessToken);
-        dispatch(registerUserSuccess(user));
+        dispatch(registerUserSuccess(res.user));
     }).catch(err => dispatch(registerUserError()));
 };
 
@@ -237,16 +237,16 @@ export const loginUserThunk = (user: IUser) => (dispatch: AppDispatch) => {
     }).then(res => {
         setRefreshToken(res.refreshToken);
         setToken(res.accessToken);
-        dispatch(loginUserSuccess(user));
+        dispatch(loginUserSuccess(res.user));
     }).catch((err) => {
         dispatch(loginUserError());
     });
 };
 
 
-export const updateToken = (refreshToken: string) => (dispatch: AppDispatch) => {
+const updateToken = (refreshToken: string | null) => (dispatch: AppDispatch) => {
     dispatch(updateUserRequest());
-    updateAccessToken(refreshToken)
+    return updateAccessToken(refreshToken)
         .then(res => {
             setRefreshToken(res.refreshToken);
             setToken(res.accessToken);
@@ -257,7 +257,7 @@ export const updateToken = (refreshToken: string) => (dispatch: AppDispatch) => 
 export const logoutThunk = (refreshToken: string | null) => (dispatch: AppDispatch) => {
     request('auth/logout', 'POST', {
         token: refreshToken
-    }).then((res) => {
+    }).then(() => {
         localStorage.clear();
         resetRefreshToken();
         resetToken();
@@ -277,17 +277,26 @@ export const updateUserData = (user: IUser, refreshToken: string) => (dispatch: 
 export const getUserData = () => (dispatch: AppDispatch) => {
     dispatch(getUserRequest());
     const token = getToken();
-    if (token) {
-        console.log("havetoken");
-        getUserInfo(token)
-            .then(res => {
-                dispatch(getUserSuccess(res.user));
-            })
-            .catch(err => dispatch(getUserError()));
-    } else {
-        console.log("no token");
-        dispatch(getUserError());
-    }
+    if (!token) return;
+    getUserInfo(token)
+        .then(res => {
+            dispatch(getUserSuccess(res.user));
+        })
+        .catch(err => {
+            dispatch(getUserError());
+            if (err.message === "jwt expired" || "jwt malformed") {
+                dispatch(updateToken(getRefreshToken()))
+                    .then(() => {
+                        getUserInfo(token)
+                            .then(res => {
+                                dispatch(getUserSuccess(res.user));
+                            })
+                            .catch(err => {
+                                dispatch(getUserError());
+                            });
+                    });
+            }
+        });
 };
 
 export const resetPassThunk = (password: string, code: string, callback: ICallback) => (dispatch: AppDispatch) => {

@@ -54,7 +54,7 @@ const getRefreshToken = () => localStorage.getItem("refreshToken");
 
 const resetRefreshToken = () => localStorage.setItem("refreshToken", '');
 
-const updateAccessToken = (refreshToken: string) => request(('auth/token'), "POST", { token: refreshToken });
+const updateAccessToken = (refreshToken: TToken) => request(('auth/token'), "POST", { token: refreshToken });
 
 const getUserInfo = (token: string) => request('auth/user', "GET", null, token);
 
