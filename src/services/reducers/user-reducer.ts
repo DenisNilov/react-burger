@@ -78,7 +78,7 @@ export const userReducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 registerUserRequest: true,
-                registerUserError: null,
+                registerUserError: false,
             };
         }
         case REGISTER_USER_SUCCESS: {

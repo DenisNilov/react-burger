@@ -53,14 +53,17 @@ export const constructorReducer = (state = initialState, action: IAction) => {
 
         case SORT_ING_CONSTRUCTOR:
             if (state.ingredients) {
-                state.ingredients.splice(
+                
+                const newIngredients = [...state.ingredients];
+
+                newIngredients.splice(
                     action.payload.to,
                     0,
-                    state.ingredients.splice(action.payload.from, 1)[0]
+                    newIngredients.splice(action.payload.from, 1)[0]
                 );
                 return {
                     ...state,
-                    ingredients: state.ingredients
+                    ingredients: newIngredients
                 };
             } else {
                 return state;
