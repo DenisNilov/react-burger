@@ -12,7 +12,7 @@ export interface IPostOrderDetailsRequestAction {
 }
 export interface IPostOrderDetailsErrorAction {
     readonly type: typeof POST_ORDER_FAILED;
-    readonly errorText: string;
+    readonly payload: string;
 }
 export interface IPostOrderDetailsSuccessAction {
     readonly type: typeof POST_ORDER_SUCCESS;
@@ -27,7 +27,7 @@ export const postOrderRequest = (): IPostOrderDetailsRequestAction => ({
 });
 export const postOrderError = (text: string): IPostOrderDetailsErrorAction => ({
     type: POST_ORDER_FAILED,
-    errorText: text
+    payload: text
 });
 export const postOrdersSuccess = (order: IOrder): IPostOrderDetailsSuccessAction => ({
     type: POST_ORDER_SUCCESS,

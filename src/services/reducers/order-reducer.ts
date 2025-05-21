@@ -10,6 +10,7 @@ export interface IOrderState {
     orderRequest: boolean;
     orderSuccess: boolean;
     orderFailed: boolean;
+    error: string | null;
 }
 
 
@@ -18,6 +19,7 @@ const initialState: IOrderState = {
     orderRequest: false,
     orderSuccess: false,
     orderFailed: false,
+    error: null,
 };
 
 export const orderReducer = (state = initialState, action: IAction) => {
@@ -39,7 +41,8 @@ export const orderReducer = (state = initialState, action: IAction) => {
             return {
                 ...state,
                 orderFailed: true,
-                orderRequest: false
+                orderRequest: false,
+                error: action.payload
             };
         default:
             return state;
