@@ -1,6 +1,5 @@
 import { request, getToken } from '../../utils/utils';
 import { AppDispatch } from '../types';
-import { IIngredient } from '../types/data';
 import { IOrder } from '../types/data';
 
 export const POST_ORDER_REQUEST: 'POST_ORDER_REQUEST' = 'POST_ORDER_REQUEST';
@@ -35,7 +34,7 @@ export const postOrdersSuccess = (order: IOrder): IPostOrderDetailsSuccessAction
 });
 
 
-export const postOrderAction = (ingredients: Array<IIngredient>) => (dispatch: AppDispatch) => {
+export const postOrderAction = (ingredients: Array<string>) => (dispatch: AppDispatch) => {
 
     const token = getToken();
 

@@ -11,36 +11,25 @@ import IngredientsList from '../burger-items-ingredients/burger-items-ingredient
 import { useNavigate } from "react-router-dom";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IIngredient } from "../../services/types/data";
+import { IConstructorState } from "../../services/reducers/constructor-reducer";
+import { useTotalPrice } from "../../services/hooks";
 
 
 const BurgerConstructor: FC = () => {
 
     const dispatch = useDispatch();
-    const { bun } = useSelector(state => state.burgerConstructor);
-    const { ingredients }: { ingredients: Array<IIngredient> | null } = useSelector(state => state.burgerConstructor);
+    const { bun, ingredients }: IConstructorState = useSelector(state => state.burgerConstructor);
     const [openModal, setOpenModal] = React.useState<boolean>(false);
     const isAuth = useSelector((store) => store.user.userData);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const totalPrice = useTotalPrice(ingredients, bun);
 
 
     const postOrderNumer = () => {
         if (bun && ingredients) {
-            dispatch(postOrderAction([bun._id, ...ingredients].map(ingredient => ingredient._id)));
+            dispatch(postOrderAction([bun, ...ingredients].map(ingredient => ingredient._id)));
         }
     };
-
-
-    const totalPrice = React.useMemo(() => {
-        const sumBun = bun ? bun.price * 2 : 0;
-
-        const sumIngredients = ingredients ? ingredients.reduce((accumulator: number, ingredient: IIngredient) => {
-            return accumulator + ingredient.price
-        }, 0) : 0;
-
-        return sumBun + sumIngredients;
-    }, [ingredients, bun]);
-
-
 
     const showModal = () => {
         if (isAuth) {
@@ -57,14 +46,6 @@ const BurgerConstructor: FC = () => {
         dispatch(resetIngConstructor());
     };
 
-
-    const [, dropTarget] = useDrop({
-        accept: "ingredient",
-        drop(itemId: IIngredient) {
-            onDropHandler(itemId);
-        },
-    });
-
     const onDropHandler = (ingredient: IIngredient) => {
         if (ingredient.type === "bun") {
             dispatch(setBunConstructor(ingredient));
@@ -73,7 +54,12 @@ const BurgerConstructor: FC = () => {
         }
     };
 
-
+    const [, dropTarget] = useDrop({
+        accept: "ingredient",
+        drop(itemId: IIngredient) {
+            onDropHandler(itemId);
+        },
+    });
 
     return (
         <section className={style.box}>
@@ -132,7 +118,6 @@ const BurgerConstructor: FC = () => {
             {openModal &&
                 <Modal onClose={handleClose} isOpen={openModal}>
                     <OrderDetails />
-
                 </Modal>
             }
         </section>

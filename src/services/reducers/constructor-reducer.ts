@@ -7,7 +7,7 @@ import {
 } from '../actions/constructor-actions';
 import { IIngredient, IAction } from '../types/data';
 
-interface IConstructorState {
+export interface IConstructorState {
     bun: IIngredient | null;
     ingredients: Array<IIngredient> | null;
 }
