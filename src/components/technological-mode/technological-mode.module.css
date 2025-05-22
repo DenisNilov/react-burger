@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    width: 100%;
+    max-width: 1240px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 0 40px 0;
+}
+
+.leftSide,
+.rightSide {
+    border: 2px white solid;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: flex-start;
+}
+
+.it {
+    width: 165px;
+}
+
+.title {
+    width: 380px;
+    margin: auto;
+}

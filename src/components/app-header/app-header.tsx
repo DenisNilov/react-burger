@@ -36,6 +36,11 @@ const Header: FC = () => {
                         <Logo />
                     </div>
                 </Link>
+                <Link
+                    to='/technological-mode'
+                >
+                    TM
+                </Link>
 
 
 
