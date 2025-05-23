@@ -7,7 +7,7 @@ import { useDispatch } from '../services/hooks';
 import { resetIngredient } from '../utils/utils';
 
 
-export const IngredientDetailsPage: FC = () => {
+const IngredientDetailsModalPage: FC = () => {
 
     const [openModal, setOpenModal] = React.useState(true);
     const navigate = useNavigate();
@@ -26,3 +26,5 @@ export const IngredientDetailsPage: FC = () => {
         </Modal>
     )
 };
+
+export default IngredientDetailsModalPage;

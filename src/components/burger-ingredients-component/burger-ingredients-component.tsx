@@ -3,10 +3,10 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions';
 import { useDispatch } from '../../services/hooks';
-import { Link } from 'react-router-dom';
 import { setIngredient } from '../../utils/utils';
 import { FC } from 'react';
 import { IIngredient } from '../../services/types/data';
+import { useNavigate, useLocation } from 'react-router-dom'
 
 interface IIngredientsComponentProps {
     ingredient: IIngredient;
@@ -14,6 +14,8 @@ interface IIngredientsComponentProps {
 }
 
 const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, count }) => {
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const { image, price, name, _id } = ingredient;
     const dispatch = useDispatch();
@@ -29,6 +31,10 @@ const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, coun
     const openDetails = () => {
         setIngredient(ingredient);
         dispatch(addIngredientDetails(ingredient))
+        const shouldOpenModal = location.pathname === '/';
+        navigate(`/ingredients/${_id}`, {
+            state: shouldOpenModal ? { background: location } : null
+        });
     }
 
 
@@ -39,8 +45,7 @@ const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, coun
             ref={ref}
             style={{ opacity }}
         >
-            <Link
-                to={`/ingredients/${_id}`}
+            <div
                 onClick={openDetails}
                 className={style.link}
             >
@@ -54,7 +59,7 @@ const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, coun
                 <p className={`text text_type_main-default pb-8 ${style.title}`}>
                     {name}
                 </p>
-            </Link>
+            </div>
         </li>
     )
 }
