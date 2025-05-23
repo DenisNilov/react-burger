@@ -1,11 +1,10 @@
 import style from './ingredient-details.module.css';
 import { useSelector } from '../../services/hooks';
-import { getIngredient } from '../../utils/utils';
 import { FC } from 'react';
 
 const IngredientDetails: FC = () => {
 
-    const ingredient = useSelector(state => state.details.ingredientDetails) || getIngredient();
+    const ingredient = useSelector(state => state.details.ingredientDetails);
     const { image_large, name, calories, carbohydrates, fat, proteins } = ingredient;
     const nutritionDimension = 'text text_type_main-default text_color_inactive';
     const nutritionquantity = 'text text_type_digits-default text_color_inactive';

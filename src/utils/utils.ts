@@ -64,20 +64,28 @@ const postNewPassword = (password: string, token: string) => request('password-r
 
 const postEmailForReset = (email: string) => request('password-reset', "POST", { email });
 
-const setIngredient = (ingredient: IIngredient) => {
-    localStorage.setItem("ingredient", JSON.stringify(ingredient));
+const setIngredientId = (ingredient: IIngredient) => {
+    localStorage.setItem("ingredientId", JSON.stringify(ingredient._id));
 }
 
-const getIngredient = () => {
-    const item = localStorage.getItem("ingredient");
-    return item ? JSON.parse(item) : null;
+const getIngredientId = () => {
+    const id = localStorage.getItem("ingredientId");
+    if (id) return JSON.parse(id);
 };
 
-const resetIngredient = () => localStorage.setItem("ingredient", '');
+const resetIngredientId = () => localStorage.setItem("ingredientId", '');
+
+const updateIngredients = (addIngredientDetails: any, dispatch: any) => request('ingredients').then((res) => {
+    if (res.success) {
+        const id = getIngredientId();
+        const filteredIngredient = res.data.find((item: IIngredient) => item._id === id)
+        dispatch(addIngredientDetails(filteredIngredient))
+    }
+});
 
 export {
     request, setToken, getToken, resetToken, setRefreshToken,
     getRefreshToken, resetRefreshToken, updateAccessToken,
     getUserInfo, updateUserInfo, postNewPassword, postEmailForReset,
-    getIngredient, setIngredient, resetIngredient
+    setIngredientId, resetIngredientId, updateIngredients
 };

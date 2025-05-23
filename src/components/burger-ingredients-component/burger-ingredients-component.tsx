@@ -3,7 +3,7 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import { useDrag } from 'react-dnd';
 import { addIngredientDetails } from '../../services/actions/ingredient-details-actions';
 import { useDispatch } from '../../services/hooks';
-import { setIngredient } from '../../utils/utils';
+import { setIngredientId } from '../../utils/utils';
 import { FC } from 'react';
 import { IIngredient } from '../../services/types/data';
 import { useNavigate, useLocation } from 'react-router-dom'
@@ -29,7 +29,7 @@ const IngredientsComponent: FC<IIngredientsComponentProps> = ({ ingredient, coun
     });
 
     const openDetails = () => {
-        setIngredient(ingredient);
+        setIngredientId(ingredient);
         dispatch(addIngredientDetails(ingredient))
         const shouldOpenModal = location.pathname === '/';
         navigate(`/ingredients/${_id}`, {
