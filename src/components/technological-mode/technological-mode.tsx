@@ -3,6 +3,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useSelector } from '../../services/hooks';
 import { useDrop, useDrag, DndProvider } from 'react-dnd';
 import styles from "./technological-mode.module.css";
+import WsComponent from './ws-test';
 
 interface IIngredient {
     id: string;
@@ -81,6 +82,9 @@ const TechnologicalMode: FC = () => {
                         />
                     ))}
                 </section>
+            </div>
+            <div className="ws-test">
+                <WsComponent />
             </div>
         </div>
     );
