@@ -20,13 +20,14 @@ const Header: FC = () => {
                             <p className={`${style.header_item_name} text_type_main-default p-2`}>Конструктор</p>
                         </div>
                     </Link>
-                    <a href="https://practicum.yandex.ru"
+                    <Link
+                        to='/feed'
                         className={style.heder_link}>
                         <div className={style.listIcon_inner}>
                             <ListIcon type="primary" />
                             <p className={`${style.header_item_name} text_type_main-default p-2`}>Лента заказов</p>
                         </div>
-                    </a>
+                    </Link>
                 </nav>
                 <Link
                     to='/'

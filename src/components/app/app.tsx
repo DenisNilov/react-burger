@@ -14,6 +14,7 @@ import { getUserData } from '../../services/actions/user-actions';
 import React, { FC } from "react";
 import TechnologicalMode from "../technological-mode/technological-mode";
 import IngredientDetailsPage from '../../pages/ingredient-detail-dage';
+import { FeedPage } from '../../pages/feed';
 
 const App: FC = () => {
 
@@ -38,6 +39,7 @@ const App: FC = () => {
         <Route path="/profile" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
         <Route path="/profile/orders" element={<ProtectedRouteElement needAuth={true}><Profile /></ProtectedRouteElement>} />
         <Route path="/technological-mode" element={<ProtectedRouteElement needAuth={true}><TechnologicalMode /></ProtectedRouteElement>} />
+        <Route path="/feed" element={<ProtectedRouteElement><FeedPage /></ProtectedRouteElement>} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
 
