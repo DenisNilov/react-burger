@@ -2,4 +2,11 @@
     min-width: 600px;
 }
 
-.list {}
+.items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: 870px;
+    width: 600px;
+    overflow-y: scroll;
+}

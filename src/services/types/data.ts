@@ -33,7 +33,7 @@ export interface IAction {
 export interface IOrderInfo {
     createdAt: string;
     updatedAt: string;
-    ingredients: string[];
+    ingredients: Array<string>;
     name: string;
     number: number;
     status: "done" | "created";
