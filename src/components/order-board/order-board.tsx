@@ -1,7 +1,6 @@
-import React, { FC, useMemo, useEffect } from 'react';
+import React, { FC, useMemo } from 'react';
 import styles from './order-board.module.css';
-import { useDispatch, useSelector } from '../../services/hooks';
-//import { wsConnectionStart, wsConnectionClose } from "../services/actions/feed-ws";
+import { wsocketFeed } from "../../utils/constants";
 
 interface IOrderNumberListProps {
     doneList: number[],
@@ -71,17 +70,9 @@ const OrdersStatistics: FC<IOrdersStatisticsProps> = ({ title, number }) => {
 
 const OrderBoardComponent: FC = () => {
 
-    const dispatch = useDispatch();
-    const { orders, total, totalToday, } = useSelector((store) => store.wsocketFeed);
+    const { orders, total, totalToday, } = JSON.parse(wsocketFeed)//useSelector((store) => store.wsocketFeed);
 
 
-    /* useEffect(() => {
-        dispatch(wsConnectionStart(apiWS.urlWS));
-        return () => {
-            dispatch(wsConnectionClose());
-        };
-    }, [dispatch]);
- */
 
     const { doneList, workList } = useMemo(() => {
         if (!orders.length) {

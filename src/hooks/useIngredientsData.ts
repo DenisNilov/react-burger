@@ -20,6 +20,8 @@ export const useIngredientsData = () => {
     const getIngredientData = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId], [ingredientsDataDict])
 
     return useMemo(
-        () => ({ ingredientsDataDict, getIngredientPrice, getIngredientImage, getIngredientData }),
-        [getIngredientImage, getIngredientPrice, getIngredientData, ingredientsDataDict])
+        () => (
+            { ingredientsDataDict, getIngredientPrice, getIngredientImage, getIngredientData }
+        ),
+        [getIngredientImage, getIngredientPrice, getIngredientData, ingredientsDataDict]);
 }

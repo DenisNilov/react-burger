@@ -4,7 +4,7 @@ import OrderFeedComponent from '../components/order-feed/order-feed';
 import OrderBoardComponent from '../components/order-board/order-board';
 
 export const FeedPage: FC = () => {
-
+    
 
 
     return (
