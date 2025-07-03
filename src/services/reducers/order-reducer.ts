@@ -2,6 +2,7 @@ import {
     POST_ORDER_REQUEST,
     POST_ORDER_SUCCESS,
     POST_ORDER_FAILED,
+    RESET_ORDER,
 } from '../actions/order-actions';
 import { IAction, IOrder } from '../types/data';
 
@@ -43,6 +44,13 @@ export const orderReducer = (state = initialState, action: IAction) => {
                 orderFailed: true,
                 orderRequest: false,
                 error: action.payload
+            };
+            case RESET_ORDER:
+            return {
+                ...state,
+                data: null,
+                orderFailed: false,
+                orderRequest: false,
             };
         default:
             return state;

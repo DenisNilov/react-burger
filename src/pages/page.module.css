@@ -67,3 +67,37 @@
 .hide-loader {
     display: none;
 }
+
+.containerItem {
+    display: flex;
+    align-items: center;
+    width: 640px;
+    justify-content: space-between;
+}
+
+.wrapperItem {
+    display: flex;
+    align-items: center;
+}
+
+.titleItem {
+    align-items: center;
+    max-width: 320px;
+
+}
+
+.imageContainerItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    background: #131316;
+    border-radius: 50%;
+    border: solid 2px #801AB2;
+}
+
+.imageItem {
+    height: 50px;
+}

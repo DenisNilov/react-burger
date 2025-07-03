@@ -13,6 +13,7 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { IIngredient } from "../../services/types/data";
 import { IConstructorState } from "../../services/reducers/constructor-reducer";
 import { useTotalPrice } from "../../services/hooks";
+import { resetOrderAction } from "../../services/actions/order-actions";
 
 
 const BurgerConstructor: FC = () => {
@@ -44,6 +45,7 @@ const BurgerConstructor: FC = () => {
     const handleClose = () => {
         setOpenModal(false);
         dispatch(resetIngConstructor());
+        dispatch(resetOrderAction());
     };
 
     const onDropHandler = (ingredient: IIngredient) => {
