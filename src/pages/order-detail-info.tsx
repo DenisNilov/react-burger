@@ -1,13 +1,13 @@
 import Modal from '../components/modal/modal';
 import React, { FC, useMemo } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import styles from './page.module.css';
-import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { IIngredient } from "../services/types/data";
-import { orders } from '../utils/constants';
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IIngredient, IOrderInfo } from "../services/types/data";
 import { getStatus } from '../utils/status';
 import { getDate } from '../utils/data';
 import { useIngredientsData } from "../hooks/useIngredientsData";
+import { useSelector } from '../services/hooks';
 
 
 
@@ -32,27 +32,30 @@ const OrderDetailsItem = ({ ingredient, count }: { ingredient: IIngredient, coun
 
 const OrderDetailsInfoModalPage: FC = () => {
 
+    const ingrs = useSelector((state) => state.ingredients.ingredients);
     const [openModal, setOpenModal] = React.useState(true);
     const navigate = useNavigate();
-    const order = orders[0]
-    const ingredients = useIngredientsData();
+    const location = useLocation();
+    const { order }: { order: IOrderInfo } = location.state || {};
+    const ingredients = useIngredientsData(ingrs);
 
     const price = useMemo(
         () =>
-            order.ingredients.reduce(
+            order?.ingredients?.reduce(
                 (prev, ingredientId) =>
-                    prev + ingredients.getIngredientPrice(ingredientId),
+                    ingredientId ? prev + ingredients.getIngredientPrice(ingredientId) : prev,
                 0
-            ),
+            ) || 0,
         [ingredients, order]
     );
 
-    const orderIngredients = useMemo(() => order.ingredients.map(ingredientId =>
-        ingredients.getIngredientData(ingredientId)), [ingredients, order.ingredients]);
+    const orderIngredients = useMemo(() => order?.ingredients
+        ?.map(ingredientId => ingredients.getIngredientData(ingredientId))
+        ?.filter(ingredient => ingredient !== undefined) || [], [ingredients, order?.ingredients]);
 
     const uniqueIngredients = useMemo(() => {
         const ingredientCounts = new Map<string, { ingredient: IIngredient, count: number }>();
-        
+
         orderIngredients.forEach(ingredient => {
             if (ingredientCounts.has(ingredient._id)) {
                 ingredientCounts.get(ingredient._id)!.count += 1;
@@ -60,7 +63,7 @@ const OrderDetailsInfoModalPage: FC = () => {
                 ingredientCounts.set(ingredient._id, { ingredient, count: 1 });
             }
         });
-        
+
         return Array.from(ingredientCounts.values());
     }, [orderIngredients]);
 
@@ -70,18 +73,21 @@ const OrderDetailsInfoModalPage: FC = () => {
         navigate('/feed');
     };
 
-    return (<>
-        <Modal onClose={handleClose} isOpen={openModal}>
+    return (<Modal onClose={handleClose} isOpen={openModal}>
 
-            {order ? <div>
+        {order ?
+            (<div>
 
                 <p
                     className={`text text_type_digits-default text_color_primary ${styles.id}`}>
                     {`#${order.number}`}
                 </p>
+
                 <p
                     className={`text text_type_main-medium text_color_primary mt-10 ${styles.title}`}
-                >{`${order.name}`}</p>
+                >{`${order.name}`}
+                </p>
+
                 <p
                     className={
                         order.status === "done"
@@ -93,34 +99,43 @@ const OrderDetailsInfoModalPage: FC = () => {
                 >
                     {getStatus(order.status)}
                 </p>
-                <p className={"text text_type_main-medium text_color_primary mt-15  mb-6 "}>
+
+                <p
+                    className={"text text_type_main-medium text_color_primary mt-15  mb-6 "}
+                >
                     Состав:
                 </p>
-                <div className={`${styles.ingredientsContainer} pr-4`}>
+                <div
+                    className={`${styles.ingredientsContainer} pr-4`}
+                >
                     {uniqueIngredients.map(({ ingredient, count }) =>
                         <OrderDetailsItem
                             key={ingredient._id}
                             ingredient={ingredient}
-                            count={count} />)}
+                            count={count}
+                        />)}
                 </div>
+
                 <div className={`${styles.infoContainer} mt-10`}>
+
                     <p className={"text text_type_main-small text_color_inactive"}>
                         {getDate(order.createdAt)}
                     </p>
+
                     <div className={styles.price}>
+
                         <p className={"text text_type_digits-default text_color_primary"}>
                             {price}
                         </p>
+
                         <CurrencyIcon type="primary" />
                     </div>
                 </div>
-            </div>
 
-                :
-                (<div className={styles.loader} id="loader"></div>)}
-        </Modal >
-
-    </>)
+            </div>)
+            :
+            (<div className={styles.loader} id="loader"></div>)}
+    </Modal >)
 };
 
 export default OrderDetailsInfoModalPage;

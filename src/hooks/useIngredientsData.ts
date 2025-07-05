@@ -1,4 +1,3 @@
-import { useSelector } from "../services/hooks";
 import { useCallback, useMemo } from "react";
 import { IIngredient } from "../services/types/data";
 
@@ -6,8 +5,8 @@ interface IIngredientsDataDict {
     [ingredientsData: string]: IIngredient;
 }
 
-export const useIngredientsData = () => {
-    const { ingredients } = useSelector(state => state.ingredients);
+export const useIngredientsData = (ingredients: Array<IIngredient>) => {
+
 
     const ingredientsDataDict = useMemo<IIngredientsDataDict>(() => {
         const ingredientsData: IIngredientsDataDict = {}
@@ -15,8 +14,8 @@ export const useIngredientsData = () => {
         return ingredientsData
     }, [ingredients])
 
-    const getIngredientImage = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId].image, [ingredientsDataDict])
-    const getIngredientPrice = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId].price, [ingredientsDataDict])
+    const getIngredientImage = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId]?.image, [ingredientsDataDict])
+    const getIngredientPrice = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId]?.price || 0, [ingredientsDataDict])
     const getIngredientData = useCallback((ingredientId: string) => ingredientsDataDict[ingredientId], [ingredientsDataDict])
 
     return useMemo(

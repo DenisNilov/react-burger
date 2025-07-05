@@ -21,13 +21,13 @@ const orders = [{
     _id: '82732',
     price: 1068,
 }, {
-    createdAt: "2025-06-26T16:57:38.801Z",
-    updatedAt: "2025-06-26T16:57:39.561Z",
+    createdAt: "2025-06-25T16:57:38.801Z",
+    updatedAt: "2025-06-25T16:57:39.561Z",
     ingredients: ["643d69a5c3f7b9001cfa093d", "643d69a5c3f7b9001cfa0943"],
-    name: "Space флюоресцентный бургер",
+    name: "Other space флюоресцентный бургер",
     number: 12732,
     status: "created" as const,
-    _id: '82732',
+    _id: '12732',
     price: 5668,
 }]
 

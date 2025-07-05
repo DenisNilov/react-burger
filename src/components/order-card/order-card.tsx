@@ -6,16 +6,18 @@ import { getStatus } from '../../utils/status';
 import { IOrderInfo } from '../../services/types/data';
 import { FC, useMemo } from 'react';
 import { useIngredientsData } from "../../hooks/useIngredientsData";
+import { IIngredient } from '../../services/types/data';
 
 interface IOrderCardsProps {
     elementPosition: string;
     order: IOrderInfo;
+    ingrs: Array<IIngredient>;
 }
 
 
-const OrderCard: FC<IOrderCardsProps> = ({ elementPosition, order }) => {
+const OrderCard: FC<IOrderCardsProps> = ({ elementPosition, order, ingrs }) => {
 
-    const ingredients = useIngredientsData();
+    const ingredients = useIngredientsData(ingrs);
 
 
     const price = useMemo(

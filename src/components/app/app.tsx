@@ -16,6 +16,7 @@ import TechnologicalMode from "../technological-mode/technological-mode";
 import IngredientDetailsPage from '../../pages/ingredient-detail-dage';
 import { FeedPage } from '../../pages/feed';
 import OrderDetailsInfoModalPage from '../../pages/order-detail-info';
+import { getIngredientsAction } from '../../services/actions/ingredients-actions';
 
 const App: FC = () => {
 
@@ -25,6 +26,7 @@ const App: FC = () => {
 
   React.useEffect(() => {
     dispatch(getUserData())
+    dispatch(getIngredientsAction());
   }, [dispatch]);
 
   return (
