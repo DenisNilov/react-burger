@@ -70,7 +70,7 @@ const OrderDetailsInfoModalPage: FC = () => {
 
     const handleClose = () => {
         setOpenModal(false);
-        navigate('/feed');
+        navigate(-1);
     };
 
     return (<Modal onClose={handleClose} isOpen={openModal}>

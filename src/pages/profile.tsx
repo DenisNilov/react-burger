@@ -3,6 +3,7 @@ import style from './page.module.css';
 import NavProfile from '../components/nav-profile/nav-profile';
 import { useLocation } from "react-router-dom";
 import { FC } from 'react';
+import OrderHistory from '../components/order-history/order-history';
 
 export const Profile: FC = () => {
 
@@ -12,7 +13,7 @@ export const Profile: FC = () => {
         <div className={`${style.profile__container} mt-20`}>
             <NavProfile />
             {location.pathname === "/profile" && <ProfileForm />}
-            {location.pathname === "/profile/orders" && <div>Пока ничего нет : )</div>}
+            {location.pathname === "/profile/orders" && <div><OrderHistory /></div>}
         </div>
     )
 }

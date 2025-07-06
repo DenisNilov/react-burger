@@ -44,6 +44,7 @@ const App: FC = () => {
         <Route path="/technological-mode" element={<ProtectedRouteElement needAuth={true}><TechnologicalMode /></ProtectedRouteElement>} />
         <Route path="/feed" element={<ProtectedRouteElement><FeedPage /></ProtectedRouteElement>} />
         <Route path={`/feed/:number`} element={<OrderDetailsInfoModalPage />} />
+        <Route path={`profile/orders/:number`} element={<OrderDetailsInfoModalPage />} />
         <Route path="*" element={<NotFound404 />} />
       </Routes>
 

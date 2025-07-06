@@ -30,7 +30,11 @@ const OrderCard: FC<IOrderCardsProps> = ({ elementPosition, order, ingrs }) => {
             className={`text_color_primary ${styles.link}`}
             to={elementPosition === "feed" ?
                 `/feed/${order._id}`
-                : elementPosition === "profile" ? `/profile/orders/${order._id}` : '*'}
+                : elementPosition === "/profile/orders"
+                    ?
+                    `/profile/orders/${order._id}`
+                    :
+                    '*'}
             state={{ from: elementPosition, order: order }}
         >
             <div className={styles.header}>
